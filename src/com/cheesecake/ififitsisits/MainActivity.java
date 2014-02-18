@@ -37,7 +37,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -54,17 +53,13 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
 	public static ActionBar actionbar;
 	private static boolean mayInternets=false;
 	private int prevPosition =0;
-		
-	protected static String selected = "Male";		//eventually remove along with InputFagment
-	protected static String selected2 = "NCR";
 
 	public final static String EXTRA_CAPTURE_FLAG= "com.cheesecake.ififitsisits.CAPTURE_FLAG";
 	
 	public final static String[] fragments = {
             "com.cheesecake.ififitsisits.HomeFragment",
-            "",
+            "com.cheesecake.ififitsisits.makakagraduateakohihi",
             "com.cheesecake.ififitsisits.ViewRecordsFragment",
-            //"com.cheesecake.ififitsisits.InputFragment",
             "com.cheesecake.ififitsisits.HelpFragment",
             "com.cheesecake.ififitsisits.SettingsFragment",
             "com.cheesecake.ififitsisits.AboutFragment",
@@ -241,37 +236,6 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
     
     /*DB management stuff*/
     
-    public void createRecord(View view){
-    	
-    	EditText edit_height = (EditText) findViewById(R.id.edit_height);
-		EditText edit_weight = (EditText) findViewById(R.id.edit_weight);
-		EditText edit_age = (EditText) findViewById(R.id.edit_age);
-		
-		double height = Double.parseDouble(edit_height.getText().toString());
-		double weight = Double.parseDouble(edit_weight.getText().toString());
-			int age = Integer.parseInt(edit_age.getText().toString());
-		String sex = selected;
-		String region = selected2;
-		DatabaseHelper db = new DatabaseHelper(this);
-		
-		db.addRecord(new Record(height,weight,age,sex,region,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,"a","b"));
-		
-		if(!mayInternets){
-			db.enqueueUpload();
-			Toast.makeText(this, "Data Enqueued for Uploading.", Toast.LENGTH_SHORT).show();
-			
-		}
-		else{
-				
-			//do uploading here
-			Toast.makeText(this, "Data Sent to Server.", Toast.LENGTH_SHORT).show();
-		
-		}
-		
-		ViewRecordsFragment.records = db.getAllRecords();
-		//.makeText(MainActivity.this, "Record Added.", Toast.LENGTH_LONG).show();
-    	
-    }
     
     public void upload(View view){
     	

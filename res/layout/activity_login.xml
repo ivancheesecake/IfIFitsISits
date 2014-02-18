@@ -7,7 +7,49 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".LoginActivity"
-    android:background="@color/emerald" >
+    android:background="@color/emerald" 
+    >
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".LoginActivity"
+    android:background="@color/emerald" 
+    android:orientation="vertical"
+    android:layout_centerInParent="true">
+    
+    <ImageView android:id="@+id/login_graphic"
+        android:src="@drawable/login_graphic_small"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:contentDescription="@string/desc"/>
+    
+    <EditText
+        android:id="@+id/edit_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_username"
+        android:padding="12dip"
+        android:inputType="text"
+        android:layout_marginTop="15sp" />
+   
+     <EditText
+        android:id="@+id/edit_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_password"
+        android:padding="12dip"
+        android:inputType="textPassword"
+        android:layout_marginTop="15sp" />
+     
+     <Button android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:text="@string/login"
+    	android:onClick="login" 
+    	android:padding="12dip"
+    	android:layout_gravity="center"
+    	android:layout_marginTop="10sp"
+    	android:layout_marginBottom="10sp" />
+   
 
-
+</LinearLayout>
 </RelativeLayout>

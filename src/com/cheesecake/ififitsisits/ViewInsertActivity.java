@@ -30,7 +30,7 @@ public class ViewInsertActivity extends Activity {
 	public static Record r;
 	private String selected = "Male";
 	private String selected2 = "NCR";
-	Bitmap bmp,bmp2;
+	static Bitmap bmp,bmp2;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -38,10 +38,12 @@ public class ViewInsertActivity extends Activity {
 		
 		System.loadLibrary("ififits_native");
 		
+		//Log.d("LOG","Nasa View Insert na.");
 		Intent intent = getIntent();
 		r = (Record) intent.getSerializableExtra(DisplayActivity.EXTRA_RECORD);
-		bmp = (Bitmap) intent.getParcelableExtra(DisplayActivity.EXTRA_SIDE_BMP);
-		bmp2 = (Bitmap) intent.getParcelableExtra(DisplayActivity.EXTRA_FRONT_BMP);
+		
+		bmp = (Bitmap) intent.getParcelableExtra(DisplayActivity.EXTRA_SIDE_BMP_2);
+		bmp2 = (Bitmap) intent.getParcelableExtra(DisplayActivity.EXTRA_FRONT_BMP_2);
 		ImageView imageview = (ImageView) findViewById(R.id.imageview_side);
 		ImageView imageview2 = (ImageView) findViewById(R.id.imageview_back);
 		

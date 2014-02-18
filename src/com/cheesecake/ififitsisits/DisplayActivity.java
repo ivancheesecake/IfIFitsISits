@@ -25,8 +25,11 @@ public class DisplayActivity extends ActionBarActivity {
 	int flag;
 	public final static String EXTRA_RECORD = "com.cheesecake.ififitsisits.RECORD";
 	public final static String EXTRA_CAPTURE_FLAG= "com.cheesecake.ififitsisits.CAPTURE_FLAG";
+	public final static String EXTRA_SIDE_BMP_2= "com.cheesecake.ififitsisits.SIDE_BMP_2";
+	public final static String EXTRA_FRONT_BMP_2= "com.cheesecake.ififitsisits.FRONT_BMP_2";
 	public final static String EXTRA_SIDE_BMP= "com.cheesecake.ififitsisits.SIDE_BMP";
 	public final static String EXTRA_FRONT_BMP= "com.cheesecake.ififitsisits.FRONT_BMP";
+	
 	@Override
 	
 	protected void onCreate(Bundle savedInstanceState){
@@ -53,7 +56,7 @@ public class DisplayActivity extends ActionBarActivity {
 		Utils.bitmapToMat(side, sideMat);
 		Keyer(sideMat.getNativeObjAddr(),keyedMat.getNativeObjAddr());
 		Utils.matToBitmap(keyedMat, side);
-		Utils.bitmapToMat(side, sideMat);//
+		//Utils.bitmapToMat(side, sideMat);//
 		//imageview2.setImageBitmap(Bitmap.createScaledBitmap(side, 150, 200, false));
 			
 
@@ -121,10 +124,14 @@ public class DisplayActivity extends ActionBarActivity {
 		//Utils.matToBitmap(sideMat, sideDraw);
 		//Utils.matToBitmap(frontMat, frontDraw);
 		
+		//ViewInsertActivity.bmp = sideDraw;
+		//ViewInsertActivity.bmp2 = frontDraw;
+		
+		//imageview.setImageBitmap(frontDraw);
 		
 		Intent intent = new Intent(this,ViewInsertActivity.class);
-		intent.putExtra(EXTRA_SIDE_BMP, sideDraw);
-		intent.putExtra(EXTRA_FRONT_BMP, frontDraw);
+		intent.putExtra(EXTRA_SIDE_BMP_2, sideIntent);
+		intent.putExtra(EXTRA_FRONT_BMP_2, bmp);
 		intent.putExtra(EXTRA_RECORD,r);
 		
 		startActivity(intent);

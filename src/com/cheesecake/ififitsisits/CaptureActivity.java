@@ -40,7 +40,7 @@ import android.widget.Toast;
 
 public class CaptureActivity extends Activity implements CvCameraViewListener2,OnTouchListener{		//Start of class CaptureActivity
 
-	private static final String TAG = "CaptureActivity";							
+	private static final String TAG = "CaptureActivity";				
 	public final static String EXTRA_BMP = "com.cheesecake.ififitsisits.BMP";
 	public final static String EXTRA_CAPTURE_FLAG= "com.cheesecake.ififitsisits.CAPTURE_FLAG";
     private CameraView mOpenCvCameraView;
@@ -49,6 +49,7 @@ public class CaptureActivity extends Activity implements CvCameraViewListener2,O
     private int screen_height;
     private int flag;
     private Bitmap overlay,side,prompt;
+    private boolean ready = false;
     
     private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {		//Async initialization of OpenCV
         
@@ -70,6 +71,8 @@ public class CaptureActivity extends Activity implements CvCameraViewListener2,O
                     	prompt = BitmapFactory.decodeResource(getApplicationContext().getResources(),R.drawable.prompt_front);
                     prompt = Bitmap.createScaledBitmap(prompt, screen_width/2, screen_height, false);
                     Utils.bitmapToMat(prompt, promptMat);
+                    
+                    
                 } break;
                
                 default:
@@ -148,9 +151,8 @@ public class CaptureActivity extends Activity implements CvCameraViewListener2,O
     	mIntermediateMat = inputFrame.rgba();	//Retrieve current frame
     	rgba = new Mat();
         mIntermediateMat.copyTo(rgba);			//Store current frame	
-        
-    	
         Overlay(mIntermediateMat.getNativeObjAddr(),promptMat.getNativeObjAddr());
+        ready = true;
         return mIntermediateMat;
     }
 
@@ -168,7 +170,7 @@ public class CaptureActivity extends Activity implements CvCameraViewListener2,O
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {		//Override of onTouch(), triggered when a touch event is detected
-     
+    	if(ready){
         Mat cropped = new Mat(rgba, new Rect(new Point(rgba.width()/2,0), new Point(rgba.width()-1,rgba.height()-1)));
       //  Mat keyed = new Mat(cropped.size(), CvType.CV_8UC3);
         	
@@ -186,7 +188,8 @@ public class CaptureActivity extends Activity implements CvCameraViewListener2,O
         if(flag == 1)
         	intent.putExtra(DisplayActivity.EXTRA_SIDE_BMP, side);
         startActivity(intent);
-        
+    	}
+    	
         return false;
     }
     
