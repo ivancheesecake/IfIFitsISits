@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:paddingBottom="0dp"
+	    android:paddingLeft="0dp"
+	    android:paddingRight="0dp"
+	    android:paddingTop="0dp"
+	    android:orientation="vertical"
+	    tools:context=".ViewRecordActivity" >
+	
+	    <LinearLayout android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+	    	android:orientation="horizontal"
+	    	android:layout_gravity="center"
+	    	android:layout_marginBottom="10sp">
+	        
+	        <ImageView android:id="@+id/imageview_side"
+	        	android:layout_width="wrap_content"
+	        	android:layout_height="wrap_content"
+	        	android:contentDescription="@string/desc"/>
+	        
+	        <ImageView android:id="@+id/imageview_back"
+	        	android:layout_width="wrap_content"
+	        	android:layout_height="wrap_content"
+	        	android:contentDescription="@string/desc"/>
+	        
+	    </LinearLayout>
+	    
+	    <LinearLayout android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+	    	android:orientation="vertical"
+	    	android:paddingBottom="16dp"
+	    	android:paddingLeft="16dp"
+	    	android:paddingRight="16dp"
+	   		android:paddingTop="16dp">
+		    <TextView
+		        android:id="@+id/textview_subjectId"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:textSize="22sp" 
+		        android:padding="5dip"
+		        android:textColor="@android:color/black"
+		     />
+		    
+		    <TextView
+		        android:id="@+id/textview_personalInfo"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:text="@string/textview_basicInfo"
+		        android:textSize="20sp" 
+		        android:padding="5dip"
+		        android:textColor="@android:color/darker_gray" />
+		    
+		    <View style="@style/Divider"/>
+		    
+		    <TextView
+		        android:id="@+id/textview_height"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:textSize="16sp" 
+		        android:padding="5dip"
+		        android:layout_marginTop="5dp"
+		        android:text="@string/textview_height"
+		        android:textColor="@android:color/black" />
+		    
+		    <TextView
+		        android:id="@+id/textview_heightVal"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:textSize="14sp" 
+		        android:layout_marginLeft="5dp"
+		        android:textColor="@android:color/darker_gray" />
+		    
+		     <TextView
+		        android:id="@+id/textview_weight"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:textSize="16sp" 
+		        android:padding="5dip"
+		        android:layout_marginTop="5dp"
+		        android:text="@string/textview_weight"
+		        android:textColor="@android:color/black" />
+		    
+		    <TextView
+		        android:id="@+id/textview_weightVal"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:textSize="14sp" 
+		        android:layout_marginLeft="5dp"
+		        android:textColor="@android:color/darker_gray" />
+		    
+		     <TextView
+		        android:id="@+id/textview_age"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:textSize="16sp" 
+		        android:padding="5dip"
+		        android:layout_marginTop="5dp"
+		        android:text="@string/textview_age"
+		        android:textColor="@android:color/black" />
+		    
+		    <TextView
+		        android:id="@+id/textview_ageVal"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:textSize="14sp" 
+		        android:layout_marginLeft="5dp"
+		        android:textColor="@android:color/darker_gray" />
+		    
+		     <TextView
+		        android:id="@+id/textview_sex"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:textSize="16sp" 
+		        android:padding="5dip"
+		        android:layout_marginTop="5dp"
+		        android:text="@string/textview_sex"
+		        android:textColor="@android:color/black" />
+		    
+		    <TextView
+		        android:id="@+id/textview_sexVal"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:textSize="14sp" 
+		        android:layout_marginLeft="5dp"
+		        android:textColor="@android:color/darker_gray" />
+		    
+		    <TextView
+		        android:id="@+id/textview_anthropometricData"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:text="@string/textview_anthropometricData"
+		        android:textSize="20sp" 
+		        android:padding="5dip"
+		        android:layout_marginTop="5dp"
+		        android:textColor="@android:color/darker_gray" />
+		    
+		    <View style="@style/Divider"/>
+		    
+		    <TextView
+		        android:id="@+id/textview_sitH"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:textSize="16sp" 
+		        android:padding="5dip"
+		        android:layout_marginTop="5dp"
+		        android:textColor="@android:color/black" 
+		        android:text="@string/textview_sitH"/>
+		    
+		    <TextView
+		        android:id="@+id/textview_sitHVal"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:textSize="14sp" 
+		        android:layout_marginLeft="5dp"
+				android:textColor="@android:color/darker_gray" />
+		    
+		    <TextView
+		        android:id="@+id/textview_sH"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:textSize="16sp" 
+		        android:padding="5dip"
+		        android:layout_marginTop="5dp"
+		        android:text="@string/textview_sH"
+		        android:textColor="@android:color/black" />
+		    
+		    <TextView
+		        android:id="@+id/textview_sHVal"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:textSize="14sp" 
+		        android:layout_marginLeft="5dp"
+		        android:textColor="@android:color/darker_gray" />
+		    
+		    <TextView
+		        android:id="@+id/textview_erH"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:textSize="16sp" 
+		        android:padding="5dip"
+		        android:layout_marginTop="5dp"
+		        android:text="@string/textview_erH"
+		        android:textColor="@android:color/black" />
+		    
+		    <TextView
+		        android:id="@+id/textview_erHVal"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:textSize="14sp" 
+		        android:layout_marginLeft="5dp"
+		        android:textColor="@android:color/darker_gray" />
+		    
+		    <TextView
+		        android:id="@+id/textview_tC"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:textSize="16sp" 
+		        android:padding="5dip"
+		        android:layout_marginTop="5dp"
+		        android:text="@string/textview_tC"
+		        android:textColor="@android:color/black" />
+		    
+		    <TextView
+		        android:id="@+id/textview_tCVal"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:textSize="14sp" 
+		        android:layout_marginLeft="5dp"
+		        android:textColor="@android:color/darker_gray" />
+		    
+		    <TextView
+		        android:id="@+id/textview_pH"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:textSize="16sp" 
+		        android:padding="5dip"
+		        android:layout_marginTop="5dp"
+		        android:text="@string/textview_pH"
+		        android:textColor="@android:color/black" />
+		    
+		    <TextView
+		        android:id="@+id/textview_pHVal"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:textSize="14sp" 
+		        android:layout_marginLeft="5dp"
+		        android:textColor="@android:color/darker_gray" />
+		    
+		    <TextView
+		        android:id="@+id/textview_kH"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:textSize="16sp" 
+		        android:padding="5dip"
+		        android:layout_marginTop="5dp"
+		        android:text="@string/textview_kH"
+		        android:textColor="@android:color/black" />
+		    
+		    <TextView
+		        android:id="@+id/textview_kHVal"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:textSize="14sp" 
+		        android:layout_marginLeft="5dp"
+		        android:textColor="@android:color/darker_gray" />
+		    
+		    <TextView
+		        android:id="@+id/textview_bpL"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:textSize="16sp" 
+		        android:padding="5dip"
+		        android:layout_marginTop="5dp"
+		        android:text="@string/textview_bpL"
+		        android:textColor="@android:color/black" />
+		    
+		    <TextView
+		        android:id="@+id/textview_bpLVal"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:textSize="14sp" 
+		        android:layout_marginLeft="5dp"
+		        android:textColor="@android:color/darker_gray" />
+		    
+		    <TextView
+		        android:id="@+id/textview_hB"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:textSize="16sp" 
+		        android:padding="5dip"
+		        android:layout_marginTop="5dp"
+		        android:text="@string/textview_hB"
+		        android:textColor="@android:color/black" />
+		    
+		    <TextView
+		        android:id="@+id/textview_hBVal"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:textSize="14sp" 
+		        android:layout_marginLeft="5dp"
+		        android:textColor="@android:color/darker_gray" />
+		    
+		    <TextView
+		        android:id="@+id/textview_kkB"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:textSize="16sp" 
+		        android:padding="5dip"
+		        android:layout_marginTop="5dp"
+		        android:text="@string/textview_kkB"
+		        android:textColor="@android:color/black" />
+		    
+		    <TextView
+		        android:id="@+id/textview_kkBVal"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:textSize="14sp" 
+		        android:layout_marginLeft="5dp"
+		        android:textColor="@android:color/darker_gray" />
+		    
+		     <TextView
+		        android:id="@+id/textview_otherInfo"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:text="@string/textview_otherInfo"
+		        android:textSize="20sp" 
+		        android:padding="5dip"
+		        android:layout_marginTop="5dp"
+		        android:textColor="@android:color/darker_gray" />
+		    
+		    <View style="@style/Divider"/>
+		    
+		    <TextView
+		        android:id="@+id/textview_recorded"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:textSize="16sp" 
+		        android:padding="5dip"
+		        android:layout_marginTop="5dp"
+		        android:textColor="@android:color/black" 
+		        android:text="@string/textview_recorded"/>
+		    <TextView
+		        android:id="@+id/textview_locationVal"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:textSize="14sp" 
+		        android:layout_marginLeft="5dp"
+				android:textColor="@android:color/darker_gray" />
+		  
+		    <TextView
+		        android:id="@+id/textview_dateVal"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:textSize="14sp" 
+		        android:layout_marginLeft="5dp"
+				android:textColor="@android:color/darker_gray" />
+		    
+		</LinearLayout>
+	</LinearLayout>
+</ScrollView>

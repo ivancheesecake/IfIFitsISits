@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+  android:title="Preferences">
+     
+    <EditTextPreference android:key="pref_text"
+   		android:title="Reference Object Size"
+   		android:summary="Actual dimensions of Reference object"
+   		android:dialogTitle="Reference Object Size"
+	/>
+         
+</PreferenceScreen>

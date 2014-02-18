@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- General Purpose Strings -->
+    <string name="app_name">If I Fits, I Sits</string>
+    <string name="action_settings">Settings</string>
+    <string name="desc">Content Description</string>
+    <string name="measure">Measure</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+    <string name="confirm">Confirm</string>
+    <string name="use_this">Use this</string>
+    <string name="use_other">Use the other</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+
+    <!-- Strings for Navigation Drawer and Action Bar -->
+
+    <string-array name="drawer_options">
+        <item>Home</item>
+        <item>Gather Data</item>
+        <item>Manage Database</item>
+        <item>Help</item>
+        <item>Settings</item>
+        <item>About</item>
+    </string-array>
+
+    <string name="status_internet">Internet</string>
+    <string name="status_gps">GPS</string>
+
+    <!-- Strings for Input Fragment -->
+
+    <string name="hint_height">Height (cm)</string>
+    <string name="hint_weight">Weight (kg)</string>
+    <string name="hint_age">Age</string>
+    <string name="button_create">Proceed</string>
+    <string name="button_view">View All Records</string>
+    <string name="textview_header">Create Record</string>
+    <string name="spinner_prompt">Sex</string>
+    <string name="region_prompt">Region</string>
+
+    <string-array name="sex_array">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <string-array name="region_array">
+        <item>NCR</item>
+        <item>CAR</item>
+        <item>Region I</item>
+        <item>Region II</item>
+        <item>Region III</item>
+        <item>Region IV-A</item>
+        <item>Region IV-B</item>
+        <item>Region V</item>
+        <item>Region VI</item>
+        <item>Region VII</item>
+        <item>Region VIII</item>
+        <item>Region IX</item>
+        <item>Region X</item>
+        <item>Region XI</item>
+        <item>Region XII</item>
+        <item>Region XIII</item>
+        <item>ARMM</item>
+    </string-array>
+    
+    <string name="upload">Upload</string>
+    <string name="delete">Delete All</string>
+
+    <!-- Strings for ViewRecordsFragment -->
+    
+    <string name="confirm_delete_msg">Are you sure you want to delete all data?</string>
+    <string name="confirm_delete_title">Confirm Deletion</string>
+    
+    <!-- Strings for ViewRecordFragment -->
+
+    <string name="action_viewall">View All</string>
+    <string name="action_viewqueue">View Queue</string>
+    <string name="textview_basicInfo">BASIC INFORMATION</string>
+    <string name="textview_anthropometricData">ANTHROPOMETRIC DATA</string>
+    <string name="textview_height">Height</string>
+    <string name="textview_weight">Weight</string>
+    <string name="textview_age">Age</string>
+    <string name="textview_sex">Sex</string>
+    <string name="textview_sitH">Sitting Height</string>
+    <string name="textview_sH">Shoulder Height</string>
+    <string name="textview_erH">Elbow Rest Height</string>
+    <string name="textview_tC">Thigh Clearance</string>
+    <string name="textview_pH">Popliteal Height</string>
+    <string name="textview_kH">Knee Height</string>
+    <string name="textview_bpL">Buttock-Popliteal Length</string>
+    <string name="textview_hB">Hip Breadth</string>
+    <string name="textview_kkB">Knee-to-knee Breadth</string>
+    <string name="textview_otherInfo">OTHER INFORMATION</string>
+    <string name="textview_recorded">Recorded At</string>
+    <string name="title_activity_create_record">Create Record</string>
+    <string name="textview_created">Record successfully created!</string>
+    <string name="title_activity_view_record_fragment">ViewRecordFragment</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_view_insert">ViewInsert</string>
+    <string name="title_activity_login">LoginActivity</string>
+    
+    
+
+</resources>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="0dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    tools:context=".ViewAllActivity" 
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:weightSum="2">
+
+    <ListView android:id="@+id/listview_allrecords"
+    	android:layout_width="match_parent"
+   		android:layout_height="0dp" 
+   		android:layout_weight="2"/> 
+   	
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+       
+        android:orientation="horizontal"
+        android:background="@drawable/ab_bottom_solid_dark_holo"
+        android:padding="2dp"
+        android:weightSum="2">
+
+    <Button
+       android:id="@+id/upload"
+       android:layout_width="wrap_content"
+       android:layout_height="match_parent"
+       android:layout_weight="1"
+       android:layout_margin="2dp"
+       android:text="@string/upload"
+       android:onClick="upload" 
+       />
+    
+      <Button
+       android:id="@+id/delete"
+       android:layout_width="wrap_content"
+       android:layout_height="match_parent"
+       android:layout_weight="1"
+       android:layout_margin="2dp"
+       android:text="@string/delete" 
+       android:onClick="deleteAll"/>
+    </LinearLayout>
+    
+</LinearLayout>
