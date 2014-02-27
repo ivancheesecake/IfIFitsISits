@@ -55,6 +55,7 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
 	private int prevPosition =0;
 
 	public final static String EXTRA_CAPTURE_FLAG= "com.cheesecake.ififitsisits.CAPTURE_FLAG";
+	public final static String EXTRA_IFIFITS= "com.cheesecake.ififitsisits.IFIFITS";
 	
 	public final static String[] fragments = {
             "com.cheesecake.ififitsisits.HomeFragment",
@@ -160,9 +161,12 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
         }
         else{
         	
-        	Intent intent = new Intent(this,CaptureActivity.class);
+        	Intent intent = new Intent(this,CaptureActivity2.class);
+        	IfIFitsExtra extra = new IfIFitsExtra();
+        	extra.set_flag(0);
         	
-        	intent.putExtra(EXTRA_CAPTURE_FLAG, 0);
+        	//intent.putExtra(EXTRA_CAPTURE_FLAG, 0);
+        	intent.putExtra(EXTRA_IFIFITS, extra);
         	
             startActivity(intent);
         }
@@ -230,8 +234,6 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
 
     	super.onDestroy();
     }
-    
-
     
     
     /*DB management stuff*/

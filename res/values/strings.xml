@@ -9,13 +9,14 @@
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
     <string name="confirm">Confirm</string>
+    <string name="proceed">Proceed</string>
     <string name="use_this">Use this</string>
     <string name="use_other">Use the other</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
-    
+
     <!-- Strings for Login -->
-    
+
     <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
     <string name="login">Login</string>
@@ -44,40 +45,21 @@
     <string name="textview_header">Create Record</string>
     <string name="spinner_prompt">Sex</string>
     <string name="region_prompt">Region</string>
+    <string name="cityprov_prompt">City/Municipality, Province</string>
 
     <string-array name="sex_array">
         <item>Male</item>
         <item>Female</item>
     </string-array>
 
-    <string-array name="region_array">
-        <item>NCR</item>
-        <item>CAR</item>
-        <item>Region I</item>
-        <item>Region II</item>
-        <item>Region III</item>
-        <item>Region IV-A</item>
-        <item>Region IV-B</item>
-        <item>Region V</item>
-        <item>Region VI</item>
-        <item>Region VII</item>
-        <item>Region VIII</item>
-        <item>Region IX</item>
-        <item>Region X</item>
-        <item>Region XI</item>
-        <item>Region XII</item>
-        <item>Region XIII</item>
-        <item>ARMM</item>
-    </string-array>
-    
     <string name="upload">Upload</string>
     <string name="delete">Delete All</string>
 
     <!-- Strings for ViewRecordsFragment -->
-    
+
     <string name="confirm_delete_msg">Are you sure you want to delete all data?</string>
     <string name="confirm_delete_title">Confirm Deletion</string>
-    
+
     <!-- Strings for ViewRecordFragment -->
 
     <string name="action_viewall">View All</string>
@@ -105,7 +87,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_view_insert">ViewInsert</string>
     <string name="title_activity_login">LoginActivity</string>
-    
-    
+    <string name="title_activity_capture_activity2">CaptureActivity2</string>
+    <string name="title_activity_display_process">DisplayProcessActivity</string>
 
 </resources>

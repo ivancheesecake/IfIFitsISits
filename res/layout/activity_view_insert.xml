@@ -21,6 +21,11 @@
    	android:layout_height="wrap_content"
    	android:contentDescription="@string/desc"/>
    
+   <ImageView android:id="@+id/imageview_front"
+   	android:layout_width="wrap_content"
+   	android:layout_height="wrap_content"
+   	android:contentDescription="@string/desc"/>
+   
    <ImageView android:id="@+id/imageview_back"
    	android:layout_width="wrap_content"
    	android:layout_height="wrap_content"
@@ -98,6 +103,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:prompt="@string/region_prompt"/>
+    <Spinner
+        android:id="@+id/cityprov_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:prompt="@string/cityprov_prompt"/>
 
     <TextView
         android:id="@+id/textview_anthropometricData"

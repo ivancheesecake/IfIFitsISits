@@ -10,9 +10,9 @@ using namespace cv;
 extern "C" {
 
 
-JNIEXPORT void JNICALL Java_com_cheesecake_ififitsisits_CaptureActivity_Keyer(JNIEnv*, jobject, jlong src, jlong dst);
+JNIEXPORT void JNICALL Java_com_cheesecake_ififitsisits_DisplayProcessActivity_Keyer(JNIEnv*, jobject, jlong src, jlong dst);
 
-JNIEXPORT void JNICALL Java_com_cheesecake_ififitsisits_CaptureActivity_Keyer(JNIEnv*, jobject, jlong src, jlong dst){
+JNIEXPORT void JNICALL Java_com_cheesecake_ififitsisits_DisplayProcessActivity_Keyer(JNIEnv*, jobject, jlong src, jlong dst){
 
 	int backgroundRed,backgroundGreen,backgroundBlue,redTemp,greenTemp,blueTemp;
 

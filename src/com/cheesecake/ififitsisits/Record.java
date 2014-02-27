@@ -12,6 +12,7 @@ public class Record implements Serializable{
 	private int age;
 	private String sex;
 	private String region;
+	private String cityprov;
 	private double sitH;
 	private double sH;
 	private double erH;
@@ -23,13 +24,35 @@ public class Record implements Serializable{
 	private double kkB;
 	private String date;
 	private String side_img;
+	private String front_img;
 	private String back_img;
 	
-	public Record(){}
+	public Record(){
+		
+		this.height = 0.0;
+	    this.weight = 0.0;
+	    this.age = 0;
+	    this.sex = "Male";
+	    this.region = "Region IV-A";
+	    this.cityprov = "Los Banos, Laguna";
+	    this.sitH = 0.0;
+	    this.sH = 0.0;
+	    this.erH = 0.0;
+	    this.tC = 0.0;
+	    this.pH = 0.0;
+	    this.kH = 0.0;
+	    this.bpL = 0.0;
+	    this.hB = 0.0;
+	    this.kkB = 0.0;
+	    this.side_img = "NULL";
+	    this.front_img = "NULL";
+	    this.back_img = "NULL";
+		
+	}
 	
-	public Record(int id, double height, double weight, int age, String sex, String region, 
+	public Record(int id, double height, double weight, int age, String sex, String region, String cityprov, 
 			double sitH, double sH, double erH, double tC, double pH, double kH, double bpL,
-			double hB, double kkB,String date, String side_img, String back_img) {
+			double hB, double kkB,String date, String side_img, String front_img, String back_img) {
 		
 		super();
 	    this.id = id;
@@ -38,6 +61,7 @@ public class Record implements Serializable{
 	    this.age = age;
 	    this.sex = sex;
 	    this.region = region;
+	    this.cityprov = cityprov;
 	    this.sitH = sitH;
 	    this.sH = sH;
 	    this.erH = erH;
@@ -49,12 +73,13 @@ public class Record implements Serializable{
 	    this.kkB = kkB;
 	    this.date = date;
 	    this.side_img = side_img;
+	    this.front_img = front_img;
 	    this.back_img = back_img;
 	    }
 	
-	public Record(double height, double weight, int age, String sex, String region, 
+	public Record(double height, double weight, int age, String sex, String region, String cityprov,
 			double sitH, double sH, double erH, double tC, double pH, double kH, double bpL,
-			double hB, double kkB, String side_img, String back_img) {
+			double hB, double kkB, String side_img, String front_img, String back_img) {
 		
 		super();
 	    
@@ -63,6 +88,7 @@ public class Record implements Serializable{
 	    this.age = age;
 	    this.sex = sex;
 	    this.region = region;
+	    this.cityprov = cityprov;
 	    this.sitH = sitH;
 	    this.sH = sH;
 	    this.erH = erH;
@@ -73,6 +99,7 @@ public class Record implements Serializable{
 	    this.hB = hB;
 	    this.kkB = kkB;
 	    this.side_img = side_img;
+	    this.front_img = front_img;
 	    this.back_img = back_img;
 	    }
 	
@@ -95,6 +122,9 @@ public class Record implements Serializable{
 	}
 	public String get_region(){
 		return this.region;
+	}
+	public String get_cityprov(){
+		return this.cityprov;
 	}
 	public double get_sitH(){
 		return this.sitH;
@@ -129,6 +159,9 @@ public class Record implements Serializable{
 	public String get_sideImg(){
 		return this.side_img;
 	}
+	public String get_frontImg(){
+		return this.front_img;
+	}
 	public String get_backImg(){
 		return this.back_img;
 	}
@@ -152,7 +185,9 @@ public class Record implements Serializable{
 	public void set_region(String region){
 		this.region = region;
 	}
-
+	public void set_cityprov(String cityprov){
+		this.cityprov = cityprov;
+	}
 	public void set_sitH(double sitH){
 		this.sitH = sitH;
 	}
@@ -185,6 +220,9 @@ public class Record implements Serializable{
 	}
 	public void set_sideImg(String side_img){
 		this.side_img = side_img;
+	}
+	public void set_frontImg(String front_img){
+		this.front_img = front_img;
 	}
 	public void set_backImg(String back_img){
 		this.back_img = back_img;

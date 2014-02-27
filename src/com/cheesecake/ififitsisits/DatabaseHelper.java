@@ -35,9 +35,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String KEY_WEIGHT = "weight";
     private static final String KEY_AGE = "age";
     private static final String KEY_SEX = "sex";
-    //private static final String KEY_LATITUDE = "latitude";
-    //private static final String KEY_LONGITUDE = "longitude";
     private static final String KEY_REGION = "region";
+    private static final String KEY_CITYPROV = "cityprov";
     private static final String KEY_SITH = "sitH";
     private static final String KEY_SH = "sH";
     private static final String KEY_ERH = "erH";
@@ -48,6 +47,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String KEY_HB = "hB";
     private static final String KEY_KKB = "kkB";
     private static final String KEY_SIDEIMG = "side_img";
+    private static final String KEY_FRONTIMG = "front_img";
     private static final String KEY_BACKIMG = "back_img";
     //private static final String KEY_DATE = "date";
     
@@ -58,7 +58,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	*/
 	
 
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 5;
 
     private static final String DATABASE_NAME = "RecordsDB";
 
@@ -75,6 +75,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "age INTEGER, "+
                 "sex TEXT, "+
                 "region TEXT, "+
+                "cityprov TEXT, "+
                 "sitH DOUBLE, "+
                 "sH DOUBLE, "+
                 "erH DOUBLE, "+
@@ -85,6 +86,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "hB DOUBLE, "+
                 "kkB DOUBLE, "+
                 "side_img TEXT, "+
+                "front_img TEXT, "+
                 "back_img TEXT, "+
                 "date DATETIME DEFAULT CURRENT_DATE"+
                 ")";
@@ -116,6 +118,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(KEY_AGE, record.get_age());
         values.put(KEY_SEX, record.get_sex());
         values.put(KEY_REGION, record.get_region());
+        values.put(KEY_CITYPROV, record.get_cityprov());
         values.put(KEY_SITH, record.get_sitH());
         values.put(KEY_SH, record.get_sH());
         values.put(KEY_ERH, record.get_erH());
@@ -126,6 +129,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(KEY_HB, record.get_hB());
         values.put(KEY_KKB, record.get_kkB());
         values.put(KEY_SIDEIMG, record.get_sideImg());
+        values.put(KEY_FRONTIMG, record.get_frontImg());
         values.put(KEY_BACKIMG, record.get_backImg());
        
 
@@ -158,18 +162,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 record.set_age(Integer.parseInt(cursor.getString(3)));
                 record.set_sex(cursor.getString(4));
                 record.set_region(cursor.getString(5));
-                record.set_sitH(Double.parseDouble(cursor.getString(6)));
-                record.set_sH(Double.parseDouble(cursor.getString(7)));
-                record.set_erH(Double.parseDouble(cursor.getString(8)));
-                record.set_tC(Double.parseDouble(cursor.getString(9)));
-                record.set_pH(Double.parseDouble(cursor.getString(10)));
-                record.set_kH(Double.parseDouble(cursor.getString(11)));
-                record.set_bpL(Double.parseDouble(cursor.getString(12)));
-                record.set_hB(Double.parseDouble(cursor.getString(13)));
-                record.set_kkB(Double.parseDouble(cursor.getString(14)));
-                record.set_sideImg(cursor.getString(15));
-                record.set_backImg(cursor.getString(16));
-                record.set_date(cursor.getString(17));
+                record.set_cityprov(cursor.getString(6));
+                record.set_sitH(Double.parseDouble(cursor.getString(7)));
+                record.set_sH(Double.parseDouble(cursor.getString(8)));
+                record.set_erH(Double.parseDouble(cursor.getString(9)));
+                record.set_tC(Double.parseDouble(cursor.getString(10)));
+                record.set_pH(Double.parseDouble(cursor.getString(11)));
+                record.set_kH(Double.parseDouble(cursor.getString(12)));
+                record.set_bpL(Double.parseDouble(cursor.getString(13)));
+                record.set_hB(Double.parseDouble(cursor.getString(14)));
+                record.set_kkB(Double.parseDouble(cursor.getString(15)));
+                record.set_sideImg(cursor.getString(16));
+                record.set_frontImg(cursor.getString(17));
+                record.set_backImg(cursor.getString(18));
+                record.set_date(cursor.getString(19));
                 Log.d(record.get_date(),""+record.get_id());
                 records.add(record);
             } while (cursor.moveToNext());
@@ -245,6 +251,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     	
     	List<Record> records = getAllRecords();
     	for(Record r: records){
+    		
+    		//add deletion for img3
     		File img = new File(Environment.getExternalStorageDirectory() + "/ififits/"+r.get_sideImg());
     		File img2 = new File(Environment.getExternalStorageDirectory() + "/ififits/"+r.get_backImg());
     		img.delete();

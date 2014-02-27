@@ -1,0 +1,1670 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+	<string-array name="region_array">
+		<item>NCR</item>
+		<item>CAR</item>
+		<item>Region I</item>
+		<item>Region II</item>
+		<item>Region III</item>
+		<item>Region IV-A</item>
+		<item>Region IV-B</item>
+		<item>Region V</item>
+		<item>Region VI</item>
+		<item>Region VII</item>
+		<item>Region VIII</item>
+		<item>Region IX</item>
+		<item>Region X</item>
+		<item>Region XI</item>
+		<item>Region XII</item>
+		<item>Region XIII</item>
+		<item>ARMM</item>
+	</string-array>
+	  
+	<string-array name="ncr_array">
+		<item>Caloocan</item>
+		<item>Las Piñas</item>
+		<item>Makati</item>
+		<item>Malabon</item>
+		<item>Mandaluyong</item>
+		<item>Manila</item>
+		<item>Marikina</item>
+		<item>Muntinlupa</item>
+		<item>Navotas</item>
+		<item>Parañaque</item>
+		<item>Pasay</item>
+		<item>Pasig</item>
+		<item>Quezon City</item>
+		<item>San Juan</item>
+		<item>Taguig</item>
+		<item>Valenzuela</item>
+		<item>Pateros</item>
+	</string-array>
+	<string-array name="car_array">
+		<item>Bangued, Abra</item>
+		<item>Boliney, Abra</item>
+		<item>Bucay, Abra</item>
+		<item>Bucloc, Abra</item>
+		<item>Daguioman, Abra</item>
+		<item>Danglas, Abra</item>
+		<item>Dolores, Abra</item>
+		<item>La Paz, Abra</item>
+		<item>Lacub, Abra</item>
+		<item>Lagangilang, Abra</item>
+		<item>Lagayan, Abra</item>
+		<item>Langiden, Abra</item>
+		<item>Licuan-Baay, Abra</item>
+		<item>Luba, Abra</item>
+		<item>Malibcong, Abra</item>
+		<item>Manabo, Abra</item>
+		<item>Peñarrubia, Abra</item>
+		<item>Pidigan, Abra</item>
+		<item>Pilar, Abra</item>
+		<item>Sallapadan, Abra</item>
+		<item>San Isidro, Abra</item>
+		<item>San Juan, Abra</item>
+		<item>San Quintin, Abra</item>
+		<item>Tayum, Abra</item>
+		<item>Tineg, Abra</item>
+		<item>Tubo, Abra</item>
+		<item>Villaviciosa, Abra</item>
+		<item>Calanasan, Apayao</item>
+		<item>Conner, Apayao</item>
+		<item>Flora, Apayao</item>
+		<item>Kabugao, Apayao</item>
+		<item>Luna, Apayao</item>
+		<item>Pudtol, Apayao</item>
+		<item>Santa Marcela, Apayao</item>
+		<item>Baguio</item>
+		<item>Atok, Benguet</item>
+		<item>Bakun, Benguet</item>
+		<item>Bokod, Benguet</item>
+		<item>Buguias, Benguet</item>
+		<item>Itogon, Benguet</item>
+		<item>Kabayan, Benguet</item>
+		<item>Kapangan, Benguet</item>
+		<item>Kibungan, Benguet</item>
+		<item>La Trinidad, Benguet</item>
+		<item>Mankayan, Benguet</item>
+		<item>Sablan, Benguet</item>
+		<item>Tuba, Benguet</item>
+		<item>Tublay, Benguet</item>
+		<item>Aguinaldo, Ifugao</item>
+		<item>Alfonso Lista, Ifugao</item>
+		<item>Asipulo, Ifugao</item>
+		<item>Banaue, Ifugao</item>
+		<item>Hingyon, Ifugao</item>
+		<item>Hungduan, Ifugao</item>
+		<item>Kiangan, Ifugao</item>
+		<item>Lagawe, Ifugao</item>
+		<item>Lamut, Ifugao</item>
+		<item>Mayoyao, Ifugao</item>
+		<item>Tinoc, Ifugao</item>
+		<item>Balbalan, Kalinga</item>
+		<item>Lubuagan, Kalinga</item>
+		<item>Pasil, Kalinga</item>
+		<item>Pinukpuk, Kalinga</item>
+		<item>Rizal, Kalinga</item>
+		<item>Tabuk City, Kalinga</item>
+		<item>Tanudan, Kalinga</item>
+		<item>Tinglayan, Kalinga</item>
+		<item>Barlig, Mountain Province</item>
+		<item>Bauko, Mountain Province</item>
+		<item>Besao, Mountain Province</item>
+		<item>Bontoc, Mountain Province</item>
+		<item>Natonin, Mountain Province</item>
+		<item>Paracelis, Mountain Province</item>
+		<item>Sabangan, Mountain Province</item>
+		<item>Sadanga, Mountain Province</item>
+		<item>Sagada, Mountain Province</item>
+		<item>Tadian, Mountain Province</item>
+	</string-array>
+	<string-array name="regioni_array">
+		<item>Dagupan City</item>
+		<item>Adams, Ilocos Norte</item>
+		<item>Bacarra, Ilocos Norte</item>
+		<item>Badoc, Ilocos Norte</item>
+		<item>Bangui, Ilocos Norte</item>
+		<item>Banna, Ilocos Norte</item>
+		<item>Batac City, Ilocos Norte</item>
+		<item>Burgos, Ilocos Norte</item>
+		<item>Carasi, Ilocos Norte</item>
+		<item>Currimao, Ilocos Norte</item>
+		<item>Dingras, Ilocos Norte</item>
+		<item>Dumalneg, Ilocos Norte</item>
+		<item>Laoag City, Ilocos Norte</item>
+		<item>Marcos, Ilocos Norte</item>
+		<item>Nueva Era, Ilocos Norte</item>
+		<item>Pagudpud, Ilocos Norte</item>
+		<item>Paoay, Ilocos Norte</item>
+		<item>Pasuquin, Ilocos Norte</item>
+		<item>Piddig, Ilocos Norte</item>
+		<item>Pinili, Ilocos Norte</item>
+		<item>San Nicolas, Ilocos Norte</item>
+		<item>Sarrat, Ilocos Norte</item>
+		<item>Solsona, Ilocos Norte</item>
+		<item>Vintar, Ilocos Norte</item>
+		<item>Alilem, Ilocos Sur</item>
+		<item>Banayoyo, Ilocos Sur</item>
+		<item>Bantay, Ilocos Sur</item>
+		<item>Burgos, Ilocos Sur</item>
+		<item>Cabugao, Ilocos Sur</item>
+		<item>Candon City, Ilocos Sur</item>
+		<item>Caoayan, Ilocos Sur</item>
+		<item>Cervantes, Ilocos Sur</item>
+		<item>Galimuyod, Ilocos Sur</item>
+		<item>Gregorio Del Pilar, Ilocos Sur</item>
+		<item>Lidlidda, Ilocos Sur</item>
+		<item>Magsingal, Ilocos Sur</item>
+		<item>Nagbukel, Ilocos Sur</item>
+		<item>Narvacan, Ilocos Sur</item>
+		<item>Quirino, Ilocos Sur</item>
+		<item>Salcedo, Ilocos Sur</item>
+		<item>San Emilio, Ilocos Sur</item>
+		<item>San Esteban, Ilocos Sur</item>
+		<item>San Ildefonso, Ilocos Sur</item>
+		<item>San Juan, Ilocos Sur</item>
+		<item>San Vicente, Ilocos Sur</item>
+		<item>Santa, Ilocos Sur</item>
+		<item>Santa Catalina, Ilocos Sur</item>
+		<item>Santa Cruz, Ilocos Sur</item>
+		<item>Santa Lucia, Ilocos Sur</item>
+		<item>Santa Maria, Ilocos Sur</item>
+		<item>Santiago, Ilocos Sur</item>
+		<item>Santo Domingo, Ilocos Sur</item>
+		<item>Sigay, Ilocos Sur</item>
+		<item>Sinait, Ilocos Sur</item>
+		<item>Sugpon, Ilocos Sur</item>
+		<item>Suyo, Ilocos Sur</item>
+		<item>Tagudin, Ilocos Sur</item>
+		<item>Vigan City, Ilocos Sur</item>
+		<item>Agoo, La Union</item>
+		<item>Aringay, La Union</item>
+		<item>Bacnotan, La Union</item>
+		<item>Bagulin, La Union</item>
+		<item>Balaoan, La Union</item>
+		<item>Bangar, La Union</item>
+		<item>Bauang, La Union</item>
+		<item>Burgos, La Union</item>
+		<item>Caba, La Union</item>
+		<item>Luna, La Union</item>
+		<item>Naguilian, La Union</item>
+		<item>Pugo, La Union</item>
+		<item>Rosario, La Union</item>
+		<item>San Fernando City, La Union</item>
+		<item>San Gabriel, La Union</item>
+		<item>San Juan, La Union</item>
+		<item>Santo Tomas, La Union</item>
+		<item>Santol, La Union</item>
+		<item>Sudipen, La Union</item>
+		<item>Tubao, La Union</item>
+		<item>Agno, Pangasinan</item>
+		<item>Aguilar, Pangasinan</item>
+		<item>Alaminos City, Pangasinan</item>
+		<item>Alcala, Pangasinan</item>
+		<item>Anda, Pangasinan</item>
+		<item>Asingan, Pangasinan</item>
+		<item>Balungao, Pangasinan</item>
+		<item>Bani, Pangasinan</item>
+		<item>Basista, Pangasinan</item>
+		<item>Bautista, Pangasinan</item>
+		<item>Bayambang, Pangasinan</item>
+		<item>Binalonan, Pangasinan</item>
+		<item>Binmaley, Pangasinan</item>
+		<item>Bolinao, Pangasinan</item>
+		<item>Bugallon, Pangasinan</item>
+		<item>Burgos, Pangasinan</item>
+		<item>Calasiao, Pangasinan</item>
+		<item>Dasol, Pangasinan</item>
+		<item>Infanta, Pangasinan</item>
+		<item>Labrador, Pangasinan</item>
+		<item>Laoac, Pangasinan</item>
+		<item>Lingayen, Pangasinan</item>
+		<item>Mabini, Pangasinan</item>
+		<item>Malasiqui, Pangasinan</item>
+		<item>Manaoag, Pangasinan</item>
+		<item>Mangaldan, Pangasinan</item>
+		<item>Mangatarem, Pangasinan</item>
+		<item>Mapandan, Pangasinan</item>
+		<item>Natividad, Pangasinan</item>
+		<item>Pozzorubio, Pangasinan</item>
+		<item>Rosales, Pangasinan</item>
+		<item>San Carlos City, Pangasinan</item>
+		<item>San Fabian, Pangasinan</item>
+		<item>San Jacinto, Pangasinan</item>
+		<item>San Manuel, Pangasinan</item>
+		<item>San Nicolas, Pangasinan</item>
+		<item>San Quintin, Pangasinan</item>
+		<item>Santa Barbara, Pangasinan</item>
+		<item>Santa Maria, Pangasinan</item>
+		<item>Santo Tomas, Pangasinan</item>
+		<item>Sison, Pangasinan</item>
+		<item>Sual, Pangasinan</item>
+		<item>Tayug, Pangasinan</item>
+		<item>Umingan, Pangasinan</item>
+		<item>Urbiztondo, Pangasinan</item>
+		<item>Urdaneta City, Pangasinan</item>
+		<item>Villasis, Pangasinan</item>
+	</string-array>
+	<string-array name="regionii_array">
+		<item>Basco, Batanes</item>
+		<item>Itbayat, Batanes</item>
+		<item>Ivana, Batanes</item>
+		<item>Mahatao, Batanes</item>
+		<item>Sabtang, Batanes</item>
+		<item>Uyugan, Batanes</item>
+		<item>Abulug, Cagayan</item>
+		<item>Alcala, Cagayan</item>
+		<item>Allacapan, Cagayan</item>
+		<item>Amulung, Cagayan</item>
+		<item>Aparri, Cagayan</item>
+		<item>Baggao, Cagayan</item>
+		<item>Ballesteros, Cagayan</item>
+		<item>Buguey, Cagayan</item>
+		<item>Calayan, Cagayan</item>
+		<item>Camalaniugan, Cagayan</item>
+		<item>Claveria, Cagayan</item>
+		<item>Enrile, Cagayan</item>
+		<item>Gattaran, Cagayan</item>
+		<item>Gonzaga, Cagayan</item>
+		<item>Iguig, Cagayan</item>
+		<item>Lal-Lo, Cagayan</item>
+		<item>Lasam, Cagayan</item>
+		<item>Pamplona, Cagayan</item>
+		<item>Peñablanca, Cagayan</item>
+		<item>Piat, Cagayan</item>
+		<item>Rizal, Cagayan</item>
+		<item>Sanchez-Mira, Cagayan</item>
+		<item>Santa Ana, Cagayan</item>
+		<item>Santa Praxedes, Cagayan</item>
+		<item>Santa Teresita, Cagayan</item>
+		<item>Santo Niño, Cagayan</item>
+		<item>Solana, Cagayan</item>
+		<item>Tuao, Cagayan</item>
+		<item>Tuguegarao City, Cagayan</item>
+		<item>Cauayan City, Isabela</item>
+		<item>Alicia, Isabela</item>
+		<item>Angadanan, Isabela</item>
+		<item>Aurora, Isabela</item>
+		<item>Benito Soliven, Isabela</item>
+		<item>Burgos, Isabela</item>
+		<item>Cabagan, Isabela</item>
+		<item>Cabatuan, Isabela</item>
+		<item>Cordon, Isabela</item>
+		<item>Delfin Albano, Isabela</item>
+		<item>Dinapigue, Isabela</item>
+		<item>Divilacan, Isabela</item>
+		<item>Echague, Isabela</item>
+		<item>Gamu, Isabela</item>
+		<item>Ilagan, Isabela</item>
+		<item>Jones, Isabela</item>
+		<item>Luna, Isabela</item>
+		<item>Maconacon, Isabela</item>
+		<item>Mallig, Isabela</item>
+		<item>Naguilian, Isabela</item>
+		<item>Palanan, Isabela</item>
+		<item>Quezon, Isabela</item>
+		<item>Quirino, Isabela</item>
+		<item>Ramon, Isabela</item>
+		<item>Reina Mercedes, Isabela</item>
+		<item>Roxas, Isabela</item>
+		<item>San Agustin, Isabela</item>
+		<item>San Guillermo, Isabela</item>
+		<item>San Isidro, Isabela</item>
+		<item>San Manuel, Isabela</item>
+		<item>San Mariano, Isabela</item>
+		<item>San Mateo, Isabela</item>
+		<item>San Pablo, Isabela</item>
+		<item>Santa Maria, Isabela</item>
+		<item>Santo Tomas, Isabela</item>
+		<item>Tumauini, Isabela</item>
+		<item>Alfonso Castaneda, Nueva Vizcaya</item>
+		<item>Ambaguio, Nueva Vizcaya</item>
+		<item>Aritao, Nueva Vizcaya</item>
+		<item>Bagabag, Nueva Vizcaya</item>
+		<item>Bambang, Nueva Vizcaya</item>
+		<item>Bayombong, Nueva Vizcaya</item>
+		<item>Diadi, Nueva Vizcaya</item>
+		<item>Dupax del Norte, Nueva Vizcaya</item>
+		<item>Dupax del Sur, Nueva Vizcaya</item>
+		<item>Kasibu, Nueva Vizcaya</item>
+		<item>Kayapa, Nueva Vizcaya</item>
+		<item>Quezon, Nueva Vizcaya</item>
+		<item>Santa Fe, Nueva Vizcaya</item>
+		<item>Solano, Nueva Vizcaya</item>
+		<item>Villaverde, Nueva Vizcaya</item>
+		<item>Aglipay, Quirino</item>
+		<item>Cabarroguis, Quirino</item>
+		<item>Diffun, Quirino</item>
+		<item>Maddela, Quirino</item>
+		<item>Nagtipunan, Quirino</item>
+		<item>Saguday, Quirino</item>
+		<item>Santiago City</item>
+	</string-array>
+	<string-array name="regioniii_array">
+		<item>Angeles City</item>
+		<item>Baler, Aurora</item>
+		<item>Casiguran, Aurora</item>
+		<item>Dilasag, Aurora</item>
+		<item>Dinalungan, Aurora</item>
+		<item>Dingalan, Aurora</item>
+		<item>Dipaculao, Aurora</item>
+		<item>Maria Aurora, Aurora</item>
+		<item>San Luis, Aurora</item>
+		<item>Abucay, Bataan</item>
+		<item>Bagac, Bataan</item>
+		<item>Balanga City, Bataan</item>
+		<item>Dinalupihan, Bataan</item>
+		<item>Hermosa, Bataan</item>
+		<item>Limay, Bataan</item>
+		<item>Mariveles, Bataan</item>
+		<item>Morong, Bataan</item>
+		<item>Orani, Bataan</item>
+		<item>Orion, Bataan</item>
+		<item>Pilar, Bataan</item>
+		<item>Samal, Bataan</item>
+		<item>Angat, Bulacan</item>
+		<item>Balagtas, Bulacan</item>
+		<item>Baliuag, Bulacan</item>
+		<item>Bocaue, Bulacan</item>
+		<item>Bulacan, Bulacan</item>
+		<item>Bustos, Bulacan</item>
+		<item>Calumpit, Bulacan</item>
+		<item>Doña Remedios Trinidad, Bulacan</item>
+		<item>Guiguinto, Bulacan</item>
+		<item>Hagonoy, Bulacan</item>
+		<item>Malolos City, Bulacan</item>
+		<item>Marilao, Bulacan</item>
+		<item>Meycauayan City, Bulacan</item>
+		<item>Norzagaray, Bulacan</item>
+		<item>Obando, Bulacan</item>
+		<item>Pandi, Bulacan</item>
+		<item>Paombong, Bulacan</item>
+		<item>Plaridel, Bulacan</item>
+		<item>Pulilan, Bulacan</item>
+		<item>San Ildefonso, Bulacan</item>
+		<item>San Jose del Monte City, Bulacan</item>
+		<item>San Miguel, Bulacan</item>
+		<item>San Rafael, Bulacan</item>
+		<item>Santa Maria, Bulacan</item>
+		<item>Aliaga, Nueva Ecija</item>
+		<item>Bongabon, Nueva Ecija</item>
+		<item>Cabanatuan City, Nueva Ecija</item>
+		<item>Cabiao, Nueva Ecija</item>
+		<item>Carranglan, Nueva Ecija</item>
+		<item>Cuyapo, Nueva Ecija</item>
+		<item>Gapan City, Nueva Ecija</item>
+		<item>Gabaldon, Nueva Ecija</item>
+		<item>General Mamerto Natividad, Nueva Ecija</item>
+		<item>General Tinio, Nueva Ecija</item>
+		<item>Guimba, Nueva Ecija</item>
+		<item>Jaen, Nueva Ecija</item>
+		<item>Laur, Nueva Ecija</item>
+		<item>Licab, Nueva Ecija</item>
+		<item>Llanera, Nueva Ecija</item>
+		<item>Lupao, Nueva Ecija</item>
+		<item>Nampicuan, Nueva Ecija</item>
+		<item>Palayan City, Nueva Ecija</item>
+		<item>Pantabangan, Nueva Ecija</item>
+		<item>Peñaranda, Nueva Ecija</item>
+		<item>Quezon, Nueva Ecija</item>
+		<item>Rizal, Nueva Ecija</item>
+		<item>San Antonio, Nueva Ecija</item>
+		<item>San Isidro, Nueva Ecija</item>
+		<item>San Jose City, Nueva Ecija</item>
+		<item>San Leonardo, Nueva Ecija</item>
+		<item>Santa Rosa, Nueva Ecija</item>
+		<item>Santo Domingo, Nueva Ecija</item>
+		<item>Science City of Muñoz, Nueva Ecija</item>
+		<item>Talavera, Nueva Ecija</item>
+		<item>Talugtug, Nueva Ecija</item>
+		<item>Zaragoza, Nueva Ecija</item>
+		<item>Olongapo City</item>
+		<item>Apalit, Pampanga</item>
+		<item>Arayat, Pampanga</item>
+		<item>Bacolor, Pampanga</item>
+		<item>Candaba, Pampanga</item>
+		<item>Floridablanca, Pampanga</item>
+		<item>Guagua, Pampanga</item>
+		<item>Lubao, Pampanga</item>
+		<item>Mabalacat, Pampanga</item>
+		<item>Macabebe, Pampanga</item>
+		<item>Magalang, Pampanga</item>
+		<item>Masantol, Pampanga</item>
+		<item>Mexico, Pampanga</item>
+		<item>Minalin, Pampanga</item>
+		<item>Porac, Pampanga</item>
+		<item>San Fernando City, Pampanga</item>
+		<item>San Luis, Pampanga</item>
+		<item>San Simon, Pampanga</item>
+		<item>Santa Ana, Pampanga</item>
+		<item>Santa Rita, Pampanga</item>
+		<item>Santo Tomas, Pampanga</item>
+		<item>Sasmuan, Pampanga</item>
+		<item>Tarlac City, Tarlac</item>
+		<item>Anao, Tarlac</item>
+		<item>Bamban, Tarlac</item>
+		<item>Camiling, Tarlac</item>
+		<item>Capas, Tarlac</item>
+		<item>Concepcion, Tarlac</item>
+		<item>Gerona, Tarlac</item>
+		<item>La Paz, Tarlac</item>
+		<item>Mayantoc, Tarlac</item>
+		<item>Moncada, Tarlac</item>
+		<item>Paniqui, Tarlac</item>
+		<item>Pura, Tarlac</item>
+		<item>Ramos, Tarlac</item>
+		<item>San Clemente, Tarlac</item>
+		<item>San Jose, Tarlac</item>
+		<item>San Manuel, Tarlac</item>
+		<item>Santa Ignacia, Tarlac</item>
+		<item>Victoria, Tarlac</item>
+		<item>Botolan, Zambales</item>
+		<item>Cabangan, Zambales</item>
+		<item>Candelaria, Zambales</item>
+		<item>Castillejos, Zambales</item>
+		<item>Iba, Zambales</item>
+		<item>Masinloc, Zambales</item>
+		<item>Palauig, Zambales</item>
+		<item>San Antonio, Zambales</item>
+		<item>San Felipe, Zambales</item>
+		<item>San Marcelino, Zambales</item>
+		<item>San Narciso, Zambales</item>
+		<item>Santa Cruz, Zambales</item>
+		<item>Subic, Zambales</item>
+	</string-array>
+	<string-array name="regioniva_array">
+		<item>Agoncillo, Batangas</item>
+		<item>Alitagtag, Batangas</item>
+		<item>Balayan, Batangas</item>
+		<item>Balete, Batangas</item>
+		<item>Batangas City, Batangas</item>
+		<item>Bauan, Batangas</item>
+		<item>Calaca, Batangas</item>
+		<item>Calatagan, Batangas</item>
+		<item>Cuenca, Batangas</item>
+		<item>Ibaan, Batangas</item>
+		<item>Laurel, Batangas</item>
+		<item>Lemery, Batangas</item>
+		<item>Lipa City, Batangas</item>
+		<item>Lian, Batangas</item>
+		<item>Lobo, Batangas</item>
+		<item>Mabini, Batangas</item>
+		<item>Malvar, Batangas</item>
+		<item>Mataas na Kahoy, Batangas</item>
+		<item>Nasugbu, Batangas</item>
+		<item>Padre Garcia, Batangas</item>
+		<item>Rosario, Batangas</item>
+		<item>San Jose, Batangas</item>
+		<item>San Juan, Batangas</item>
+		<item>San Luis, Batangas</item>
+		<item>San Nicolas, Batangas</item>
+		<item>San Pascual, Batangas</item>
+		<item>Santa Teresita, Batangas</item>
+		<item>Santo Tomas, Batangas</item>
+		<item>Taal, Batangas</item>
+		<item>Talisay, Batangas</item>
+		<item>Tanauan City, Batangas</item>
+		<item>Taysan, Batangas</item>
+		<item>Tingloy, Batangas</item>
+		<item>Tuy, Batangas</item>
+		<item>Alfonso, Cavite</item>
+		<item>Amadeo, Cavite</item>
+		<item>Bacoor, Cavite</item>
+		<item>Carmona, Cavite</item>
+		<item>Cavite City, Cavite</item>
+		<item>Dasmariñas, Cavite</item>
+		<item>Gen. Mariano Alvarez, Cavite</item>
+		<item>Gen. Emilio Aguinaldo, Cavite</item>
+		<item>Gen. Trias, Cavite</item>
+		<item>Imus, Cavite</item>
+		<item>Indang, Cavite</item>
+		<item>Kawit, Cavite</item>
+		<item>Magallanes, Cavite</item>
+		<item>Maragondon, Cavite</item>
+		<item>Mendez, Cavite</item>
+		<item>Naic, Cavite</item>
+		<item>Noveleta, Cavite</item>
+		<item>Rosario, Cavite</item>
+		<item>Silang, Cavite</item>
+		<item>Tagaytay City, Cavite</item>
+		<item>Tanza, Cavite</item>
+		<item>Ternate, Cavite</item>
+		<item>Trece Martires City, Cavite</item>
+		<item>Alaminos, Laguna</item>
+		<item>Bay, Laguna</item>
+		<item>Biñan, Laguna</item>
+		<item>Cabuyao, Laguna</item>
+		<item>Calamba City, Laguna</item>
+		<item>Calauan, Laguna</item>
+		<item>Cavinti, Laguna</item>
+		<item>Famy, Laguna</item>
+		<item>Kalayaan, Laguna</item>
+		<item>Liliw, Laguna</item>
+		<item>Los Baños, Laguna</item>
+		<item>Luisiana, Laguna</item>
+		<item>Lumban, Laguna</item>
+		<item>Mabitac, Laguna</item>
+		<item>Magdalena, Laguna</item>
+		<item>Majayjay, Laguna</item>
+		<item>Nagcarlan, Laguna</item>
+		<item>Paete, Laguna</item>
+		<item>Pagsanjan, Laguna</item>
+		<item>Pakil, Laguna</item>
+		<item>Pangil, Laguna</item>
+		<item>Pila, Laguna</item>
+		<item>Rizal, Laguna</item>
+		<item>San Pablo City, Laguna</item>
+		<item>San Pedro, Laguna</item>
+		<item>Santa Cruz, Laguna</item>
+		<item>Santa Maria, Laguna</item>
+		<item>Santa Rosa City, Laguna</item>
+		<item>Siniloan, Laguna</item>
+		<item>Victoria, Laguna</item>
+		<item>Lucena City</item>
+		<item>Agdangan, Quezon</item>
+		<item>Alabat, Quezon</item>
+		<item>Atimonan, Quezon</item>
+		<item>Buenavista, Quezon</item>
+		<item>Burdeos, Quezon</item>
+		<item>Calauag, Quezon</item>
+		<item>Candelaria, Quezon</item>
+		<item>Catanauan, Quezon</item>
+		<item>Dolores, Quezon</item>
+		<item>General Luna, Quezon</item>
+		<item>General Nakar, Quezon</item>
+		<item>Guinayangan, Quezon</item>
+		<item>Gumaca, Quezon</item>
+		<item>Infanta, Quezon</item>
+		<item>Jomalig, Quezon</item>
+		<item>Lopez, Quezon</item>
+		<item>Lucban, Quezon</item>
+		<item>Macalelon, Quezon</item>
+		<item>Mauban, Quezon</item>
+		<item>Mulanay, Quezon</item>
+		<item>Padre Burgos, Quezon</item>
+		<item>Pagbilao, Quezon</item>
+		<item>Panukulan, Quezon</item>
+		<item>Patnanungan, Quezon</item>
+		<item>Perez, Quezon</item>
+		<item>Pitogo, Quezon</item>
+		<item>Plaridel, Quezon</item>
+		<item>Polillo, Quezon</item>
+		<item>Quezon, Quezon</item>
+		<item>Real, Quezon</item>
+		<item>Sampaloc, Quezon</item>
+		<item>San Andres, Quezon</item>
+		<item>San Antonio, Quezon</item>
+		<item>San Francisco, Quezon</item>
+		<item>San Narciso, Quezon</item>
+		<item>Sariaya, Quezon</item>
+		<item>Tagkawayan, Quezon</item>
+		<item>Tayabas City, Quezon</item>
+		<item>Tiaong, Quezon</item>
+		<item>Unisan, Quezon</item>
+		<item>Angono, Rizal</item>
+		<item>Antipolo City, Rizal</item>
+		<item>Baras, Rizal</item>
+		<item>Binangonan, Rizal</item>
+		<item>Cainta, Rizal</item>
+		<item>Cardona, Rizal</item>
+		<item>Jalajala, Rizal</item>
+		<item>Morong, Rizal</item>
+		<item>Pililla, Rizal</item>
+		<item>Rodriguez, Rizal</item>
+		<item>San Mateo, Rizal</item>
+		<item>Tanay, Rizal</item>
+		<item>Taytay, Rizal</item>
+		<item>Teresa, Rizal</item>
+	</string-array>
+	<string-array name="regionivb_array">
+		<item>Boac, Marinduque</item>
+		<item>Buenavista, Marinduque</item>
+		<item>Gasan, Marinduque</item>
+		<item>Mogpog, Marinduque</item>
+		<item>Santa Cruz, Marinduque</item>
+		<item>Torrijos, Marinduque</item>
+		<item>Abra de Ilog, Occidental Mindoro</item>
+		<item>Calintaan, Occidental Mindoro</item>
+		<item>Looc, Occidental Mindoro</item>
+		<item>Lubang, Occidental Mindoro</item>
+		<item>Magsaysay, Occidental Mindoro</item>
+		<item>Mamburao, Occidental Mindoro</item>
+		<item>Paluan, Occidental Mindoro</item>
+		<item>Rizal, Occidental Mindoro</item>
+		<item>Sablayan, Occidental Mindoro</item>
+		<item>San Jose, Occidental Mindoro</item>
+		<item>Santa Cruz, Occidental Mindoro</item>
+		<item>Calapan City, Oriental Mindoro</item>
+		<item>Baco, Oriental Mindoro</item>
+		<item>Bansud, Oriental Mindoro</item>
+		<item>Bongabong, Oriental Mindoro</item>
+		<item>Bulalacao, Oriental Mindoro</item>
+		<item>Gloria, Oriental Mindoro</item>
+		<item>Mansalay, Oriental Mindoro</item>
+		<item>Naujan, Oriental Mindoro</item>
+		<item>Pinamalayan, Oriental Mindoro</item>
+		<item>Pola, Oriental Mindoro</item>
+		<item>Puerto Galera, Oriental Mindoro</item>
+		<item>Roxas, Oriental Mindoro</item>
+		<item>San Teodoro, Oriental Mindoro</item>
+		<item>Socorro, Oriental Mindoro</item>
+		<item>Victoria, Oriental Mindoro</item>
+		<item>Aborlan, Palawan</item>
+		<item>Agutaya, Palawan</item>
+		<item>Araceli, Palawan</item>
+		<item>Balabac, Palawan</item>
+		<item>Bataraza, Palawan</item>
+		<item>Brooke\'s Point, Palawan</item>
+		<item>Busuanga, Palawan</item>
+		<item>Cagayancillo, Palawan</item>
+		<item>Coron, Palawan</item>
+		<item>Culion, Palawan</item>
+		<item>Cuyo, Palawan</item>
+		<item>Dumaran, Palawan</item>
+		<item>El Nido, Palawan</item>
+		<item>Kalayaan, Palawan</item>
+		<item>Linapacan, Palawan</item>
+		<item>Magsaysay, Palawan</item>
+		<item>Narra, Palawan</item>
+		<item>Quezon, Palawan</item>
+		<item>Rizal, Palawan</item>
+		<item>Roxas, Palawan</item>
+		<item>San Vicente, Palawan</item>
+		<item>Sofronio Española, Palawan</item>
+		<item>Taytay, Palawan</item>
+		<item>Puerto Princesa City</item>
+		<item>Alcantara, Romblon</item>
+		<item>Banton, Romblon</item>
+		<item>Cajidiocan, Romblon</item>
+		<item>Calatrava, Romblon</item>
+		<item>Concepcion, Romblon</item>
+		<item>Corcuera, Romblon</item>
+		<item>Ferrol, Romblon</item>
+		<item>Looc, Romblon</item>
+		<item>Magdiwang, Romblon</item>
+		<item>Odiongan, Romblon</item>
+		<item>Romblon, Romblon</item>
+		<item>San Agustin, Romblon</item>
+		<item>San Andres, Romblon</item>
+		<item>San Fernando, Romblon</item>
+		<item>San Jose, Romblon</item>
+		<item>Santa Fe, Romblon</item>
+		<item>Santa Maria, Romblon</item>
+	</string-array>
+	<string-array name="regionv_array">
+		<item>Bacacay, Albay</item>
+		<item>Camalig, Albay</item>
+		<item>Daraga, Albay</item>
+		<item>Guinobatan, Albay</item>
+		<item>Jovellar, Albay</item>
+		<item>Libon, Albay</item>
+		<item>Ligao City, Albay</item>
+		<item>Malilipot, Albay</item>
+		<item>Malinao, Albay</item>
+		<item>Manito, Albay</item>
+		<item>Oas, Albay</item>
+		<item>Pio Duran, Albay</item>
+		<item>Polangui, Albay</item>
+		<item>Rapu-Rapu, Albay</item>
+		<item>Santo Domingo, Albay</item>
+		<item>Tabaco City, Albay</item>
+		<item>Tiwi, Albay</item>
+		<item>Basud, Camarines Norte</item>
+		<item>Capalonga, Camarines Norte</item>
+		<item>Daet, Camarines Norte</item>
+		<item>Jose Panganiban, Camarines Norte</item>
+		<item>Labo, Camarines Norte</item>
+		<item>Mercedes, Camarines Norte</item>
+		<item>Paracale, Camarines Norte</item>
+		<item>San Lorenzo Ruiz, Camarines Norte</item>
+		<item>San Vicente, Camarines Norte</item>
+		<item>Santa Elena, Camarines Norte</item>
+		<item>Talisay, Camarines Norte</item>
+		<item>Vinzons, Camarines Norte</item>
+		<item>Iriga City, Camarines Sur</item>
+		<item>Baao, Camarines Sur</item>
+		<item>Balatan, Camarines Sur</item>
+		<item>Bato, Camarines Sur</item>
+		<item>Bombon, Camarines Sur</item>
+		<item>Buhi, Camarines Sur</item>
+		<item>Bula, Camarines Sur</item>
+		<item>Cabusao, Camarines Sur</item>
+		<item>Calabanga, Camarines Sur</item>
+		<item>Camaligan, Camarines Sur</item>
+		<item>Canaman, Camarines Sur</item>
+		<item>Caramoan, Camarines Sur</item>
+		<item>Del Gallego, Camarines Sur</item>
+		<item>Gainza, Camarines Sur</item>
+		<item>Garchitorena, Camarines Sur</item>
+		<item>Goa, Camarines Sur</item>
+		<item>Lagonoy, Camarines Sur</item>
+		<item>Libmanan, Camarines Sur</item>
+		<item>Lupi, Camarines Sur</item>
+		<item>Magarao, Camarines Sur</item>
+		<item>Milaor, Camarines Sur</item>
+		<item>Minalabac, Camarines Sur</item>
+		<item>Nabua, Camarines Sur</item>
+		<item>Ocampo, Camarines Sur</item>
+		<item>Pamplona, Camarines Sur</item>
+		<item>Pasacao, Camarines Sur</item>
+		<item>Pili, Camarines Sur</item>
+		<item>Presentacion, Camarines Sur</item>
+		<item>Ragay, Camarines Sur</item>
+		<item>Sagñay, Camarines Sur</item>
+		<item>San Fernando, Camarines Sur</item>
+		<item>San Jose, Camarines Sur</item>
+		<item>Sipocot, Camarines Sur</item>
+		<item>Siruma, Camarines Sur</item>
+		<item>Tigaon, Camarines Sur</item>
+		<item>Tinambac, Camarines Sur</item>
+		<item>Bagamanoc, Catanduanes</item>
+		<item>Baras, Catanduanes</item>
+		<item>Bato, Catanduanes</item>
+		<item>Caramoran, Catanduanes</item>
+		<item>Gigmoto, Catanduanes</item>
+		<item>Pandan, Catanduanes</item>
+		<item>Panganiban, Catanduanes</item>
+		<item>San Andres, Catanduanes</item>
+		<item>San Miguel, Catanduanes</item>
+		<item>Viga, Catanduanes</item>
+		<item>Virac, Catanduanes</item>
+		<item>Aroroy, Masbate</item>
+		<item>Baleno, Masbate</item>
+		<item>Balud, Masbate</item>
+		<item>Batuan, Masbate</item>
+		<item>Cataingan, Masbate</item>
+		<item>Cawayan, Masbate</item>
+		<item>Claveria, Masbate</item>
+		<item>Dimasalang, Masbate</item>
+		<item>Esperanza, Masbate</item>
+		<item>Mandaon, Masbate</item>
+		<item>Masbate City, Masbate</item>
+		<item>Milagros, Masbate</item>
+		<item>Mobo, Masbate</item>
+		<item>Monreal, Masbate</item>
+		<item>Palanas, Masbate</item>
+		<item>Pio V. Corpuz, Masbate</item>
+		<item>Placer, Masbate</item>
+		<item>San Fernando, Masbate</item>
+		<item>San Jacinto, Masbate</item>
+		<item>San Pascual, Masbate</item>
+		<item>Uson, Masbate</item>
+		<item>Naga City</item>
+		<item>Barcelona, Sorsogon</item>
+		<item>Bulan, Sorsogon</item>
+		<item>Bulusan, Sorsogon</item>
+		<item>Casiguran, Sorsogon</item>
+		<item>Castilla, Sorsogon</item>
+		<item>Donsol, Sorsogon</item>
+		<item>Gubat, Sorsogon</item>
+		<item>Irosin, Sorsogon</item>
+		<item>Juban, Sorsogon</item>
+		<item>Magallanes, Sorsogon</item>
+		<item>Matnog, Sorsogon</item>
+		<item>Pilar, Sorsogon</item>
+		<item>Prieto Diaz, Sorsogon</item>
+		<item>Santa Magdalena, Sorsogon</item>
+		<item>Sorsogon City, Sorsogon</item>
+	</string-array>
+	<string-array name="regionvi_array">
+		<item>Altavas, Aklan</item>
+		<item>Balete, Aklan</item>
+		<item>Banga, Aklan</item>
+		<item>Batan, Aklan</item>
+		<item>Buruanga, Aklan</item>
+		<item>Ibajay, Aklan</item>
+		<item>Kalibo, Aklan</item>
+		<item>Lezo, Aklan</item>
+		<item>Libacao, Aklan</item>
+		<item>Madalag, Aklan</item>
+		<item>Makato, Aklan</item>
+		<item>Malay, Aklan</item>
+		<item>Malinao, Aklan</item>
+		<item>Nabas, Aklan</item>
+		<item>New Washington, Aklan</item>
+		<item>Numancia, Aklan</item>
+		<item>Tangalan, Aklan</item>
+		<item>Anini-y, Antique</item>
+		<item>Barbaza, Antique</item>
+		<item>Belison, Antique</item>
+		<item>Bugasong, Antique</item>
+		<item>Caluya, Antique</item>
+		<item>Culasi, Antique</item>
+		<item>Hamtic, Antique</item>
+		<item>Laua-an, Antique</item>
+		<item>Libertad, Antique</item>
+		<item>Pandan, Antique</item>
+		<item>Patnongon, Antique</item>
+		<item>San Jose, Antique</item>
+		<item>San Remigio, Antique</item>
+		<item>Sebaste, Antique</item>
+		<item>Sibalom, Antique</item>
+		<item>Tibiao, Antique</item>
+		<item>Tobias Fornier, Antique</item>
+		<item>Valderrama, Antique</item>
+		<item>Bacolod City</item>
+		<item>Cuartero, Capiz</item>
+		<item>Dao, Capiz</item>
+		<item>Dumalag, Capiz</item>
+		<item>Dumarao, Capiz</item>
+		<item>Ivisan, Capiz</item>
+		<item>Jamindan, Capiz</item>
+		<item>Ma-ayon, Capiz</item>
+		<item>Mambusao, Capiz</item>
+		<item>Panay, Capiz</item>
+		<item>Panitan, Capiz</item>
+		<item>Pilar, Capiz</item>
+		<item>Pontevedra, Capiz</item>
+		<item>President Roxas, Capiz</item>
+		<item>Roxas City, Capiz</item>
+		<item>Sapi-an, Capiz</item>
+		<item>Sigma, Capiz</item>
+		<item>Tapaz, Capiz</item>
+		<item>Buenavista, Guimaras</item>
+		<item>Jordan, Guimaras</item>
+		<item>Nueva Valencia, Guimaras</item>
+		<item>San Lorenzo, Guimaras</item>
+		<item>Sibunag, Guimaras</item>
+		<item>Iloilo City</item>
+		<item>Ajuy, Iloilo</item>
+		<item>Alimodian, Iloilo</item>
+		<item>Anilao, Iloilo</item>
+		<item>Badiangan, Iloilo</item>
+		<item>Balasan, Iloilo</item>
+		<item>Banate, Iloilo</item>
+		<item>Barotac Nuevo, Iloilo</item>
+		<item>Barotac Viejo, Iloilo</item>
+		<item>Batad, Iloilo</item>
+		<item>Bingawan, Iloilo</item>
+		<item>Cabatuan, Iloilo</item>
+		<item>Calinog, Iloilo</item>
+		<item>Carles, Iloilo</item>
+		<item>Concepcion, Iloilo</item>
+		<item>Dingle, Iloilo</item>
+		<item>Dueñas, Iloilo</item>
+		<item>Dumangas, Iloilo</item>
+		<item>Estancia, Iloilo</item>
+		<item>Guimbal, Iloilo</item>
+		<item>Igbaras, Iloilo</item>
+		<item>Janiuay, Iloilo</item>
+		<item>Lambunao, Iloilo</item>
+		<item>Leganes, Iloilo</item>
+		<item>Lemery, Iloilo</item>
+		<item>Leon, Iloilo</item>
+		<item>Maasin, Iloilo</item>
+		<item>Miagao, Iloilo</item>
+		<item>Mina, Iloilo</item>
+		<item>New Lucena, Iloilo</item>
+		<item>Oton, Iloilo</item>
+		<item>Passi City, Iloilo</item>
+		<item>Pavia, Iloilo</item>
+		<item>Pototan, Iloilo</item>
+		<item>San Dionisio, Iloilo</item>
+		<item>San Enrique, Iloilo</item>
+		<item>San Joaquin, Iloilo</item>
+		<item>San Miguel, Iloilo</item>
+		<item>San Rafael, Iloilo</item>
+		<item>Santa Barbara, Iloilo</item>
+		<item>Sara, Iloilo</item>
+		<item>Tigbauan, Iloilo</item>
+		<item>Tubungan, Iloilo</item>
+		<item>Zarraga, Iloilo</item>
+		<item>Bago City, Negros Occidental</item>
+		<item>Cadiz City, Negros Occidental</item>
+		<item>Escalante City, Negros Occidental</item>
+		<item>Himamaylan City, Negros Occidental</item>
+		<item>Kabankalan City, Negros Occidental</item>
+		<item>La Carlota City, Negros Occidental</item>
+		<item>Sagay City, Negros Occidental</item>
+		<item>San Carlos City, Negros Occidental</item>
+		<item>Silay City, Negros Occidental</item>
+		<item>Sipalay City, Negros Occidental</item>
+		<item>Talisay City, Negros Occidental</item>
+		<item>Victorias City, Negros Occidental</item>
+	</string-array>
+	<string-array name="regionvii_array">
+		<item>Alburquerque, Bohol</item>
+		<item>Alicia, Bohol</item>
+		<item>Anda, Bohol</item>
+		<item>Antequera, Bohol</item>
+		<item>Baclayon, Bohol</item>
+		<item>Balilihan, Bohol</item>
+		<item>Batuan, Bohol</item>
+		<item>Bien Unido, Bohol</item>
+		<item>Bilar, Bohol</item>
+		<item>Buenavista, Bohol</item>
+		<item>Calape, Bohol</item>
+		<item>Candijay, Bohol</item>
+		<item>Carmen, Bohol</item>
+		<item>Catigbian, Bohol</item>
+		<item>Clarin, Bohol</item>
+		<item>Corella, Bohol</item>
+		<item>Cortes, Bohol</item>
+		<item>Dagohoy, Bohol</item>
+		<item>Danao, Bohol</item>
+		<item>Dauis, Bohol</item>
+		<item>Dimiao, Bohol</item>
+		<item>Duero, Bohol</item>
+		<item>Garcia Hernandez, Bohol</item>
+		<item>Guindulman, Bohol</item>
+		<item>Inabanga, Bohol</item>
+		<item>Jagna, Bohol</item>
+		<item>Jetafe, Bohol</item>
+		<item>Lila, Bohol</item>
+		<item>Loay, Bohol</item>
+		<item>Loboc, Bohol</item>
+		<item>Loon, Bohol</item>
+		<item>Mabini, Bohol</item>
+		<item>Maribojoc, Bohol</item>
+		<item>Panglao, Bohol</item>
+		<item>Pilar, Bohol</item>
+		<item>Pres. Carlos P. Garcia, Bohol</item>
+		<item>Sagbayan, Bohol</item>
+		<item>San Isidro, Bohol</item>
+		<item>San Miguel, Bohol</item>
+		<item>Sevilla, Bohol</item>
+		<item>Sierra Bullones, Bohol</item>
+		<item>Sikatuna, Bohol</item>
+		<item>Tagbilaran City, Bohol</item>
+		<item>Talibon, Bohol</item>
+		<item>Trinidad, Bohol</item>
+		<item>Tubigon, Bohol</item>
+		<item>Ubay, Bohol</item>
+		<item>Valencia, Bohol</item>
+		<item>Cebu City</item>
+		<item>Alcantara, Cebu</item>
+		<item>Alcoy, Cebu</item>
+		<item>Alegria, Cebu</item>
+		<item>Aloguinsan, Cebu</item>
+		<item>Argao, Cebu</item>
+		<item>Asturias, Cebu</item>
+		<item>Badian, Cebu</item>
+		<item>Balamban, Cebu</item>
+		<item>Bantayan, Cebu</item>
+		<item>Barili, Cebu</item>
+		<item>Bogo City, Cebu</item>
+		<item>Boljoon, Cebu</item>
+		<item>Borbon, Cebu</item>
+		<item>Carcar City, Cebu</item>
+		<item>Carmen, Cebu</item>
+		<item>Catmon, Cebu</item>
+		<item>Compostela, Cebu</item>
+		<item>Consolacion, Cebu</item>
+		<item>Cordoba, Cebu</item>
+		<item>Daanbantayan, Cebu</item>
+		<item>Dalaguete, Cebu</item>
+		<item>Danao City, Cebu</item>
+		<item>Dumanjug, Cebu</item>
+		<item>Ginatilan, Cebu</item>
+		<item>Liloan, Cebu</item>
+		<item>Madridejos, Cebu</item>
+		<item>Malabuyoc, Cebu</item>
+		<item>Medellin, Cebu</item>
+		<item>Minglanilla, Cebu</item>
+		<item>Moalboal, Cebu</item>
+		<item>Naga City, Cebu</item>
+		<item>Oslob, Cebu</item>
+		<item>Pilar, Cebu</item>
+		<item>Pinamungahan, Cebu</item>
+		<item>Poro, Cebu</item>
+		<item>Ronda, Cebu</item>
+		<item>Samboan, Cebu</item>
+		<item>San Fernando, Cebu</item>
+		<item>San Francisco, Cebu</item>
+		<item>San Remigio, Cebu</item>
+		<item>Santa Fe, Cebu</item>
+		<item>Santander, Cebu</item>
+		<item>Sibonga, Cebu</item>
+		<item>Sogod, Cebu</item>
+		<item>Tabogon, Cebu</item>
+		<item>Tabuelan, Cebu</item>
+		<item>Talisay City, Cebu</item>
+		<item>Toledo City, Cebu</item>
+		<item>Tuburan, Cebu</item>
+		<item>Tudela, Cebu</item>
+		<item>Lapu-Lapu City</item>
+		<item>Mandaue City</item>
+		<item>Amlan, Negros Oriental</item>
+		<item>Ayungon, Negros Oriental</item>
+		<item>Bacong, Negros Oriental</item>
+		<item>Bais City, Negros Oriental</item>
+		<item>Basay, Negros Oriental</item>
+		<item>Bayawan City, Negros Oriental</item>
+		<item>Bindoy, Negros Oriental</item>
+		<item>Canlaon City, Negros Oriental</item>
+		<item>Dauin, Negros Oriental</item>
+		<item>Dumaguete City, Negros Oriental</item>
+		<item>Guihulngan City, Negros Oriental</item>
+		<item>Jimalalud, Negros Oriental</item>
+		<item>La Libertad, Negros Oriental</item>
+		<item>Mabinay, Negros Oriental</item>
+		<item>Manjuyod, Negros Oriental</item>
+		<item>Pamplona, Negros Oriental</item>
+		<item>San Jose, Negros Oriental</item>
+		<item>Santa Catalina, Negros Oriental</item>
+		<item>Siaton, Negros Oriental</item>
+		<item>Sibulan, Negros Oriental</item>
+		<item>Tanjay City, Negros Oriental</item>
+		<item>Tayasan, Negros Oriental</item>
+		<item>Valencia, Negros Oriental</item>
+		<item>Vallehermoso, Negros Oriental</item>
+		<item>Zamboanguita, Negros Oriental</item>
+		<item>Enrique Villanueva, Siquijor</item>
+		<item>Larena, Siquijor</item>
+		<item>Lazi, Siquijor</item>
+		<item>Maria, Siquijor</item>
+		<item>San Juan, Siquijor</item>
+		<item>Siquijor, Siquijor</item>
+	</string-array>
+	<string-array name="regionviii_array">
+		<item>Almeria, Biliran</item>
+		<item>Biliran, Biliran</item>
+		<item>Cabucgayan, Biliran</item>
+		<item>Caibiran, Biliran</item>
+		<item>Culaba, Biliran</item>
+		<item>Kawayan, Biliran</item>
+		<item>Maripipi, Biliran</item>
+		<item>Naval, Biliran</item>
+		<item>Arteche, Eastern Samar</item>
+		<item>Balangiga, Eastern Samar</item>
+		<item>Balangkayan, Eastern Samar</item>
+		<item>Borongan City, Eastern Samar</item>
+		<item>Can-avid, Eastern Samar</item>
+		<item>Dolores, Eastern Samar</item>
+		<item>General MacArthur, Eastern Samar</item>
+		<item>Giporlos, Eastern Samar</item>
+		<item>Guiuan, Eastern Samar</item>
+		<item>Hernani, Eastern Samar</item>
+		<item>Jipapad, Eastern Samar</item>
+		<item>Lawaan, Eastern Samar</item>
+		<item>Llorente, Eastern Samar</item>
+		<item>Maslog, Eastern Samar</item>
+		<item>Maydolong, Eastern Samar</item>
+		<item>Mercedes, Eastern Samar</item>
+		<item>Oras, Eastern Samar</item>
+		<item>Quinapondan, Eastern Samar</item>
+		<item>Salcedo, Eastern Samar</item>
+		<item>San Julian, Eastern Samar</item>
+		<item>San Policarpo, Eastern Samar</item>
+		<item>Sulat, Eastern Samar</item>
+		<item>Taft, Eastern Samar</item>
+		<item>Abuyog, Leyte</item>
+		<item>Alangalang, Leyte</item>
+		<item>Albuera, Leyte</item>
+		<item>Babatngon, Leyte</item>
+		<item>Barugo, Leyte</item>
+		<item>Bato, Leyte</item>
+		<item>Baybay City, Leyte</item>
+		<item>Burauen, Leyte</item>
+		<item>Calubian, Leyte</item>
+		<item>Capoocan, Leyte</item>
+		<item>Carigara, Leyte</item>
+		<item>Dagami, Leyte</item>
+		<item>Dulag, Leyte</item>
+		<item>Hilongos, Leyte</item>
+		<item>Hindang, Leyte</item>
+		<item>Inopacan, Leyte</item>
+		<item>Isabel, Leyte</item>
+		<item>Jaro, Leyte</item>
+		<item>Javier, Leyte</item>
+		<item>Julita, Leyte</item>
+		<item>Kananga, Leyte</item>
+		<item>La Paz, Leyte</item>
+		<item>Leyte, Leyte</item>
+		<item>Macarthur, Leyte</item>
+		<item>Mahaplag, Leyte</item>
+		<item>Matag-ob, Leyte</item>
+		<item>Matalom, Leyte</item>
+		<item>Mayorga, Leyte</item>
+		<item>Merida, Leyte</item>
+		<item>Palo, Leyte</item>
+		<item>Palompon, Leyte</item>
+		<item>Pastrana, Leyte</item>
+		<item>San Isidro, Leyte</item>
+		<item>San Miguel, Leyte</item>
+		<item>Santa Fe, Leyte</item>
+		<item>Tabango, Leyte</item>
+		<item>Tabontabon, Leyte</item>
+		<item>Tanauan, Leyte</item>
+		<item>Tolosa, Leyte</item>
+		<item>Tunga, Leyte</item>
+		<item>Villaba, Leyte</item>
+		<item>Allen, Northern Samar</item>
+		<item>Biri, Northern Samar</item>
+		<item>Bobon, Northern Samar</item>
+		<item>Capul, Northern Samar</item>
+		<item>Catarman, Northern Samar</item>
+		<item>Catubig, Northern Samar</item>
+		<item>Gamay, Northern Samar</item>
+		<item>Laoang, Northern Samar</item>
+		<item>Lapinig, Northern Samar</item>
+		<item>Las Navas, Northern Samar</item>
+		<item>Lavezares, Northern Samar</item>
+		<item>Lope de Vega, Northern Samar</item>
+		<item>Mapanas, Northern Samar</item>
+		<item>Mondragon, Northern Samar</item>
+		<item>Palapag, Northern Samar</item>
+		<item>Pambujan, Northern Samar</item>
+		<item>Rosario, Northern Samar</item>
+		<item>San Antonio, Northern Samar</item>
+		<item>San Isidro, Northern Samar</item>
+		<item>San Jose, Northern Samar</item>
+		<item>San Roque, Northern Samar</item>
+		<item>San Vicente, Northern Samar</item>
+		<item>Silvino Lobos, Northern Samar</item>
+		<item>Ormoc City</item>
+		<item>Almagro, Samar</item>
+		<item>Basey, Samar</item>
+		<item>Calbayog City, Samar</item>
+		<item>Calbiga, Samar</item>
+		<item>Catbalogan City, Samar</item>
+		<item>Daram, Samar</item>
+		<item>Gandara, Samar</item>
+		<item>Hinabangan, Samar</item>
+		<item>Jiabong, Samar</item>
+		<item>Marabut, Samar</item>
+		<item>Matuguinao, Samar</item>
+		<item>Motiong, Samar</item>
+		<item>Pagsanghan, Samar</item>
+		<item>Paranas, Samar</item>
+		<item>Pinabacdao, Samar</item>
+		<item>San Jorge, Samar</item>
+		<item>San Jose De Buan, Samar</item>
+		<item>San Sebastian, Samar</item>
+		<item>Santa Margarita, Samar</item>
+		<item>Santa Rita, Samar</item>
+		<item>Santo Niño, Samar</item>
+		<item>Tagapul-an, Samar</item>
+		<item>Talalora, Samar</item>
+		<item>Tarangnan, Samar</item>
+		<item>Villareal, Samar</item>
+		<item>Zumarraga, Samar</item>
+		<item>Anahawan, Southern Leyte</item>
+		<item>Bontoc, Southern Leyte</item>
+		<item>Hinunangan, Southern Leyte</item>
+		<item>Hinundayan, Southern Leyte</item>
+		<item>Libagon, Southern Leyte</item>
+		<item>Liloan, Southern Leyte</item>
+		<item>Limasawa, Southern Leyte</item>
+		<item>Maasin City, Southern Leyte</item>
+		<item>Macrohon, Southern Leyte</item>
+		<item>Malitbog, Southern Leyte</item>
+		<item>Padre Burgos, Southern Leyte</item>
+		<item>Pintuyan, Southern Leyte</item>
+		<item>Saint Bernard, Southern Leyte</item>
+		<item>San Francisco, Southern Leyte</item>
+		<item>San Juan, Southern Leyte</item>
+		<item>San Ricardo, Southern Leyte</item>
+		<item>Silago, Southern Leyte</item>
+		<item>Sogod, Southern Leyte</item>
+		<item>Tomas Oppus, Southern Leyte</item>
+	</string-array>
+	<string-array name="regionix_array">
+		<item>Isabela City</item>
+		<item>Zamboanga City</item>
+		<item>Bacungan, Zamboanga del Norte</item>
+		<item>Baliguian, Zamboanga del Norte</item>
+		<item>Dapitan City, Zamboanga del Norte</item>
+		<item>Dipolog City, Zamboanga del Norte</item>
+		<item>Godod, Zamboanga del Norte</item>
+		<item>Gutalac, Zamboanga del Norte</item>
+		<item>Jose Dalman, Zamboanga del Norte</item>
+		<item>Kalawit, Zamboanga del Norte</item>
+		<item>Katipunan, Zamboanga del Norte</item>
+		<item>La Libertad, Zamboanga del Norte</item>
+		<item>Labason, Zamboanga del Norte</item>
+		<item>Liloy, Zamboanga del Norte</item>
+		<item>Manukan, Zamboanga del Norte</item>
+		<item>Mutia, Zamboanga del Norte</item>
+		<item>Piñan, Zamboanga del Norte</item>
+		<item>Polanco, Zamboanga del Norte</item>
+		<item>Pres. Manuel A. Roxas, Zamboanga del Norte</item>
+		<item>Rizal, Zamboanga del Norte</item>
+		<item>Salug, Zamboanga del Norte</item>
+		<item>Sergio Osmeña Sr., Zamboanga del Norte</item>
+		<item>Siayan, Zamboanga del Norte</item>
+		<item>Sibuco, Zamboanga del Norte</item>
+		<item>Sibutad, Zamboanga del Norte</item>
+		<item>Sindangan, Zamboanga del Norte</item>
+		<item>Siocon, Zamboanga del Norte</item>
+		<item>Sirawai, Zamboanga del Norte</item>
+		<item>Tampilisan, Zamboanga del Norte</item>
+		<item>Aurora, Zamboanga del Sur</item>
+		<item>Bayog, Zamboanga del Sur</item>
+		<item>Dimataling, Zamboanga del Sur</item>
+		<item>Dinas, Zamboanga del Sur</item>
+		<item>Dumalinao, Zamboanga del Sur</item>
+		<item>Dumingag, Zamboanga del Sur</item>
+		<item>Guipos, Zamboanga del Sur</item>
+		<item>Josefina, Zamboanga del Sur</item>
+		<item>Kumalarang, Zamboanga del Sur</item>
+		<item>Labangan, Zamboanga del Sur</item>
+		<item>Lakewood, Zamboanga del Sur</item>
+		<item>Lapuyan, Zamboanga del Sur</item>
+		<item>Mahayag, Zamboanga del Sur</item>
+		<item>Margosatubig, Zamboanga del Sur</item>
+		<item>Midsalip, Zamboanga del Sur</item>
+		<item>Molave, Zamboanga del Sur</item>
+		<item>Pagadian City, Zamboanga del Sur</item>
+		<item>Pitogo, Zamboanga del Sur</item>
+		<item>Ramon Magsaysay, Zamboanga del Sur</item>
+		<item>San Miguel, Zamboanga del Sur</item>
+		<item>San Pablo, Zamboanga del Sur</item>
+		<item>Sominot, Zamboanga del Sur</item>
+		<item>Tabina, Zamboanga del Sur</item>
+		<item>Tambulig, Zamboanga del Sur</item>
+		<item>Tigbao, Zamboanga del Sur</item>
+		<item>Tukuran, Zamboanga del Sur</item>
+		<item>Vincenzo A. Sagun, Zamboanga del Sur</item>
+		<item>Zamboanga City, Zamboanga del Sur</item>
+		<item>Alicia, Zamboanga Sibugay</item>
+		<item>Buug, Zamboanga Sibugay</item>
+		<item>Diplahan, Zamboanga Sibugay</item>
+		<item>Imelda, Zamboanga Sibugay</item>
+		<item>Ipil, Zamboanga Sibugay</item>
+		<item>Kabasalan, Zamboanga Sibugay</item>
+		<item>Mabuhay, Zamboanga Sibugay</item>
+		<item>Malangas, Zamboanga Sibugay</item>
+		<item>Naga, Zamboanga Sibugay</item>
+		<item>Olutanga, Zamboanga Sibugay</item>
+		<item>Payao, Zamboanga Sibugay</item>
+		<item>Roseller Lim, Zamboanga Sibugay</item>
+		<item>Siay, Zamboanga Sibugay</item>
+		<item>Talusan, Zamboanga Sibugay</item>
+		<item>Titay, Zamboanga Sibugay</item>
+		<item>Tungawan, Zamboanga Sibugay</item>
+	</string-array>
+	<string-array name="regionx_array">
+		<item>Baungon, Bukidnon</item>
+		<item>Cabanglasan, Bukidnon</item>
+		<item>Damulog, Bukidnon</item>
+		<item>Dangcagan, Bukidnon</item>
+		<item>Don Carlos, Bukidnon</item>
+		<item>Impasug-Ong, Bukidnon</item>
+		<item>Kadingilan, Bukidnon</item>
+		<item>Kalilangan, Bukidnon</item>
+		<item>Kibawe, Bukidnon</item>
+		<item>Kitaotao, Bukidnon</item>
+		<item>Lantapan, Bukidnon</item>
+		<item>Libona, Bukidnon</item>
+		<item>Malaybalay City, Bukidnon</item>
+		<item>Malitbog, Bukidnon</item>
+		<item>Manolo Fortich, Bukidnon</item>
+		<item>Maramag, Bukidnon</item>
+		<item>Pangantucan, Bukidnon</item>
+		<item>Quezon, Bukidnon</item>
+		<item>San Fernando, Bukidnon</item>
+		<item>Sumilao, Bukidnon</item>
+		<item>Talakag, Bukidnon</item>
+		<item>Valencia City, Bukidnon</item>
+		<item>Cagayan de Oro City</item>
+		<item>Catarman, Camiguin</item>
+		<item>Guinsiliban, Camiguin</item>
+		<item>Mahinog, Camiguin</item>
+		<item>Mambajao, Camiguin</item>
+		<item>Sagay, Camiguin</item>
+		<item>Iligan City, Lanao del Norte</item>
+		<item>Bacolod, Lanao del Norte</item>
+		<item>Baloi, Lanao del Norte</item>
+		<item>Baroy, Lanao del Norte</item>
+		<item>Kapatagan, Lanao del Norte</item>
+		<item>Kauswagan, Lanao del Norte</item>
+		<item>Kolambugan, Lanao del Norte</item>
+		<item>Lala, Lanao del Norte</item>
+		<item>Linamon, Lanao del Norte</item>
+		<item>Magsaysay, Lanao del Norte</item>
+		<item>Maigo, Lanao del Norte</item>
+		<item>Matungao, Lanao del Norte</item>
+		<item>Munai, Lanao del Norte</item>
+		<item>Nunungan, Lanao del Norte</item>
+		<item>Pantao Ragat, Lanao del Norte</item>
+		<item>Pantar, Lanao del Norte</item>
+		<item>Poona Piagapo, Lanao del Norte</item>
+		<item>Salvador, Lanao del Norte</item>
+		<item>Sapad, Lanao del Norte</item>
+		<item>Sultan Naga Dimaporo, Lanao del Norte</item>
+		<item>Tagoloan, Lanao del Norte</item>
+		<item>Tangcal, Lanao del Norte</item>
+		<item>Tubod, Lanao del Norte</item>
+		<item>Aloran, Misamis Occidental</item>
+		<item>Baliangao, Misamis Occidental</item>
+		<item>Bonifacio, Misamis Occidental</item>
+		<item>Calamba, Misamis Occidental</item>
+		<item>Clarin, Misamis Occidental</item>
+		<item>Concepcion, Misamis Occidental</item>
+		<item>Don Victoriano Chiongbian, Misamis Occidental</item>
+		<item>Jimenez, Misamis Occidental</item>
+		<item>Lopez Jaena, Misamis Occidental</item>
+		<item>Oroquieta City, Misamis Occidental</item>
+		<item>Ozamis City, Misamis Occidental</item>
+		<item>Panaon, Misamis Occidental</item>
+		<item>Plaridel, Misamis Occidental</item>
+		<item>Sapang Dalaga, Misamis Occidental</item>
+		<item>Sinacaban, Misamis Occidental</item>
+		<item>Tangub City, Misamis Occidental</item>
+		<item>Tudela, Misamis Occidental</item>
+		<item>Gingoog City, Misamis Oriental</item>
+		<item>El Salvador City, Misamis Oriental</item>
+		<item>Alubijid, Misamis Oriental</item>
+		<item>Balingasag, Misamis Oriental</item>
+		<item>Balingoan, Misamis Oriental</item>
+		<item>Binuangan, Misamis Oriental</item>
+		<item>Claveria, Misamis Oriental</item>
+		<item>Gitagum, Misamis Oriental</item>
+		<item>Initao, Misamis Oriental</item>
+		<item>Jasaan, Misamis Oriental</item>
+		<item>Kinoguitan, Misamis Oriental</item>
+		<item>Lagonglong, Misamis Oriental</item>
+		<item>Laguindingan, Misamis Oriental</item>
+		<item>Libertad, Misamis Oriental</item>
+		<item>Lugait, Misamis Oriental</item>
+		<item>Magsaysay, Misamis Oriental</item>
+		<item>Manticao, Misamis Oriental</item>
+		<item>Medina, Misamis Oriental</item>
+		<item>Naawan, Misamis Oriental</item>
+		<item>Opol, Misamis Oriental</item>
+		<item>Salay, Misamis Oriental</item>
+		<item>Sugbongcogon, Misamis Oriental</item>
+		<item>Tagoloan, Misamis Oriental</item>
+		<item>Talisayan, Misamis Oriental</item>
+		<item>Villanueva, Misamis Oriental</item>
+	</string-array>
+	<string-array name="regionxi_array">
+		<item>Compostela, Compostela Valley</item>
+		<item>Laak, Compostela Valley</item>
+		<item>Mabini, Compostela Valley</item>
+		<item>Maco, Compostela Valley</item>
+		<item>Maragusan, Compostela Valley</item>
+		<item>Mawab, Compostela Valley</item>
+		<item>Monkayo, Compostela Valley</item>
+		<item>Montevista, Compostela Valley</item>
+		<item>Nabunturan, Compostela Valley</item>
+		<item>New Bataan, Compostela Valley</item>
+		<item>Pantukan, Compostela Valley</item>
+		<item>Davao City</item>
+		<item>Asuncion, Davao del Norte</item>
+		<item>Braulio E. Dujali, Davao del Norte</item>
+		<item>Carmen, Davao del Norte</item>
+		<item>Island Garden City of Samal, Davao del Norte</item>
+		<item>Kapalong, Davao del Norte</item>
+		<item>New Corella, Davao del Norte</item>
+		<item>Panabo City, Davao del Norte</item>
+		<item>San Isidro, Davao del Norte</item>
+		<item>Santo Tomas, Davao del Norte</item>
+		<item>Tagum City, Davao del Norte</item>
+		<item>Talaingod, Davao del Norte</item>
+		<item>Bansalan, Davao del Sur</item>
+		<item>Digos City, Davao del Sur</item>
+		<item>Hagonoy, Davao del Sur</item>
+		<item>Kiblawan, Davao del Sur</item>
+		<item>Magsaysay, Davao del Sur</item>
+		<item>Malalag, Davao del Sur</item>
+		<item>Matanao, Davao del Sur</item>
+		<item>Padada, Davao del Sur</item>
+		<item>Santa Cruz, Davao del Sur</item>
+		<item>Sulop, Davao del Sur</item>
+		<item>Don Marcelino, Davao Occidental</item>
+		<item>Jose Abad Santos, Davao Occidental</item>
+		<item>Malita, Davao Occidental</item>
+		<item>Santa Maria, Davao Occidental</item>
+		<item>Sarangani, Davao Occidental</item>
+		<item>Baganga, Davao Oriental</item>
+		<item>Banaybanay, Davao Oriental</item>
+		<item>Boston, Davao Oriental</item>
+		<item>Caraga, Davao Oriental</item>
+		<item>Cateel, Davao Oriental</item>
+		<item>Governor Generoso, Davao Oriental</item>
+		<item>Lupon, Davao Oriental</item>
+		<item>Manay, Davao Oriental</item>
+		<item>Mati City, Davao Oriental</item>
+		<item>San Isidro, Davao Oriental</item>
+		<item>Tarragona, Davao Oriental</item>
+	</string-array>
+	<string-array name="regionxii_array">
+		<item>Alamada, Cotabato</item>
+		<item>Aleosan, Cotabato</item>
+		<item>Antipas, Cotabato</item>
+		<item>Arakan, Cotabato</item>
+		<item>Banisilan, Cotabato</item>
+		<item>Carmen, Cotabato</item>
+		<item>Kabacan, Cotabato</item>
+		<item>Kidapawan City, Cotabato</item>
+		<item>Libungan, Cotabato</item>
+		<item>M\Lang, Cotabato</item>
+		<item>Magpet, Cotabato</item>
+		<item>Makilala, Cotabato</item>
+		<item>Matalam, Cotabato</item>
+		<item>Midsayap, Cotabato</item>
+		<item>Pigkawayan, Cotabato</item>
+		<item>Pikit, Cotabato</item>
+		<item>President Roxas, Cotabato</item>
+		<item>Tulunan, Cotabato</item>
+		<item>Cotabato City</item>
+		<item>General Santos City</item>
+		<item>Alabel, Sarangani</item>
+		<item>Glan, Sarangani</item>
+		<item>Kiamba, Sarangani</item>
+		<item>Maasim, Sarangani</item>
+		<item>Maitum, Sarangani</item>
+		<item>Malapatan, Sarangani</item>
+		<item>Malungon, Sarangani</item>
+		<item>Banga, South Cotabato</item>
+		<item>Koronadal City, South Cotabato</item>
+		<item>Lake Sebu, South Cotabato</item>
+		<item>Norala, South Cotabato</item>
+		<item>Polomolok, South Cotabato</item>
+		<item>Santo Niño, South Cotabato</item>
+		<item>Surallah, South Cotabato</item>
+		<item>T\'Boli, South Cotabato</item>
+		<item>Tampakan, South Cotabato</item>
+		<item>Tantangan, South Cotabato</item>
+		<item>Tupi, South Cotabato</item>
+		<item>Bagumbayan, Sultan Kudarat</item>
+		<item>Columbio, Sultan Kudarat</item>
+		<item>Esperanza, Sultan Kudarat</item>
+		<item>Isulan, Sultan Kudarat</item>
+		<item>Kalamansig, Sultan Kudarat</item>
+		<item>Lambayong, Sultan Kudarat</item>
+		<item>Lebak, Sultan Kudarat</item>
+		<item>Lutayan, Sultan Kudarat</item>
+		<item>Palimbang, Sultan Kudarat</item>
+		<item>President Quirino, Sultan Kudarat</item>
+		<item>Sen. Ninoy Aquino, Sultan Kudarat</item>
+		<item>Tacurong City, Sultan Kudarat</item>
+	</string-array>
+	<string-array name="regionxiii_array">
+		<item>Buenavista, Agusan del Norte</item>
+		<item>Cabadbaran City, Agusan del Norte</item>
+		<item>Carmen, Agusan del Norte</item>
+		<item>Jabonga, Agusan del Norte</item>
+		<item>Kitcharao, Agusan del Norte</item>
+		<item>Las Nieves, Agusan del Norte</item>
+		<item>Magallanes, Agusan del Norte</item>
+		<item>Nasipit, Agusan del Norte</item>
+		<item>Remedios T. Romualdez, Agusan del Norte</item>
+		<item>Santiago, Agusan del Norte</item>
+		<item>Tubay, Agusan del Norte</item>
+		<item>Bayugan, Agusan del Sur</item>
+		<item>Bunawan, Agusan del Sur</item>
+		<item>Esperanza, Agusan del Sur</item>
+		<item>La Paz, Agusan del Sur</item>
+		<item>Loreto, Agusan del Sur</item>
+		<item>Prosperidad, Agusan del Sur</item>
+		<item>Rosario, Agusan del Sur</item>
+		<item>San Francisco, Agusan del Sur</item>
+		<item>San Luis, Agusan del Sur</item>
+		<item>Santa Josefa, Agusan del Sur</item>
+		<item>Sibagat, Agusan del Sur</item>
+		<item>Talacogon, Agusan del Sur</item>
+		<item>Trento, Agusan del Sur</item>
+		<item>Veruela, Agusan del Sur</item>
+		<item>Basilisia (Rizal), Dinagat Islands</item>
+		<item>Cagdianao, Dinagat Islands</item>
+		<item>Dinagat, Dinagat Islands</item>
+		<item>Libjo (Albor), Dinagat Islands</item>
+		<item>Loreto, Dinagat Islands</item>
+		<item>San Jose, Dinagat Islands</item>
+		<item>Tubajon, Dinagat Islands</item>
+		<item>Alegria, Surigao del Norte</item>
+		<item>Bacuag, Surigao del Norte</item>
+		<item>Burgos, Surigao del Norte</item>
+		<item>Claver, Surigao del Norte</item>
+		<item>Dapa, Surigao del Norte</item>
+		<item>Del Carmen, Surigao del Norte</item>
+		<item>General Luna, Surigao del Norte</item>
+		<item>Gigaquit, Surigao del Norte</item>
+		<item>Mainit, Surigao del Norte</item>
+		<item>Malimono, Surigao del Norte</item>
+		<item>Pilar, Surigao del Norte</item>
+		<item>Placer, Surigao del Norte</item>
+		<item>San Benito, Surigao del Norte</item>
+		<item>San Francisco, Surigao del Norte</item>
+		<item>San Isidro, Surigao del Norte</item>
+		<item>Santa Monica, Surigao del Norte</item>
+		<item>Sison, Surigao del Norte</item>
+		<item>Socorro, Surigao del Norte</item>
+		<item>Surigao City, Surigao del Norte</item>
+		<item>Tagana-an, Surigao del Norte</item>
+		<item>Tubod, Surigao del Norte</item>
+		<item>Barobo, Surigao del Sur</item>
+		<item>Bayabas, Surigao del Sur</item>
+		<item>Bislig City, Surigao del Sur</item>
+		<item>Cagwait, Surigao del Sur</item>
+		<item>Cantilan, Surigao del Sur</item>
+		<item>Carmen, Surigao del Sur</item>
+		<item>Carrascal, Surigao del Sur</item>
+		<item>Cortes, Surigao del Sur</item>
+		<item>Hinatuan, Surigao del Sur</item>
+		<item>Lanuza, Surigao del Sur</item>
+		<item>Lianga, Surigao del Sur</item>
+		<item>Lingig, Surigao del Sur</item>
+		<item>Madrid, Surigao del Sur</item>
+		<item>Marihatag, Surigao del Sur</item>
+		<item>San Agustin, Surigao del Sur</item>
+		<item>San Miguel, Surigao del Sur</item>
+		<item>Tagbina, Surigao del Sur</item>
+		<item>Tago, Surigao del Sur</item>
+		<item>Tandag City, Surigao del Sur</item>
+	</string-array>
+	<string-array name="armm_array">
+		<item>Lamitan City, Basilan</item>
+		<item>Akbar, Basilan</item>
+		<item>Al-Barka, Basilan</item>
+		<item>Hadji Mohammad Aju, Basilan</item>
+		<item>Hadji Muhtamad, Basilan</item>
+		<item>Lantawan, Basilan</item>
+		<item>Maluso, Basilan</item>
+		<item>Sumisip, Basilan</item>
+		<item>Tabuan-Lasa, Basilan</item>
+		<item>Tipo-Tipo, Basilan</item>
+		<item>Tuburan, Basilan</item>
+		<item>Ungkaya Pukan, Basilan</item>
+		<item>Bacolod-Kalawi, Lanao del Sur</item>
+		<item>Balabagan, Lanao del Sur</item>
+		<item>Balindong, Lanao del Sur</item>
+		<item>Bayang, Lanao del Sur</item>
+		<item>Binidayan, Lanao del Sur</item>
+		<item>Buadiposo-Buntong, Lanao del Sur</item>
+		<item>Bubong, Lanao del Sur</item>
+		<item>Bumbaran, Lanao del Sur</item>
+		<item>Butig, Lanao del Sur</item>
+		<item>Calanogas, Lanao del Sur</item>
+		<item>Ditsaan-Ramain, Lanao del Sur</item>
+		<item>Ganassi, Lanao del Sur</item>
+		<item>Kapai, Lanao del Sur</item>
+		<item>Kapatagan, Lanao del Sur</item>
+		<item>Lumba-Bayabao, Lanao del Sur</item>
+		<item>Lumbaca-Unayan, Lanao del Sur</item>
+		<item>Lumbatan, Lanao del Sur</item>
+		<item>Lumbayanague, Lanao del Sur</item>
+		<item>Madalum, Lanao del Sur</item>
+		<item>Madamba, Lanao del Sur</item>
+		<item>Maguing, Lanao del Sur</item>
+		<item>Malabang, Lanao del Sur</item>
+		<item>Marantao, Lanao del Sur</item>
+		<item>Marawi City, Lanao del Sur</item>
+		<item>Marogong, Lanao del Sur</item>
+		<item>Masiu, Lanao del Sur</item>
+		<item>Mulondo, Lanao del Sur</item>
+		<item>Pagayawan, Lanao del Sur</item>
+		<item>Piagapo, Lanao del Sur</item>
+		<item>Poona Bayabao, Lanao del Sur</item>
+		<item>Pualas, Lanao del Sur</item>
+		<item>Saguiaran, Lanao del Sur</item>
+		<item>Sultan Dumalondong, Lanao del Sur</item>
+		<item>Picong, Lanao del Sur</item>
+		<item>Tagoloan II, Lanao del Sur</item>
+		<item>Tamparan, Lanao del Sur</item>
+		<item>Taraka, Lanao del Sur</item>
+		<item>Tubaran, Lanao del Sur</item>
+		<item>Tugaya, Lanao del Sur</item>
+		<item>Wao, Lanao del Sur</item>
+		<item>Ampatuan, Maguindanao</item>
+		<item>Barira, Maguindanao</item>
+		<item>Buldon, Maguindanao</item>
+		<item>Buluan, Maguindanao</item>
+		<item>Datu Abdullah Sangki, Maguindanao</item>
+		<item>Datu Anggal Midtimbang, Maguindanao</item>
+		<item>Datu Blah T. Sinsuat, Maguindanao</item>
+		<item>Datu Hoffer Ampatuan, Maguindanao</item>
+		<item>Datu Odin Sinsuat, Maguindanao</item>
+		<item>Datu Paglas, Maguindanao</item>
+		<item>Datu Piang, Maguindanao</item>
+		<item>Datu Salibo, Maguindanao</item>
+		<item>Datu Saudi-Ampatuan, Maguindanao</item>
+		<item>Datu Unsay, Maguindanao</item>
+		<item>Gen. S. K. Pendatun, Maguindanao</item>
+		<item>Guindulungan, Maguindanao</item>
+		<item>Kabuntalan, Maguindanao</item>
+		<item>Mamasapano, Maguindanao</item>
+		<item>Mangudadatu, Maguindanao</item>
+		<item>Matanog, Maguindanao</item>
+		<item>Northern Kabuntalan, Maguindanao</item>
+		<item>Pagagawan, Maguindanao</item>
+		<item>Pagalungan, Maguindanao</item>
+		<item>Paglat, Maguindanao</item>
+		<item>Pandag, Maguindanao</item>
+		<item>Parang, Maguindanao</item>
+		<item>Rajah Buayan, Maguindanao</item>
+		<item>Shariff Aguak, Maguindanao</item>
+		<item>Shariff Saydona Mustapha, Maguindanao</item>
+		<item>South Upi, Maguindanao</item>
+		<item>Sultan Kudarat, Maguindanao</item>
+		<item>Sultan Mastura, Maguindanao</item>
+		<item>Sultan sa Barongis, Maguindanao</item>
+		<item>Sultan Sumangka, Maguindanao</item>
+		<item>Talayan, Maguindanao</item>
+		<item>Upi, Maguindanao</item>
+		<item>Banguigui, Sulu</item>
+		<item>Hadji Panglima Tahil, Sulu</item>
+		<item>Indanan, Sulu</item>
+		<item>Jolo, Sulu</item>
+		<item>Kalingalan Caluang, Sulu</item>
+		<item>Lugus, Sulu</item>
+		<item>Luuk, Sulu</item>
+		<item>Maimbung, Sulu</item>
+		<item>Old Panamao, Sulu</item>
+		<item>Omar, Sulu</item>
+		<item>Pandami, Sulu</item>
+		<item>Panglima Estino, Sulu</item>
+		<item>Pangutaran, Sulu</item>
+		<item>Parang, Sulu</item>
+		<item>Pata, Sulu</item>
+		<item>Patikul, Sulu</item>
+		<item>Siasi, Sulu</item>
+		<item>Talipao, Sulu</item>
+		<item>Tapul, Sulu</item>
+		<item>Bongao, Tawi-tawi</item>
+		<item>Languyan, Tawi-tawi</item>
+		<item>Mapun, Tawi-tawi</item>
+		<item>Panglima Sugala, Tawi-tawi</item>
+		<item>Sapa-Sapa, Tawi-tawi</item>
+		<item>Sibutu, Tawi-tawi</item>
+		<item>Simunul, Tawi-tawi</item>
+		<item>Sitangkai, Tawi-tawi</item>
+		<item>South Ubian, Tawi-tawi</item>
+		<item>Tandubas, Tawi-tawi</item>
+		<item>Turtle Islands, Tawi-tawi</item>
+	</string-array>
+</resources>

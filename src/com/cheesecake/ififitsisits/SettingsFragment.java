@@ -4,7 +4,6 @@
 
 package com.cheesecake.ififitsisits;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.preference.PreferenceFragment;
 import android.view.LayoutInflater;

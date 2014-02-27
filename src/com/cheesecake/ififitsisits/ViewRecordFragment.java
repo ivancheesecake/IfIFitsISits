@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,14 +40,20 @@ public class ViewRecordFragment extends Fragment{
 		File extStore = Environment.getExternalStorageDirectory();
 		String path = extStore.getAbsolutePath();
 		
+		Log.d("Side: ",r.get_sideImg());
+		Log.d("Front: ",r.get_frontImg());
+		Log.d("Back: ",r.get_backImg());
+		
 		Bitmap side = BitmapFactory.decodeFile(path+"/ififits/"+r.get_sideImg());
+		Bitmap front = BitmapFactory.decodeFile(path+"/ififits/"+r.get_frontImg());
 		Bitmap back = BitmapFactory.decodeFile(path+"/ififits/"+r.get_backImg());
 		
 		ImageView imageview_side = (ImageView) v.findViewById(R.id.imageview_side);
+		ImageView imageview_front = (ImageView) v.findViewById(R.id.imageview_front);
 		ImageView imageview_back = (ImageView) v.findViewById(R.id.imageview_back);
 		
-		int image_width = (int)screen_width/2;
-		int image_height = (int)screen_height/2;
+		int image_width = (int)screen_width/3;
+		int image_height = (int)screen_height/3;
 		
 		if(image_width >image_height){
 			int temp = image_height;
@@ -55,6 +62,7 @@ public class ViewRecordFragment extends Fragment{
 		}
 		
 		imageview_side.setImageBitmap(Bitmap.createScaledBitmap(side, image_width, image_height, false));
+		imageview_front.setImageBitmap(Bitmap.createScaledBitmap(front, image_width, image_height, false));
 		imageview_back.setImageBitmap(Bitmap.createScaledBitmap(back, image_width, image_height, false));
         
 		TextView textview_subjectId = (TextView) v.findViewById(R.id.textview_subjectId);
@@ -71,7 +79,8 @@ public class ViewRecordFragment extends Fragment{
 		TextView textview_bpLVal = (TextView) v.findViewById(R.id.textview_bpLVal);
 		TextView textview_hBVal = (TextView) v.findViewById(R.id.textview_hBVal);
 		TextView textview_kkBVal = (TextView) v.findViewById(R.id.textview_kkBVal);
-		TextView textview_locationVal = (TextView) v.findViewById(R.id.textview_locationVal);
+		TextView textview_cityprovVal = (TextView) v.findViewById(R.id.textview_cityprovVal);
+		TextView textview_regionVal = (TextView) v.findViewById(R.id.textview_regionVal);
 		TextView textview_dateVal = (TextView) v.findViewById(R.id.textview_dateVal);
 		
 		DecimalFormat df = new DecimalFormat("#.00");
@@ -90,7 +99,8 @@ public class ViewRecordFragment extends Fragment{
 		textview_bpLVal.setText(df.format(r.get_bpL())+" cm");
 		textview_hBVal.setText(df.format(r.get_hB())+" cm");
 		textview_kkBVal.setText(df.format(r.get_kkB())+" cm");
-		textview_locationVal.setText(r.get_region());
+		textview_cityprovVal.setText(r.get_cityprov());
+		textview_regionVal.setText(r.get_region());
 		textview_dateVal.setText(r.get_date());
         
         return v;

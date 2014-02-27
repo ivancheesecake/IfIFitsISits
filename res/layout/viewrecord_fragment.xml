@@ -26,6 +26,11 @@
 	        	android:layout_height="wrap_content"
 	        	android:contentDescription="@string/desc"/>
 	        
+	        <ImageView android:id="@+id/imageview_front"
+	        	android:layout_width="wrap_content"
+	        	android:layout_height="wrap_content"
+	        	android:contentDescription="@string/desc"/>
+	        
 	        <ImageView android:id="@+id/imageview_back"
 	        	android:layout_width="wrap_content"
 	        	android:layout_height="wrap_content"
@@ -328,13 +333,21 @@
 		        android:textColor="@android:color/black" 
 		        android:text="@string/textview_recorded"/>
 		    <TextView
-		        android:id="@+id/textview_locationVal"
+		        android:id="@+id/textview_cityprovVal"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:textSize="14sp" 
 		        android:layout_marginLeft="5dp"
 				android:textColor="@android:color/darker_gray" />
-		  
+		    <TextView
+		        android:id="@+id/textview_regionVal"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:textSize="14sp" 
+		        android:layout_marginLeft="5dp"
+				android:textColor="@android:color/darker_gray" />
+		  	
+		    
 		    <TextView
 		        android:id="@+id/textview_dateVal"
 		        android:layout_width="match_parent"
