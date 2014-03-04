@@ -184,6 +184,46 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return records;
     }
     
+    public Record getRecord(int id) {
+
+        String query = "SELECT  * FROM " + TABLE_RECORD + " WHERE id="+id+ " ORDER BY id DESC";
+  
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+  
+        Record record = null;
+        if (cursor.moveToFirst()) {
+        	
+            do {
+                record = new Record();
+                record.set_id(Integer.parseInt(cursor.getString(0)));
+                record.set_height(Double.parseDouble(cursor.getString(1)));
+                record.set_weight(Double.parseDouble(cursor.getString(2)));
+                record.set_age(Integer.parseInt(cursor.getString(3)));
+                record.set_sex(cursor.getString(4));
+                record.set_region(cursor.getString(5));
+                record.set_cityprov(cursor.getString(6));
+                record.set_sitH(Double.parseDouble(cursor.getString(7)));
+                record.set_sH(Double.parseDouble(cursor.getString(8)));
+                record.set_erH(Double.parseDouble(cursor.getString(9)));
+                record.set_tC(Double.parseDouble(cursor.getString(10)));
+                record.set_pH(Double.parseDouble(cursor.getString(11)));
+                record.set_kH(Double.parseDouble(cursor.getString(12)));
+                record.set_bpL(Double.parseDouble(cursor.getString(13)));
+                record.set_hB(Double.parseDouble(cursor.getString(14)));
+                record.set_kkB(Double.parseDouble(cursor.getString(15)));
+                record.set_sideImg(cursor.getString(16));
+                record.set_frontImg(cursor.getString(17));
+                record.set_backImg(cursor.getString(18));
+                record.set_date(cursor.getString(19));
+                Log.d(record.get_date(),""+record.get_id());
+
+            } while (cursor.moveToNext());
+        }
+        db.close(); 
+        return record;
+    }
+    
     public void enqueueUpload(){
     	
     	long lastId=0;

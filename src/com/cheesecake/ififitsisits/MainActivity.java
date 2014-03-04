@@ -10,6 +10,12 @@
 
 package com.cheesecake.ififitsisits;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -53,6 +59,8 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
 	public static ActionBar actionbar;
 	private static boolean mayInternets=false;
 	private int prevPosition =0;
+	public static List<Integer> queue;
+	public static List<Record> records;
 
 	public final static String EXTRA_CAPTURE_FLAG= "com.cheesecake.ififitsisits.CAPTURE_FLAG";
 	public final static String EXTRA_IFIFITS= "com.cheesecake.ififitsisits.IFIFITS";
@@ -241,13 +249,49 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
     
     public void upload(View view){
     	
+    	HttpPostHelper helper = new HttpPostHelper("http://192.168.1.100/android_add_survey.php"); 	//get url from sharedpreferences
+    	ArrayList<NameValuePair> pairs;
+ 		queue = db.getQueue();
+    	
     	if(mayInternets){
-	    	for(int i=0; i<ViewRecordsFragment.queue.size(); i++){
+	    	for(int i=0; i<queue.size(); i++){
 	    		
-	    		db.dequeue(ViewRecordsFragment.queue.get(i));
+	    		Record r = db.getRecord(queue.get(i));
+	    		
+	    		//perform upload
+	    		
+	    		pairs = new ArrayList<NameValuePair>();
+				pairs.add(new BasicNameValuePair("project_id", "012"));
+				pairs.add(new BasicNameValuePair("project_name", "Armchair Anthropometry"));
+				pairs.add(new BasicNameValuePair("description", "Anthropometry for Armchairs. Duh."));
+				pairs.add(new BasicNameValuePair("survey_info_id", r.get_id()+""));
+				pairs.add(new BasicNameValuePair("gender",  r.get_sex()));
+				pairs.add(new BasicNameValuePair("age",  r.get_age()+""));
+				pairs.add(new BasicNameValuePair("height",  r.get_height()+""));
+				pairs.add(new BasicNameValuePair("weight", r.get_weight()+""));
+				pairs.add(new BasicNameValuePair("region",  r.get_region()));	//add for cityprov
+				pairs.add(new BasicNameValuePair("cityprov", r.get_cityprov()));	//add for cityprov
+				pairs.add(new BasicNameValuePair("body_measurement", "sitH:"+r.get_sitH()+","+
+																	 "pH:"+r.get_pH()+","+
+																	 "tC:"+r.get_tC()+","+
+																	 "bpL:"+r.get_bpL()+","+
+																	 "kH:"+r.get_kH()+","+
+																	 "sH:"+r.get_sH()+","+
+																	 "erH:"+r.get_erH()+","+
+																	 "hB:"+r.get_hB()+","+
+																	 "kkB:"+r.get_kkB()));
+				
+				
+				if(helper.post(pairs)){
+					Log.d("Uploaded",queue.get(i)+"");
+					db.dequeue(queue.get(i));
+					}
+				else{
+					Log.d("Upload Failed",queue.get(i)+"");
+				}
 	    	}
 	    	
-	    	//perform upload
+	    	
 	    	
 	    	//refresh fragment
 	    	FragmentTransaction tx = getSupportFragmentManager().beginTransaction();

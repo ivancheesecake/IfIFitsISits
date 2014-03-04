@@ -14,17 +14,18 @@ extern "C" {
 
 	float euclideanDistance2d(Point A, Point B);
 	void midPoint(Point *midpoint, Point a, Point b);
-	void measureSide(Mat src, Mat out, double *measurements, double actual_dimensions);
+	void measureSide(Mat & src, Mat & out, double *measurements, double actual_dimensions);
 	void measureFront(Mat & src, Mat & out, double *measurements,double actual_dimensions);
+	void measureBack(Mat & src, Mat & out, double *measurements,double actual_dimensions);
 
-	JNIEXPORT jint JNICALL Java_com_cheesecake_ififitsisits_DisplayActivity_DeriveData(JNIEnv *env, jobject obj, jlong src, jlong out, jlong src2, jlong out2, jdoubleArray arr, jdouble dimensions);
+	JNIEXPORT jint JNICALL Java_com_cheesecake_ififitsisits_DisplayProcessActivity_DeriveData(JNIEnv *env, jobject obj, jlong src, jlong out, jdoubleArray arr, jdouble dimensions, jint flag);
 
-	JNIEXPORT jint JNICALL Java_com_cheesecake_ififitsisits_DisplayActivity_DeriveData(JNIEnv *env, jobject obj, jlong src, jlong out, jlong src2, jlong out2, jdoubleArray arr, jdouble dimensions){
+	JNIEXPORT jint JNICALL Java_com_cheesecake_ififitsisits_DisplayProcessActivity_DeriveData(JNIEnv *env, jobject obj, jlong src, jlong out, jdoubleArray arr, jdouble dimensions, jint flag){
 
 	Mat & binaryMat = *(Mat*)src;
 	Mat & img = *(Mat*)out;
-	Mat & binaryMat2 = *(Mat*)src2;
-	Mat & img2 = *(Mat*)out2;
+	//Mat & binaryMat2 = *(Mat*)src2;
+	//Mat & img2 = *(Mat*)out2;
 
 	//Mat binaryMat2;
 
@@ -38,24 +39,30 @@ extern "C" {
          return -1; /* exception occurred */
      }	
 
-     measureSide(binaryMat,img,measurementsArray,dimensions);
-     measureFront(binaryMat2,img2,measurementsArray,dimensions);
+     if(flag==0)
+     	measureSide(binaryMat,img,measurementsArray,dimensions);
+     else if(flag==1)
+     	measureFront(binaryMat,img,measurementsArray,dimensions);
+     else
+     	measureBack(binaryMat,img,measurementsArray,dimensions);
 
      env->ReleaseDoubleArrayElements(arr, measurementsArray, 0);
 
 	}
 
-	void measureSide(Mat src, Mat  out, double *measurements, double actual_dimensions){
+	void measureSide(Mat & src, Mat & out, double *measurements, double actual_dimensions){
 
-	Mat binaryMat = src;
-	Mat img = out;
+	Mat & binaryMat = *(&src);
+	Mat & img = *(&out);
 	Mat binaryMat2;
 
     binaryMat.copyTo(binaryMat2);
 
+    
+
     char output[50];
    	sprintf(output,"%f",actual_dimensions);
-	__android_log_write(ANDROID_LOG_INFO, "Sitting Height", output);//Or ANDROID_LOG_INFO, ... 
+	__android_log_write(ANDROID_LOG_INFO, "Measure", "Side");//Or ANDROID_LOG_INFO, ... 
 
 	/*
 	=========== Find the Subject and the Reference Object ==============
@@ -84,6 +91,7 @@ extern "C" {
 	Mat drawing = Mat::zeros( binaryMat.size(), CV_8UC3 );
 	
 	Scalar black = Scalar( 0,0,0);
+	Scalar white = Scalar( 255,255,255);
 
 	/*for( int i = 0; i< contours.size(); i++ ){
 		
@@ -106,6 +114,8 @@ extern "C" {
 
 	for(int i=0; i<contours.size(); i++){
 
+		if(i==biggest)
+				continue;
 		if(boundRect[biggest].area()-boundRect[i].area() < difference){
 
 			next = i;
@@ -115,6 +125,8 @@ extern "C" {
 		//cout << boundRect[i].area() << endl;
 	}
 
+	rectangle( img, boundRect[biggest].tl(), boundRect[biggest].br(), black, 1, 8, 0 );
+	rectangle( img, boundRect[next].tl(), boundRect[next].br(), white, 1, 8, 0 );
 	/*
 	==================== It's crunch time (again) =======================
 	*/
@@ -287,7 +299,7 @@ extern "C" {
 
 
 	//------------------------------------------------------------------>
-
+	/*
 	//-------------------- ERH ------------------------------------------>
 
 	for(y=F.y-1; y > subject_y; y--){
@@ -314,6 +326,7 @@ extern "C" {
 	circle(img, L, 5, Scalar( 255, 255, 255 ), 1, 8,0);
 	sH = euclideanDistance2d(E,L);
 	sH /= pixelRatio;
+	*/
 	//------------------------------------------------------------------>
 
 	measurements[0] = sitH;
@@ -321,12 +334,14 @@ extern "C" {
 	measurements[2] = tC;
 	measurements[3] = bpL;
 	measurements[4] = knH;
-	measurements[5] = erH;
-	measurements[6] = sH;
+	//measurements[5] = erH;
+	//measurements[6] = sH;
 
 }
 
 void measureFront(Mat & src, Mat & out, double *measurements,double actual_dimensions){
+
+	__android_log_write(ANDROID_LOG_INFO, "Measure", "Front");//Or ANDROID_LOG_INFO, ...
 
 	Mat & binaryMat = *(&src);
 	Mat & img = *(&out);
@@ -361,11 +376,11 @@ void measureFront(Mat & src, Mat & out, double *measurements,double actual_dimen
 	Mat drawing = Mat::zeros( binaryMat.size(), CV_8UC3 );
 	
 	Scalar black = Scalar( 0,0,0);
-
+	/*
 	for( int i = 0; i< contours.size(); i++ ){
 		
 		rectangle( img, boundRect[i].tl(), boundRect[i].br(), black, 1, 8, 0 );
-	}
+	}*/
 
 	// Identify subject and reference object
 	int maxarea =0, biggest =0,next=0;
@@ -397,7 +412,7 @@ void measureFront(Mat & src, Mat & out, double *measurements,double actual_dimen
 	*/
 
 
-	cout << "Deriving Anthropometric Data..." << endl << endl;
+	//cout << "Deriving Anthropometric Data..." << endl << endl;
 
 	bool stop = false;
 	int x,y;
@@ -511,3 +526,150 @@ void measureFront(Mat & src, Mat & out, double *measurements,double actual_dimen
  }
 
 }
+
+
+void measureBack(Mat & src, Mat & out, double *measurements,double actual_dimensions){
+
+	__android_log_write(ANDROID_LOG_INFO, "Measure", "Back");//Or ANDROID_LOG_INFO, ...
+
+	Mat & binaryMat = *(&src);
+	Mat & img = *(&out);
+	Mat binaryMat2;
+
+    binaryMat.copyTo(binaryMat2);
+
+    /*
+	=========== Find the Subject and the Reference Object ==============
+	*/
+
+	// Find Contours
+	cout << "Detecting Subject and Reference Object..." << endl;
+	vector<vector<Point> > contours;
+	vector<Vec4i> hierarchy;
+	findContours( binaryMat, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );
+
+	/// Approximate contours to polygons + get bounding rects and circles
+
+	vector<vector<Point> > contours_poly( contours.size() );
+	vector<Rect> boundRect( contours.size() );
+	vector<Point2f>center( contours.size() );
+	vector<float>radius( contours.size() );
+
+	// Detect and draw bounding boxes
+
+	for( int i = 0; i < contours.size(); i++ ){ 
+		approxPolyDP( Mat(contours[i]), contours_poly[i], 3, true );
+		boundRect[i] = boundingRect( Mat(contours_poly[i]) );
+	}
+
+	Mat drawing = Mat::zeros( binaryMat.size(), CV_8UC3 );
+	
+	Scalar black = Scalar( 0,0,0);
+
+	/*
+	for( int i = 0; i< contours.size(); i++ ){
+		
+		rectangle( img, boundRect[i].tl(), boundRect[i].br(), black, 1, 8, 0 );
+	}*/
+
+	// Identify subject and reference object
+	int maxarea =0, biggest =0,next=0;
+	for(int i=0; i<contours.size(); i++){
+
+		if(boundRect[i].area() > maxarea){
+
+			biggest = i;
+			maxarea = boundRect[i].area();
+		}
+
+	}
+
+	int  difference = maxarea;
+
+	for(int i=0; i<contours.size(); i++){
+
+		if(boundRect[biggest].area()-boundRect[i].area() < difference){
+
+			next = i;
+			difference = boundRect[biggest].area()-boundRect[i].area();
+		}
+
+		//cout << boundRect[i].area() << endl;
+	}
+
+	/*
+	==================== It's crunch time (again) =======================
+	*/
+
+
+	cout << "Deriving Anthropometric Data..." << endl << endl;
+
+	bool stop = false;
+	int x,y;
+	int subject_x,subject_y, subject_width, subject_height;
+	int refObject_y,refObject_dimension;
+	float sH,erH;
+	float pixelRatio;
+
+	//-------------------- Reference Object ---------------------------->
+
+	
+	refObject_dimension = boundRect[next].height;
+	pixelRatio = refObject_dimension / actual_dimensions;
+	cout << refObject_dimension << endl;
+	cout << "There are " << pixelRatio << " pixels in 1 cm." << endl;
+
+	//------------------------------------------------------------------>
+	
+	
+	Point A,B,C,D;
+
+	subject_x = boundRect[biggest].x;
+	subject_y = boundRect[biggest].y;
+	subject_width = boundRect[biggest].width + subject_x;
+	subject_height = boundRect[biggest].height + subject_y;
+
+	//float hip,maxHip=0,knee,minKnee=subject_width,temp_x1,temp_x2,max_x1=0,max_x2=0,max_y=0,min_x1=0,min_x2=0,min_y=0;
+
+	
+	//-------------------------- SH ------------------------------------>
+
+	A = Point(subject_width/7,subject_y);
+
+	
+	for(int y=0; y<subject_height; y++)
+		if(static_cast<int>(binaryMat2.at<uchar>(y,A.x))==255){
+			B = Point(A.x,y);
+			break;		
+		}
+				
+	C = Point(subject_width/7,subject_height);
+	circle(img, B, 5, Scalar( 255, 0, 255 ), -1, 8,0);
+	circle(img, C, 5, Scalar( 255, 0, 255), -1, 8,0);	
+	line( img, B, C, Scalar( 255, 0,255 ), 1, 8 );
+	sH = euclideanDistance2d(B,C);
+	sH /= pixelRatio;
+	
+	//------------------------------------------------------------------->
+	//-------------------------- ERH ------------------------------------>
+
+	for(int y=B.y+1; y<C.y; y++){
+
+		if(static_cast<int>(binaryMat2.at<uchar>(y,B.x))==0){
+			D = Point(B.x,y);
+			break;
+		}
+	}	
+
+	line( img, C, D, Scalar( 255, 255, 0 ), 1, 8 );
+	circle(img, D, 5, Scalar( 255, 255, 0 ), -1, 8,0);
+	erH = euclideanDistance2d(C,D);
+	erH /= pixelRatio;
+
+
+	//------------------------------------------------------------------->
+
+	measurements[5] = erH;
+	measurements[6] = sH;
+	
+ }

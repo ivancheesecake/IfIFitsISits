@@ -19,11 +19,13 @@ public class DisplayProcessActivity extends Activity {
 	private IfIFitsExtra extra;	
 	private Bitmap[] extraBitmaps;
 	private Bitmap keyedBitmap;
-	private Mat origMat;
-	private Mat keyedMat;
+	private Mat origMat, origMat_copy;
+	private Mat keyedMat, keyedMat_copy;
 	private ImageView origImageView;
 	private ImageView keyedImageView;
 	private int flag;
+	private double[] measurements;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -39,16 +41,25 @@ public class DisplayProcessActivity extends Activity {
 		System.arraycopy(ps, 0, extraBitmaps, 0, ps.length);
 		flag = extra.get_flag();
 		
+		measurements = extra.get_measurements();
 		
 		origImageView = (ImageView) findViewById(R.id.display);
 		origImageView.setImageBitmap(extraBitmaps[flag]);
 		
 		origMat = new Mat();
 		keyedMat = new Mat();
+		origMat_copy = new Mat();
+		keyedMat_copy = new Mat();
+		
 		Utils.bitmapToMat(extraBitmaps[flag], origMat);
-		Keyer(origMat.getNativeObjAddr(),keyedMat.getNativeObjAddr());
+		origMat.copyTo(origMat_copy);
+		Keyer(origMat.getNativeObjAddr(),keyedMat.getNativeObjAddr());	//perform keying
+		keyedMat.copyTo(keyedMat_copy);
+		DeriveData(keyedMat.getNativeObjAddr(), origMat.getNativeObjAddr(),measurements, 3.0, flag); //use sharedpreferences for refobj dimensions
+		Utils.matToBitmap(origMat, extraBitmaps[flag]);
+		
 		keyedBitmap = Bitmap.createBitmap(origMat.width(), origMat.height(), Bitmap.Config.ARGB_8888);	//Initialize Bitmap
-		Utils.matToBitmap(keyedMat,keyedBitmap);
+		Utils.matToBitmap(keyedMat_copy,keyedBitmap);
 		keyedImageView = (ImageView) findViewById(R.id.display2);
 		keyedImageView.setImageBitmap(keyedBitmap);
 	}
@@ -73,7 +84,7 @@ public class DisplayProcessActivity extends Activity {
 			
 		}
 		else{
-			extra.set_measurements(new double[] {0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0});
+			//extra.set_measurements(new double[] {0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0});
 			Intent intent = new Intent(this,ViewInsertActivity.class);
 			intent.putExtra(EXTRA_IFIFITS, extra);
 			intent.putExtra(EXTRA_IFIFITS_BITMAPS, extraBitmaps);
@@ -82,7 +93,7 @@ public class DisplayProcessActivity extends Activity {
 	}
 	
 	public native void Keyer(long src, long dst);
-	public native void DeriveData(long src,long dst,long src2,long dst2,double [] measurements, double actualDimensions);
+	public native void DeriveData(long src,long dst, double [] measurements, double actualDimensions, int flag);
 	
 	
 

@@ -17,7 +17,7 @@ public class CameraView extends JavaCameraView implements PictureCallback {
 	    public CameraView(Context context, AttributeSet attrs) {
 	        super(context, attrs);
 	    }
-
+	    /*
 	    public List<String> getEffectList() {
 	        return mCamera.getParameters().getSupportedColorEffects();
 	    }
@@ -56,7 +56,7 @@ public class CameraView extends JavaCameraView implements PictureCallback {
 	    public Size getResolution() {
 	        return mCamera.getParameters().getPreviewSize();
 	    }
-
+	     */
 	    public void takePicture(final String fileName) {
 	        
 	    	Log.i(TAG, "Taking picture");
@@ -68,14 +68,14 @@ public class CameraView extends JavaCameraView implements PictureCallback {
 	    @Override
 	    public void onPictureTaken(byte[] data, Camera camera) {
 	        
-	    	/*
+	    	
 	    	//Log.i(TAG, "Saving a bitmap to file");
 	        // The camera preview was automatically stopped. Start it again.
 	        //mCamera.startPreview();
 	        //mCamera.setPreviewCallback(this);
 
 	        // Write the image in a file (in jpeg format)
-	        
+	        /*
 	        try {
 	            FileOutputStream fos = new FileOutputStream(mPictureFileName);
 
@@ -85,11 +85,11 @@ public class CameraView extends JavaCameraView implements PictureCallback {
 	        } catch (java.io.IOException e) {
 	            Log.e("PictureDemo", "Exception in photoCallback", e);
 	        }
-	    	
+	    	*/
 	    	//Bitmap bmp = Bitmap.createBitmap(mIntermediateMat.width(), mIntermediateMat.height(), Bitmap.Config.ARGB_8888);
 	        //Utils.matToBitmap(mIntermediateMat,bmp);
 	    	//Bitmap bmp = BitmapFactory.decodeByteArray(data,0,data.length);
-	    	*/
+	    	
 	    }
 	    
 }

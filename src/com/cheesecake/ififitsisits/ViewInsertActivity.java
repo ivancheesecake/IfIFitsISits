@@ -70,9 +70,6 @@ public class ViewInsertActivity extends Activity {
 		bmp2 = extraBitmaps[1];
 		bmp3 = extraBitmaps[2];
 		
-		//bmp = (Bitmap) intent.getParcelableExtra(DisplayActivity.EXTRA_SIDE_BMP_2);
-		//bmp2 = (Bitmap) intent.getParcelableExtra(DisplayActivity.EXTRA_FRONT_BMP_2);
-		
 		ImageView imageview = (ImageView) findViewById(R.id.imageview_side);
 		ImageView imageview2 = (ImageView) findViewById(R.id.imageview_front);
 		ImageView imageview3 = (ImageView) findViewById(R.id.imageview_back);
@@ -112,12 +109,12 @@ public class ViewInsertActivity extends Activity {
 		
 		//textview_subjectId.setText("Subject #"+r.get_id());
 		textview_sitHVal.setText(df.format(extra.get_measurements()[0])+" cm");		//double check mo yung indices
-		textview_sHVal.setText(df.format(extra.get_measurements()[1])+" cm");
-		textview_erHVal.setText(df.format(extra.get_measurements()[2])+" cm");
-		textview_tCVal.setText(df.format(extra.get_measurements()[3])+" cm");
-		textview_pHVal.setText(df.format(extra.get_measurements()[4])+" cm");
-		textview_kHVal.setText(df.format(extra.get_measurements()[5])+" cm");
-		textview_bpLVal.setText(df.format(extra.get_measurements()[6])+" cm");
+		textview_pHVal.setText(df.format(extra.get_measurements()[1])+" cm");
+		textview_tCVal.setText(df.format(extra.get_measurements()[2])+" cm");
+		textview_bpLVal.setText(df.format(extra.get_measurements()[3])+" cm");
+		textview_kHVal.setText(df.format(extra.get_measurements()[4])+" cm");
+		textview_erHVal.setText(df.format(extra.get_measurements()[5])+" cm");
+		textview_sHVal.setText(df.format(extra.get_measurements()[6])+" cm");
 		textview_hBVal.setText(df.format(extra.get_measurements()[7])+" cm");
 		textview_kkBVal.setText(df.format(extra.get_measurements()[8])+" cm");
 		//textview_locationVal.setText(r.get_region());
@@ -243,12 +240,12 @@ public class ViewInsertActivity extends Activity {
 		        }
 		        else if(selected2.equals("Region XII")){
 		        	adapter3 = ArrayAdapter.createFromResource(getApplicationContext(),
-		    		        R.array.regioni_array, android.R.layout.simple_spinner_item);
+		    		        R.array.regionxii_array, android.R.layout.simple_spinner_item);
 		        	
 		        }
 		        else if(selected2.equals("Region XIII")){
 		        	adapter3 = ArrayAdapter.createFromResource(getApplicationContext(),
-		    		        R.array.regioni_array, android.R.layout.simple_spinner_item);
+		    		        R.array.regionxiii_array, android.R.layout.simple_spinner_item);
 		        	
 		        }
 		        else if(selected2.equals("ARMM")){
@@ -355,12 +352,12 @@ public class ViewInsertActivity extends Activity {
 			db.addRecord(new Record(height,weight,age,selected,
 					selected2,selected3,
 					extra.get_measurements()[0],		//double check indices
-					extra.get_measurements()[1],
-					extra.get_measurements()[2],
-					extra.get_measurements()[3],
-					extra.get_measurements()[4],
-					extra.get_measurements()[5],
 					extra.get_measurements()[6],
+					extra.get_measurements()[5],
+					extra.get_measurements()[2],
+					extra.get_measurements()[1],
+					extra.get_measurements()[4],
+					extra.get_measurements()[3],
 					extra.get_measurements()[7],
 					extra.get_measurements()[8],
 					filename,
@@ -373,94 +370,38 @@ public class ViewInsertActivity extends Activity {
 				
 			}
 			else{
-					
-				//do uploading here
 				
-				ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
+				HttpPostHelper helper = new HttpPostHelper("http://192.168.1.100/android_add_survey.php"); 	//get url from sharedpreferences
+				ArrayList<NameValuePair> pairs = new ArrayList<NameValuePair>();
+				pairs.add(new BasicNameValuePair("project_id", "012"));
+				pairs.add(new BasicNameValuePair("project_name", "Armchair Anthropometry"));
+				pairs.add(new BasicNameValuePair("description", "Anthropometry for Armchairs. Duh."));
+				pairs.add(new BasicNameValuePair("survey_info_id", db.getLastId()+""));
+				pairs.add(new BasicNameValuePair("gender", selected));
+				pairs.add(new BasicNameValuePair("age", age+""));
+				pairs.add(new BasicNameValuePair("height", height+""));
+				pairs.add(new BasicNameValuePair("weight", weight+""));
+				pairs.add(new BasicNameValuePair("region", selected2));	//add for cityprov
+				pairs.add(new BasicNameValuePair("cityprov", selected3));	//add for cityprov
+				pairs.add(new BasicNameValuePair("body_measurement", "sitH:"+extra.get_measurements()[0]+","+
+																	 "pH:"+extra.get_measurements()[1]+","+
+																	 "tC:"+extra.get_measurements()[2]+","+
+																	 "bpL:"+extra.get_measurements()[3]+","+
+																	 "kH:"+extra.get_measurements()[4]+","+
+																	 "sH:"+extra.get_measurements()[5]+","+
+																	 "erH:"+extra.get_measurements()[6]+","+
+																	 "hB:"+extra.get_measurements()[7]+","+
+																	 "kkB:"+extra.get_measurements()[8]));	
 				
-				postParameters.add(new BasicNameValuePair("project_id","1234"));
-						  
-				postParameters.add(new BasicNameValuePair("project_name",
-					      "Cheesecake"));
-						  
-						  postParameters.add(new BasicNameValuePair("description",
-					      "Some random string."));
-						  
-						  postParameters.add(new BasicNameValuePair("survey_info_id",
-					      "1"));		//change to real id
-						  
-						  
-						  postParameters.add(new BasicNameValuePair("gender",
-					      selected));
-						  
-						  postParameters.add(new BasicNameValuePair("age",
-					      age+""));
-						  
-						  postParameters.add(new BasicNameValuePair("height",
-					      height+""));
-						  
-						  postParameters.add(new BasicNameValuePair("weight",
-						  weight+""));
-						  
-						  postParameters.add(new BasicNameValuePair("region",
-					      selected2));
-						  
-						  postParameters.add(new BasicNameValuePair("body_measurement1",
-					      "Sitting Height:"+extra.get_measurements()[0]));
 				
-				String response = null;
-				
-				 try {
-				     response = CustomHttpClient.executeHttpPost(
-				       "http://192.168.1.101/SP/Main Program/android_add_survey.php", //ip address if using localhost server
-				       //"http://129.107.187.135/CSE5324/jsonscript.php", // ip address if using localhost server
-				       
-				       postParameters);
-				 }catch(Exception e){
-					 
-					 Log.d("DATA:","FAIL");
-				 }
-				
-				 
-				 //String result = response.toString();  
-	              
-			      //parse json data
-				 /*
-			         try{
-			           String returnString = "";
-			           JSONArray jArray = new JSONArray(result);
-			                 for(int i=0;i<jArray.length();i++){
-			                         JSONObject json_data = jArray.getJSONObject(i);
-			                         Log.i("log_tag","Project ID: "+json_data.getString("project_id")+
-			                                 ", Project Name: "+json_data.getString("project_name")+
-			                                 ", Description: "+json_data.getString("description")+
-			                                 ", Survey Info ID: "+json_data.getString("survey_info_id")+
-			                                 ", Gender: "+json_data.getString("gender")+
-			                                 ", Age: "+json_data.getInt("age")+
-			                                 ", Height: "+json_data.getString("height")+
-			                                 ", Weight: "+json_data.getString("weight")+
-			                                 ", Region: "+json_data.getString("region")+
-			                                 ", Measurements: "+json_data.getString("body_measurement1")
-			                         );
-			                         //Get an output to the screen
-			                         returnString += "\n" + "Project ID: " + json_data.getString("project_id") + "\n" + "Project Name: " + json_data.getInt("project_name");
-			                 }
-			         }
-			         catch(JSONException e){
-			                 Log.e("log_tag", "Error parsing data "+e.toString());
-			         }
-				
-				 */
-				 
-				 
-				Toast.makeText(this, "Data Sent to Server.", Toast.LENGTH_SHORT).show();
-			
-			}
-			
-			//ViewRecordsFragment.records = db.getAllRecords();
-			//.makeText(MainActivity.this, "Record Added.", Toast.LENGTH_LONG).show();
-			
-			
+				if(helper.post(pairs))
+					Toast.makeText(this, "Data Sent to Server.", Toast.LENGTH_SHORT).show();
+				else{
+					db.enqueueUpload();
+					Toast.makeText(this, "Data Enqueued for Uploading.", Toast.LENGTH_SHORT).show();
+					}
+				}
+			db.close();
             Intent intent = new Intent(this, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP); 
