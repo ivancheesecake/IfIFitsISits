@@ -23,11 +23,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.NetworkInfo.State;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -61,6 +63,8 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
 	private int prevPosition =0;
 	public static List<Integer> queue;
 	public static List<Record> records;
+	private float refObj;
+	private String url;
 
 	public final static String EXTRA_CAPTURE_FLAG= "com.cheesecake.ififitsisits.CAPTURE_FLAG";
 	public final static String EXTRA_IFIFITS= "com.cheesecake.ififitsisits.IFIFITS";
@@ -104,8 +108,18 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
         tx.replace(R.id.main,Fragment.instantiate(MainActivity.this, fragments[0]));
         tx.commit();
         
-        SharedPreferences prefs = this.getSharedPreferences("com.cheesecake.ififits", Context.MODE_PRIVATE);
-        prefs.edit().putFloat("com.cheesecake.ififits.refobject", (float)20.0);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        refObj = Float.parseFloat(prefs.getString("refObj", "10.0"));
+        url = prefs.getString("url", "http://192.168.0.103/SP/Main%20Program");
+        
+        //Editor toEdit;
+        //toEdit = prefs.edit();
+		//toEdit.putString("url", "http://192.168.0.103/SP/Main%20Program");
+		//toEdit.commit();
+        
+       // Log.d("Reference Object ",refObj+"");
+        //Log.d("URL ",url);
+        //prefs.edit().putFloat("com.cheesecake.ififits.refobject", (float)20.0);
         
 	}
 	
@@ -158,16 +172,7 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
    
         mDrawerLayout.closeDrawer(mDrawerList);
       
-        if(position!=1){
-        	FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-        	tx.replace(R.id.main, Fragment.instantiate(MainActivity.this, fragments[position])).addToBackStack("fragment_"+position);
-        	FragmentManager fm = this.getSupportFragmentManager();
-            fm.popBackStack ("fragment_"+prevPosition, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        	tx.commit();
-        	
-        	prevPosition = position;
-        }
-        else{
+        if(position==1){
         	
         	Intent intent = new Intent(this,CaptureActivity2.class);
         	IfIFitsExtra extra = new IfIFitsExtra();
@@ -178,6 +183,21 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
         	
             startActivity(intent);
         }
+        else if(position==4){
+        	
+        	Intent intent = new Intent(this,SettingsActivity.class);
+        	startActivity(intent);
+        }
+        else{
+        	FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
+        	tx.replace(R.id.main, Fragment.instantiate(MainActivity.this, fragments[position])).addToBackStack("fragment_"+position);
+        	FragmentManager fm = this.getSupportFragmentManager();
+            fm.popBackStack ("fragment_"+prevPosition, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        	tx.commit();
+        	
+        	prevPosition = position;
+        }
+        
         
     }
  
@@ -194,6 +214,18 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
             
             
         }
+    }
+    
+    private boolean isAuthenticated(String url){
+    	
+    	Log.d("Inside isAuthenticated","HIHI");
+    	
+    	HttpPostHelper helper = new HttpPostHelper(url+"/is_authenticated.php"); 	//get url from sharedpreferences
+        ArrayList<NameValuePair> pairs = new ArrayList<NameValuePair>();
+        pairs.add(new BasicNameValuePair("gagraduateako", "yep"));
+        
+        //return helper.post(pairs);  
+        return true;
     }
     
     private void installListener() {
@@ -218,6 +250,23 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
                     	Log.d("Internet Connectivity", "May Internet");
                     	status_internets.setIcon(R.drawable.ic_action_network_wifi);
                     	mayInternets = true;
+                    	
+                    	if(!isAuthenticated(url)){
+                    		
+                    		Log.d("Inside installListener","AW");
+                    		Editor toEdit;
+                    		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+                    		
+                    		toEdit = prefs.edit();
+                			toEdit.putString("authenticated", "false");
+                			toEdit.commit();
+                			
+                			intent = new Intent(getApplicationContext(),LoginActivity.class);
+                			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                			startActivity(intent);
+                			finish();
+                			
+                    	}
                		 
                     } else {
                     	Log.d("Internet Connectivity", "Walang Internet");
@@ -249,7 +298,7 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
     
     public void upload(View view){
     	
-    	HttpPostHelper helper = new HttpPostHelper("http://192.168.1.100/android_add_survey.php"); 	//get url from sharedpreferences
+    	HttpPostHelper helper = new HttpPostHelper(url+"/android_add_survey.php"); 	//get url from sharedpreferences
     	ArrayList<NameValuePair> pairs;
  		queue = db.getQueue();
     	
@@ -265,7 +314,7 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
 				pairs.add(new BasicNameValuePair("project_name", "Armchair Anthropometry"));
 				pairs.add(new BasicNameValuePair("description", "Anthropometry for Armchairs. Duh."));
 				pairs.add(new BasicNameValuePair("survey_info_id", r.get_id()+""));
-				pairs.add(new BasicNameValuePair("gender",  r.get_sex()));
+				pairs.add(new BasicNameValuePair("gender",  r.get_sex().substring(0,1)));
 				pairs.add(new BasicNameValuePair("age",  r.get_age()+""));
 				pairs.add(new BasicNameValuePair("height",  r.get_height()+""));
 				pairs.add(new BasicNameValuePair("weight", r.get_weight()+""));
@@ -285,19 +334,21 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
 				if(helper.post(pairs)){
 					Log.d("Uploaded",queue.get(i)+"");
 					db.dequeue(queue.get(i));
+					
+					//refresh fragment
+			    	FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
+		        	tx.replace(R.id.main, Fragment.instantiate(MainActivity.this, fragments[2])).addToBackStack("fragment_2");
+		        	FragmentManager fm = MainActivity.this.getSupportFragmentManager();
+		            fm.popBackStack ("fragment_2", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+		        	tx.commit();
+			    	Toast.makeText(this, "Data Sent to Server.", Toast.LENGTH_SHORT).show();
 					}
+			
 				else{
-					Log.d("Upload Failed",queue.get(i)+"");
+					Log.d("Upload Failed. Server not found.",queue.get(i)+"");
 				}
 	    	}
 	    	
-	    	
-	    	
-	    	//refresh fragment
-	    	FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-	    	tx.replace(R.id.main, Fragment.instantiate(MainActivity.this, fragments[2]));
-	    	tx.commit();
-	    	Toast.makeText(this, "Data Sent to Server.", Toast.LENGTH_SHORT).show();
     	}
     	else
     		Toast.makeText(this, "No Internet Connection.", Toast.LENGTH_SHORT).show();

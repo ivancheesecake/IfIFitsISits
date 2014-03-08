@@ -2,10 +2,21 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
   android:title="Preferences">
      
-    <EditTextPreference android:key="pref_text"
+   <PreferenceCategory
+   android:summary="Username and password information"
+   android:title="Settings" >
+  
+    <EditTextPreference android:key="refObj"
    		android:title="Reference Object Size"
    		android:summary="Actual dimensions of Reference object"
    		android:dialogTitle="Reference Object Size"
+   		android:inputType="numberDecimal"
 	/>
-         
+    <EditTextPreference android:key="url"
+   		android:title="Server URL"
+   		android:summary="URL of the National Anthropometric Database"
+   		android:dialogTitle="Server URL"
+   		android:inputType="text"
+	/>
+    </PreferenceCategory> 
 </PreferenceScreen>

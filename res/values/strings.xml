@@ -17,8 +17,7 @@
 
     <!-- Strings for Login -->
 
-    <string name="hint_username">Username</string>
-    <string name="hint_password">Password</string>
+    <string name="hint_authkey">Authentication Key</string>
     <string name="login">Login</string>
 
     <!-- Strings for Navigation Drawer and Action Bar -->
@@ -89,5 +88,6 @@
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_capture_activity2">CaptureActivity2</string>
     <string name="title_activity_display_process">DisplayProcessActivity</string>
+    <string name="title_activity_settings">SettingsActivity</string>
 
 </resources>

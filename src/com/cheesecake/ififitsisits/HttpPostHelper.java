@@ -58,4 +58,32 @@ public class HttpPostHelper {
 		return true;
 	}
 	
+public String post_string(ArrayList<NameValuePair> pairs){
+		
+		HttpClient client = new DefaultHttpClient();
+		HttpPost post = new HttpPost(this.url);
+		String response;
+		try{
+			post.setEntity(new UrlEncodedFormEntity(pairs));
+			
+		}catch(UnsupportedEncodingException u){
+			return "ERR";
+			}
+		
+		try{
+			response = client.execute(post, new BasicResponseHandler());
+			Log.d("response",response);
+		}catch(ClientProtocolException e){
+			
+			Log.e("ClientProtocolException","FAIL!");
+			return "ERR";
+		}catch(IOException e){
+			Log.e("IOException","FAIL!");
+			return "ERR";
+		}
+		
+		return response;
+	}
+	
+	
 }

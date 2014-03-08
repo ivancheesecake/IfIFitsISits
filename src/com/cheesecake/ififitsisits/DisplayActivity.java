@@ -54,7 +54,7 @@ public class DisplayActivity extends ActionBarActivity {
 		side = BitmapFactory.decodeResource(getApplicationContext().getResources(),R.drawable.side);
 		
 		Utils.bitmapToMat(side, sideMat);
-		Keyer(sideMat.getNativeObjAddr(),keyedMat.getNativeObjAddr());
+		//Keyer(sideMat.getNativeObjAddr(),keyedMat.getNativeObjAddr());
 		Utils.matToBitmap(keyedMat, side);
 		//Utils.bitmapToMat(side, sideMat);//
 		//imageview2.setImageBitmap(Bitmap.createScaledBitmap(side, 150, 200, false));
@@ -68,7 +68,7 @@ public class DisplayActivity extends ActionBarActivity {
 			front = BitmapFactory.decodeResource(getApplicationContext().getResources(),R.drawable.front);
 			
 			Utils.bitmapToMat(front, frontMat);
-			Keyer(frontMat.getNativeObjAddr(),keyedMat2.getNativeObjAddr());
+			//Keyer(frontMat.getNativeObjAddr(),keyedMat2.getNativeObjAddr());
 			Utils.matToBitmap(keyedMat2, front);
 			Utils.bitmapToMat(front, frontMat);//
 			//imageview2.setImageBitmap(Bitmap.createScaledBitmap(front, 150, 200, false));
@@ -104,7 +104,7 @@ public class DisplayActivity extends ActionBarActivity {
 		
 		r = new Record();
 		//MeasureSide(keyedMat.getNativeObjAddr(),sideMat.getNativeObjAddr(), measurements);
-		DeriveData(keyedMat.getNativeObjAddr(),sideMat.getNativeObjAddr(), keyedMat2.getNativeObjAddr(), frontMat.getNativeObjAddr(),measurements,actualDimensions);
+		//DeriveData(keyedMat.getNativeObjAddr(),sideMat.getNativeObjAddr(), keyedMat2.getNativeObjAddr(), frontMat.getNativeObjAddr(),measurements,actualDimensions);
 		
 		r.set_sitH(measurements[0]);
 		r.set_pH(measurements[1]);
@@ -139,7 +139,7 @@ public class DisplayActivity extends ActionBarActivity {
 		}
 	}
 	
-	public native void Keyer(long src, long dst);
-    public native void MeasureSide(long src, long dst,double [] sideArray);
-    public native void DeriveData(long src,long dst,long src2,long dst2,double [] measurements, double actualDimensions);
+	///public native void Keyer(long src, long dst);
+    //public native void MeasureSide(long src, long dst,double [] sideArray);
+    //public native void DeriveData(long src,long dst,long src2,long dst2,double [] measurements, double actualDimensions);
 }

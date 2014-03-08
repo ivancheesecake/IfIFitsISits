@@ -1,8 +1,15 @@
+/*
+ * http://stackoverflow.com/questions/7693633/android-image-dialog-popup
+ * http://www.dreamincode.net/forums/topic/331525-full-screen-dialog-with-scaled-image/
+ * 
+ * */
+
 package com.cheesecake.ififitsisits;
 
 import java.io.File;
 import java.text.DecimalFormat;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,13 +20,19 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.webkit.WebView.FindListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ViewRecordFragment extends Fragment{
 
 	public static Record r;
+	Bitmap side,front,back;
+	String path;
+	View v,v2;
 	public static Fragment newInstance(Context context) {
         ViewRecordFragment f = new ViewRecordFragment();
  
@@ -28,7 +41,9 @@ public class ViewRecordFragment extends Fragment{
  
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-        View v = (View) inflater.inflate(R.layout.viewrecord_fragment, null);
+        v = (View) inflater.inflate(R.layout.viewrecord_fragment,container, false);
+        v2 = (View) inflater.inflate(R.layout.image_dialog,container, false);
+        
         MainActivity.actionbar.setSubtitle("View Record");
         
         DisplayMetrics displaymetrics = new DisplayMetrics();
@@ -38,19 +53,66 @@ public class ViewRecordFragment extends Fragment{
 		int screen_width = displaymetrics.widthPixels;
 		
 		File extStore = Environment.getExternalStorageDirectory();
-		String path = extStore.getAbsolutePath();
+		path = extStore.getAbsolutePath();
 		
 		Log.d("Side: ",r.get_sideImg());
 		Log.d("Front: ",r.get_frontImg());
 		Log.d("Back: ",r.get_backImg());
 		
-		Bitmap side = BitmapFactory.decodeFile(path+"/ififits/"+r.get_sideImg());
-		Bitmap front = BitmapFactory.decodeFile(path+"/ififits/"+r.get_frontImg());
-		Bitmap back = BitmapFactory.decodeFile(path+"/ififits/"+r.get_backImg());
+		side = BitmapFactory.decodeFile(path+"/ififits/"+r.get_sideImg());
+		front = BitmapFactory.decodeFile(path+"/ififits/"+r.get_frontImg());
+		back = BitmapFactory.decodeFile(path+"/ififits/"+r.get_backImg());
 		
 		ImageView imageview_side = (ImageView) v.findViewById(R.id.imageview_side);
 		ImageView imageview_front = (ImageView) v.findViewById(R.id.imageview_front);
 		ImageView imageview_back = (ImageView) v.findViewById(R.id.imageview_back);
+		
+		imageview_side.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				
+				Dialog settingsDialog = new Dialog(getActivity());
+				settingsDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+				settingsDialog.setContentView(R.layout.image_dialog);
+				ImageView i = (ImageView) settingsDialog.findViewById(R.id.image_view_dialog_01);
+				i.setImageBitmap(side);
+				settingsDialog.show();
+				
+			}
+		});
+		
+		imageview_front.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				
+				Dialog settingsDialog = new Dialog(getActivity());
+				settingsDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+				settingsDialog.setContentView(R.layout.image_dialog);
+				ImageView i = (ImageView) settingsDialog.findViewById(R.id.image_view_dialog_01);
+				i.setImageBitmap(front);
+				settingsDialog.show();
+				
+			}
+		});
+		
+		imageview_back.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				
+				Dialog settingsDialog = new Dialog(getActivity());
+				settingsDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+				settingsDialog.setContentView(R.layout.image_dialog);
+				ImageView i = (ImageView) settingsDialog.findViewById(R.id.image_view_dialog_01);
+				i.setImageBitmap(back);
+				settingsDialog.show();
+				
+			}
+		});
+		
+		
 		
 		int image_width = (int)screen_width/3;
 		int image_height = (int)screen_height/3;
@@ -65,6 +127,8 @@ public class ViewRecordFragment extends Fragment{
 		imageview_front.setImageBitmap(Bitmap.createScaledBitmap(front, image_width, image_height, false));
 		imageview_back.setImageBitmap(Bitmap.createScaledBitmap(back, image_width, image_height, false));
         
+		
+		
 		TextView textview_subjectId = (TextView) v.findViewById(R.id.textview_subjectId);
 		TextView textview_heightVal = (TextView) v.findViewById(R.id.textview_heightVal);
 		TextView textview_weightVal = (TextView) v.findViewById(R.id.textview_weightVal);

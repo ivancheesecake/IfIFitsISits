@@ -42,8 +42,9 @@ public class CaptureActivity2 extends Activity implements CvCameraViewListener2,
 	private Mat originalMat;
 	private Mat promptMat;
 	private Mat croppedMat;
-	private Bitmap croppedBitmap;
+	private Bitmap croppedBitmap,origBitmap;
 	private int screen_width,screen_height;
+	private int flag;
 	private boolean ready;
 
 	
@@ -76,9 +77,12 @@ public class CaptureActivity2 extends Activity implements CvCameraViewListener2,
                     screen_width = displaymetrics.widthPixels;
                     
                     try{
-                    	
-                    	promptMat = Utils.loadResource(getApplicationContext(), R.drawable.prompt_side, Highgui.CV_LOAD_IMAGE_COLOR);
-                    
+                    	if(flag==0)
+                    		promptMat = Utils.loadResource(getApplicationContext(), R.drawable.prompt_side, Highgui.CV_LOAD_IMAGE_COLOR);
+                    	else if(flag==1)
+                    		promptMat = Utils.loadResource(getApplicationContext(), R.drawable.prompt_front, Highgui.CV_LOAD_IMAGE_COLOR);
+                    	else
+                    		promptMat = Utils.loadResource(getApplicationContext(), R.drawable.prompt_back, Highgui.CV_LOAD_IMAGE_COLOR);
                     }catch(IOException e){
                     
                     	promptMat = new Mat();
@@ -122,6 +126,7 @@ public class CaptureActivity2 extends Activity implements CvCameraViewListener2,
         Intent intent = getIntent();
         extra = (IfIFitsExtra) intent.getSerializableExtra(EXTRA_IFIFITS);
         
+        flag = extra.get_flag();
         if(extra.get_flag()==0)
         	extraBitmaps = new Bitmap[3];
         else{
@@ -178,7 +183,10 @@ public class CaptureActivity2 extends Activity implements CvCameraViewListener2,
     public boolean onTouch(View v, MotionEvent event) {		//Override of onTouch(), triggered when a touch event is detected
     	
     	if(ready){
-    			
+    		
+    		//mOpenCvCameraView.takePicture();
+    	//	Utils.bitmapToMat(origBitmap, originalMat);
+    		
     		croppedMat = new Mat(originalMat, new Rect(new Point(originalMat.width()/2,0), new Point(originalMat.width()-1,originalMat.height()-1)));
     	    croppedBitmap = Bitmap.createBitmap(croppedMat.width(), croppedMat.height(), Bitmap.Config.ARGB_8888);	//Initialize Bitmap
     	    Utils.matToBitmap(croppedMat, croppedBitmap);		//Convert Mat to Bitmap 

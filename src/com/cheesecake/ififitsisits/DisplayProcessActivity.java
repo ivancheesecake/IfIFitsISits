@@ -1,13 +1,19 @@
 package com.cheesecake.ififitsisits;
 
+import java.io.File;
+import java.io.FileOutputStream;
+
 import org.opencv.android.Utils;
 import org.opencv.core.Mat;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Parcelable;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
@@ -25,6 +31,7 @@ public class DisplayProcessActivity extends Activity {
 	private ImageView keyedImageView;
 	private int flag;
 	private double[] measurements;
+	private float refObj;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,21 +54,38 @@ public class DisplayProcessActivity extends Activity {
 		origImageView.setImageBitmap(extraBitmaps[flag]);
 		
 		origMat = new Mat();
-		keyedMat = new Mat();
+		
 		origMat_copy = new Mat();
-		keyedMat_copy = new Mat();
 		
 		Utils.bitmapToMat(extraBitmaps[flag], origMat);
 		origMat.copyTo(origMat_copy);
-		Keyer(origMat.getNativeObjAddr(),keyedMat.getNativeObjAddr());	//perform keying
+		keyedMat = new Mat();
+		keyedMat_copy = new Mat();
+		
+		
+		KeyerYCbCr(origMat.getNativeObjAddr(),keyedMat.getNativeObjAddr());	//perform keying
 		keyedMat.copyTo(keyedMat_copy);
-		DeriveData(keyedMat.getNativeObjAddr(), origMat.getNativeObjAddr(),measurements, 3.0, flag); //use sharedpreferences for refobj dimensions
+		
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(DisplayProcessActivity.this);
+        refObj = Float.parseFloat(prefs.getString("refObj", "10.0"));
+        
+		DeriveData(keyedMat.getNativeObjAddr(), origMat.getNativeObjAddr(),measurements, refObj, flag); //use sharedpreferences for refobj dimensions
 		Utils.matToBitmap(origMat, extraBitmaps[flag]);
 		
 		keyedBitmap = Bitmap.createBitmap(origMat.width(), origMat.height(), Bitmap.Config.ARGB_8888);	//Initialize Bitmap
 		Utils.matToBitmap(keyedMat_copy,keyedBitmap);
 		keyedImageView = (ImageView) findViewById(R.id.display2);
 		keyedImageView.setImageBitmap(keyedBitmap);
+		/*
+		File folder = new File(Environment.getExternalStorageDirectory() + "/ififits");
+		File file = new File(folder, "asd.jpg");
+		try{
+			FileOutputStream fOut = new FileOutputStream(file);
+			keyedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
+		    fOut.flush();
+		    fOut.close();
+		}catch(Exception e){}
+		*/
 	}
 	
 	
@@ -92,7 +116,13 @@ public class DisplayProcessActivity extends Activity {
 		}
 	}
 	
+	public void cancel(View view){
+		finish();
+		
+	}
+	
 	public native void Keyer(long src, long dst);
+	public native void KeyerYCbCr(long src, long dst);
 	public native void DeriveData(long src,long dst, double [] measurements, double actualDimensions, int flag);
 	
 	

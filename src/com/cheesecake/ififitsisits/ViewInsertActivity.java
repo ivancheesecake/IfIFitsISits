@@ -9,20 +9,22 @@ import java.util.UUID;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Parcelable;
+import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -39,7 +41,7 @@ public class ViewInsertActivity extends Activity {
 	public final static String EXTRA_IFIFITS_BITMAPS= "com.cheesecake.ififitsisits.IFIFITS_BITMAPS";
 	
 	private static Record r;
-	private String selected = "Male";
+	private String selected = "M";
 	private String selected2 = "NCR";
 	private String selected3 = "Caloocan";
 	private Spinner spinner3;
@@ -93,6 +95,50 @@ public class ViewInsertActivity extends Activity {
 		imageview2.setImageBitmap(Bitmap.createScaledBitmap(bmp2, image_width, image_height, false));
 		imageview3.setImageBitmap(Bitmap.createScaledBitmap(bmp3, image_width, image_height, false));
 		
+		imageview.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				
+				Dialog settingsDialog = new Dialog(ViewInsertActivity.this);
+				settingsDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+				settingsDialog.setContentView(R.layout.image_dialog);
+				ImageView i = (ImageView) settingsDialog.findViewById(R.id.image_view_dialog_01);
+				i.setImageBitmap(extraBitmaps[0]);
+				settingsDialog.show();
+				
+			}
+		});
+		
+		imageview2.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				
+				Dialog settingsDialog = new Dialog(ViewInsertActivity.this);
+				settingsDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+				settingsDialog.setContentView(R.layout.image_dialog);
+				ImageView i = (ImageView) settingsDialog.findViewById(R.id.image_view_dialog_01);
+				i.setImageBitmap(extraBitmaps[1]);
+				settingsDialog.show();
+				
+			}
+		});
+		
+		imageview3.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				
+				Dialog settingsDialog = new Dialog(ViewInsertActivity.this);
+				settingsDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+				settingsDialog.setContentView(R.layout.image_dialog);
+				ImageView i = (ImageView) settingsDialog.findViewById(R.id.image_view_dialog_01);
+				i.setImageBitmap(extraBitmaps[2]);
+				settingsDialog.show();
+				
+			}
+		});
 		//TextView textview_subjectId = (TextView) findViewById(R.id.textview_subjectId);
 		TextView textview_sitHVal = (TextView) findViewById(R.id.textview_sitHVal);
 		TextView textview_sHVal = (TextView) findViewById(R.id.textview_sHVal);
@@ -154,6 +200,7 @@ public class ViewInsertActivity extends Activity {
 
 		    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 		        selected = parent.getItemAtPosition(pos).toString();
+		        //selected = selected.substring(0,1);
 		        //Log.d("Selected",selected);
 		    }
 
@@ -371,13 +418,17 @@ public class ViewInsertActivity extends Activity {
 			}
 			else{
 				
-				HttpPostHelper helper = new HttpPostHelper("http://192.168.1.100/android_add_survey.php"); 	//get url from sharedpreferences
+				SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ViewInsertActivity.this);
+		        String url = prefs.getString("url", "http://192.168.1.100");
+				
+		        HttpPostHelper helper = new HttpPostHelper(url+"/android_add_survey.php"); 	//get url from sharedpreferences
+				
 				ArrayList<NameValuePair> pairs = new ArrayList<NameValuePair>();
 				pairs.add(new BasicNameValuePair("project_id", "012"));
 				pairs.add(new BasicNameValuePair("project_name", "Armchair Anthropometry"));
 				pairs.add(new BasicNameValuePair("description", "Anthropometry for Armchairs. Duh."));
 				pairs.add(new BasicNameValuePair("survey_info_id", db.getLastId()+""));
-				pairs.add(new BasicNameValuePair("gender", selected));
+				pairs.add(new BasicNameValuePair("gender", selected.substring(0,1)));
 				pairs.add(new BasicNameValuePair("age", age+""));
 				pairs.add(new BasicNameValuePair("height", height+""));
 				pairs.add(new BasicNameValuePair("weight", weight+""));
