@@ -1,6 +1,8 @@
 package com.cheesecake.ififitsisits;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame;
@@ -19,6 +21,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Parcelable;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -183,8 +186,12 @@ public class CaptureActivity2 extends Activity implements CvCameraViewListener2,
     public boolean onTouch(View v, MotionEvent event) {		//Override of onTouch(), triggered when a touch event is detected
     	
     	if(ready){
+    		 
+    		String fileName = Environment.getExternalStorageDirectory().getPath() +
+    	                               "/cache.jpg";
+    	    
+    	    //mOpenCvCameraView.takePicture(fileName);
     		
-    		//mOpenCvCameraView.takePicture();
     	//	Utils.bitmapToMat(origBitmap, originalMat);
     		
     		croppedMat = new Mat(originalMat, new Rect(new Point(originalMat.width()/2,0), new Point(originalMat.width()-1,originalMat.height()-1)));

@@ -63,7 +63,11 @@ public class DisplayProcessActivity extends Activity {
 		keyedMat_copy = new Mat();
 		
 		
-		KeyerYCbCr(origMat.getNativeObjAddr(),keyedMat.getNativeObjAddr());	//perform keying
+		KeyerYCbCr(origMat.getNativeObjAddr(),keyedMat.getNativeObjAddr());	
+
+		//Utils.matToBitmap(origMat, extraBitmaps[flag]);
+		//origImageView.setImageBitmap(extraBitmaps[flag]);
+		
 		keyedMat.copyTo(keyedMat_copy);
 		
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(DisplayProcessActivity.this);
@@ -76,16 +80,7 @@ public class DisplayProcessActivity extends Activity {
 		Utils.matToBitmap(keyedMat_copy,keyedBitmap);
 		keyedImageView = (ImageView) findViewById(R.id.display2);
 		keyedImageView.setImageBitmap(keyedBitmap);
-		/*
-		File folder = new File(Environment.getExternalStorageDirectory() + "/ififits");
-		File file = new File(folder, "asd.jpg");
-		try{
-			FileOutputStream fOut = new FileOutputStream(file);
-			keyedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
-		    fOut.flush();
-		    fOut.close();
-		}catch(Exception e){}
-		*/
+	
 	}
 	
 	

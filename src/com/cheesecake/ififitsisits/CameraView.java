@@ -16,6 +16,8 @@ import android.util.Log;
 public class CameraView extends JavaCameraView implements PictureCallback {
 	public final static String EXTRA_MAT = "com.cheesecake.ififitsisits.MAT";
 	 private static final String TAG = "Sample::Tutorial3View";
+	 private String mPictureFileName;
+	 
 	 Bitmap bmp;
 
 	    public CameraView(Context context, AttributeSet attrs) {
@@ -61,9 +63,10 @@ public class CameraView extends JavaCameraView implements PictureCallback {
 	        return mCamera.getParameters().getPreviewSize();
 	    }
 
-	    public void takePicture() {
+	    public void takePicture(final String fileName) {
 	        
 	    	Log.i(TAG, "Taking picture");
+	    	this.mPictureFileName = fileName;
 	        mCamera.setPreviewCallback(null);
 	        mCamera.takePicture(null, null, this);
 	        //return bmp;
@@ -75,13 +78,13 @@ public class CameraView extends JavaCameraView implements PictureCallback {
 	    	
 	    	//Log.i(TAG, "Saving a bitmap to file");
 	        // The camera preview was automatically stopped. Start it again.
-	        //mCamera.startPreview();
-	        //mCamera.setPreviewCallback(this);
+	        mCamera.startPreview();
+	        mCamera.setPreviewCallback(this);
 
 	        // Write the image in a file (in jpeg format)
 	        
 	        try {
-	            FileOutputStream fos = new FileOutputStream("ififits/temp.jpg");
+	            FileOutputStream fos = new FileOutputStream(mPictureFileName);
 
 	            fos.write(data);
 	            fos.close();
@@ -89,6 +92,8 @@ public class CameraView extends JavaCameraView implements PictureCallback {
 	        } catch (java.io.IOException e) {
 	            Log.e("PictureDemo", "Exception in photoCallback", e);
 	        }
+	        
+	        //mCamera.release();
 	    	
 	    	//Bitmap bmp = Bitmap.createBitmap(mIntermediateMat.width(), mIntermediateMat.height(), Bitmap.Config.ARGB_8888);
 	        //Utils.matToBitmap(mIntermediateMat,bmp);

@@ -420,14 +420,18 @@ public class ViewInsertActivity extends Activity {
 				
 				SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ViewInsertActivity.this);
 		        String url = prefs.getString("url", "http://192.168.1.100");
+		        String authkey = prefs.getString("authkey", "gagraduateako");
 				
 		        HttpPostHelper helper = new HttpPostHelper(url+"/android_add_survey.php"); 	//get url from sharedpreferences
 				
 				ArrayList<NameValuePair> pairs = new ArrayList<NameValuePair>();
+				
+				
+				pairs.add(new BasicNameValuePair("authkey", authkey));
 				pairs.add(new BasicNameValuePair("project_id", "012"));
 				pairs.add(new BasicNameValuePair("project_name", "Armchair Anthropometry"));
 				pairs.add(new BasicNameValuePair("description", "Anthropometry for Armchairs. Duh."));
-				pairs.add(new BasicNameValuePair("survey_info_id", db.getLastId()+""));
+				pairs.add(new BasicNameValuePair("survey_info_id", authkey+"-"+db.getLastId()));
 				pairs.add(new BasicNameValuePair("gender", selected.substring(0,1)));
 				pairs.add(new BasicNameValuePair("age", age+""));
 				pairs.add(new BasicNameValuePair("height", height+""));
@@ -439,8 +443,8 @@ public class ViewInsertActivity extends Activity {
 																	 "tC:"+extra.get_measurements()[2]+","+
 																	 "bpL:"+extra.get_measurements()[3]+","+
 																	 "kH:"+extra.get_measurements()[4]+","+
-																	 "sH:"+extra.get_measurements()[5]+","+
-																	 "erH:"+extra.get_measurements()[6]+","+
+																	 "erH:"+extra.get_measurements()[5]+","+
+																	 "sH:"+extra.get_measurements()[6]+","+
 																	 "hB:"+extra.get_measurements()[7]+","+
 																	 "kkB:"+extra.get_measurements()[8]));	
 				
@@ -449,7 +453,7 @@ public class ViewInsertActivity extends Activity {
 					Toast.makeText(this, "Data Sent to Server.", Toast.LENGTH_SHORT).show();
 				else{
 					db.enqueueUpload();
-					Toast.makeText(this, "Data Enqueued for Uploading.", Toast.LENGTH_SHORT).show();
+					Toast.makeText(this, "Cannot Connect to Server. Data Enqueued for Uploading.", Toast.LENGTH_LONG).show();
 					}
 				}
 			db.close();

@@ -29,7 +29,7 @@ JNIEXPORT void JNICALL Java_com_cheesecake_ififitsisits_DisplayProcessActivity_K
 	int tola,tolb;
 	float mask;
 	tola = 30;
-	tolb = 200;
+	tolb = 180;
 	char string[30];
 
 	//Mat keyed = Mat(img.size(),CV_8UC1);
@@ -45,8 +45,6 @@ JNIEXPORT void JNICALL Java_com_cheesecake_ififitsisits_DisplayProcessActivity_K
 	int greenKey = img.at<cv::Vec3b>(0,0)[1];
 	int blueKey = img.at<cv::Vec3b>(0,0)[2];
 	int red,green,blue;
-
-	int image[300][300];
 
 	Cb_key =  (int)round(128 + -0.168736*redKey - 0.331264*greenKey + 0.5*blueKey);
 	Cr_key = (int) round(128 + 0.5*redKey - 0.418688*greenKey - 0.081312*blueKey); 
@@ -84,6 +82,8 @@ JNIEXPORT void JNICALL Java_com_cheesecake_ififitsisits_DisplayProcessActivity_K
 	threshold(maskara, keyed, 0, 255,CV_THRESH_OTSU);
 	erode(keyed, keyed, Mat(), Point(-1, -1), 2, 1, 1);
 	dilate(keyed, keyed, Mat(), Point(-1, -1), 2, 1, 1);
+
+	//imgCopy.copyTo(img, maskara);
 
 }
 

@@ -219,13 +219,17 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
     private boolean isAuthenticated(String url){
     	
     	Log.d("Inside isAuthenticated","HIHI");
-    	
-    	HttpPostHelper helper = new HttpPostHelper(url+"/is_authenticated.php"); 	//get url from sharedpreferences
-        ArrayList<NameValuePair> pairs = new ArrayList<NameValuePair>();
-        pairs.add(new BasicNameValuePair("gagraduateako", "yep"));
+    	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        String authkey = prefs.getString("authkey", "");
         
-        //return helper.post(pairs);  
-        return true;
+        HttpPostHelper helper = new HttpPostHelper(url+"/is_authenticated.php"); 	//get url from sharedpreferences
+        ArrayList<NameValuePair> pairs = new ArrayList<NameValuePair>();
+        pairs.add(new BasicNameValuePair("authkey", authkey));
+        
+        
+        
+        return helper.post(pairs);  
+        //return true;
     }
     
     private void installListener() {
@@ -300,7 +304,9 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
     	
     	HttpPostHelper helper = new HttpPostHelper(url+"/android_add_survey.php"); 	//get url from sharedpreferences
     	ArrayList<NameValuePair> pairs;
- 		queue = db.getQueue();
+ 		boolean fail = false;
+    	queue = db.getQueue();
+ 		
     	
     	if(mayInternets){
 	    	for(int i=0; i<queue.size(); i++){
@@ -341,17 +347,21 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
 		        	FragmentManager fm = MainActivity.this.getSupportFragmentManager();
 		            fm.popBackStack ("fragment_2", FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		        	tx.commit();
-			    	Toast.makeText(this, "Data Sent to Server.", Toast.LENGTH_SHORT).show();
+			    	
 					}
 			
 				else{
-					Log.d("Upload Failed. Server not found.",queue.get(i)+"");
+					fail = true;
 				}
 	    	}
 	    	
+	    	if(fail)
+	    		Toast.makeText(this, "Not all data was successfully uploaded.", Toast.LENGTH_SHORT).show();
+	    	else
+	    		Toast.makeText(this, "Data Sent to Server.", Toast.LENGTH_SHORT).show();
     	}
     	else
-    		Toast.makeText(this, "No Internet Connection.", Toast.LENGTH_SHORT).show();
+    		Toast.makeText(this, "Upload failed. No Internet Connection.", Toast.LENGTH_SHORT).show();
     }
     
     public void deleteAll(View view){

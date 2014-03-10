@@ -31,12 +31,14 @@ public class LoginActivity extends Activity {
 	        
 	        Log.d("authenticated",authenticated);
 	        
-	      //  if(authenticated.equals("true")){
+	        if(authenticated.equals("true")){
+	        	
+	        	Toast.makeText(this, "Welcome, Researcher!", Toast.LENGTH_LONG).show();
 	        	Intent intent = new Intent(this,MainActivity.class);
 	        	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intent);
 				finish();
-	       // }
+	        }
 	}
 
 	@Override
@@ -52,21 +54,28 @@ public class LoginActivity extends Activity {
 		
 		Editor toEdit;
 		
+		toEdit = prefs.edit();
+		toEdit.putString("url", getString(R.string.url));
+		toEdit.commit();
+		
+		
 		EditText edit_authkey = (EditText) findViewById(R.id.edit_authkey);
 		String authkey = edit_authkey.getText().toString();
-		HttpPostHelper helper = new HttpPostHelper("http://192.168.0.103/SP/Main%20Program/android_authkey.php"); 	//get url from sharedpreferences
+		HttpPostHelper helper = new HttpPostHelper(getString(R.string.url)+"/android_authkey.php"); 	//get url from sharedpreferences
 		
 		ArrayList<NameValuePair> pairs = new ArrayList<NameValuePair>();
 		pairs.add(new BasicNameValuePair("authkey", authkey));
 	
-		if(helper.post(pairs)){
-			toEdit = prefs.edit();
+		if(isAuthenticated(getString(R.string.url), authkey) && helper.post(pairs)){
+			
 			toEdit.putString("authenticated", "true");
+			toEdit.putString("authkey", authkey);
 			toEdit.commit();
 			
 			authenticated = prefs.getString("authenticated", "false");
 		    Log.d("authenticated",authenticated);
 			
+		    Toast.makeText(this, "Welcome, Researcher!", Toast.LENGTH_LONG).show();
 			Intent intent = new Intent(this,MainActivity.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
@@ -74,8 +83,24 @@ public class LoginActivity extends Activity {
 			
 		}
 		else{
-			Toast.makeText(getApplicationContext(), "Invalid Authentication Key.", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), "Authentication Failed.", Toast.LENGTH_SHORT).show(); //make more informative
 		}
 		
 	}
+	
+	private boolean isAuthenticated(String url, String authkey_input){
+    	
+    	Log.d("Inside isAuthenticated","HIHI");
+    	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+        String authkey = prefs.getString("authkey", authkey_input);
+        
+        HttpPostHelper helper = new HttpPostHelper(url+"/is_authenticated.php"); 	//get url from sharedpreferences
+        ArrayList<NameValuePair> pairs = new ArrayList<NameValuePair>();
+        pairs.add(new BasicNameValuePair("authkey", authkey));
+        
+        
+        
+        return helper.post(pairs);  
+        //return true;
+    }
 }

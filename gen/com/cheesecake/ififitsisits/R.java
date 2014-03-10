@@ -1330,80 +1330,81 @@ containing a value of this type.
         /**  Description of a share target (both in the list of such or the default share button) in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
          */
         public static final int abc_shareactionprovider_share_with_application=0x7f08000e;
-        public static final int action_settings=0x7f080011;
+        public static final int action_settings=0x7f080012;
         /**  Strings for ViewRecordFragment 
          */
-        public static final int action_viewall=0x7f08002d;
-        public static final int action_viewqueue=0x7f08002e;
+        public static final int action_viewall=0x7f08002e;
+        public static final int action_viewqueue=0x7f08002f;
         /**  General Purpose Strings 
          */
-        public static final int app_name=0x7f080010;
+        public static final int app_name=0x7f080011;
         /**   Strings for possible PreferenceActivity Back/Next buttons 
          */
         public static final int back_button_label=0x7f080000;
-        public static final int button_create=0x7f080023;
-        public static final int button_view=0x7f080024;
-        public static final int cancel=0x7f08001b;
-        public static final int cityprov_prompt=0x7f080028;
-        public static final int confirm=0x7f080016;
+        public static final int button_create=0x7f080024;
+        public static final int button_view=0x7f080025;
+        public static final int cancel=0x7f08001c;
+        public static final int cityprov_prompt=0x7f080029;
+        public static final int confirm=0x7f080017;
         /**  Strings for ViewRecordsFragment 
          */
-        public static final int confirm_delete_msg=0x7f08002b;
-        public static final int confirm_delete_title=0x7f08002c;
-        public static final int delete=0x7f08002a;
-        public static final int desc=0x7f080012;
-        public static final int drawer_close=0x7f080015;
-        public static final int drawer_open=0x7f080014;
-        public static final int hello_world=0x7f080043;
-        public static final int hint_age=0x7f080022;
+        public static final int confirm_delete_msg=0x7f08002c;
+        public static final int confirm_delete_title=0x7f08002d;
+        public static final int delete=0x7f08002b;
+        public static final int desc=0x7f080013;
+        public static final int drawer_close=0x7f080016;
+        public static final int drawer_open=0x7f080015;
+        public static final int hello_world=0x7f080044;
+        public static final int hint_age=0x7f080023;
         /**  Strings for Login 
          */
-        public static final int hint_authkey=0x7f08001c;
+        public static final int hint_authkey=0x7f08001d;
         /**  Strings for Input Fragment 
          */
-        public static final int hint_height=0x7f080020;
-        public static final int hint_weight=0x7f080021;
-        public static final int login=0x7f08001d;
-        public static final int measure=0x7f080013;
+        public static final int hint_height=0x7f080021;
+        public static final int hint_weight=0x7f080022;
+        public static final int login=0x7f08001e;
+        public static final int measure=0x7f080014;
         public static final int next_button_label=0x7f080001;
-        public static final int ok=0x7f08001a;
-        public static final int proceed=0x7f080017;
-        public static final int region_prompt=0x7f080027;
+        public static final int ok=0x7f08001b;
+        public static final int proceed=0x7f080018;
+        public static final int region_prompt=0x7f080028;
         /**  Optional button to Skip a PreferenceActivity [CHAR LIMIT=20] 
          */
         public static final int skip_button_label=0x7f080002;
-        public static final int spinner_prompt=0x7f080026;
-        public static final int status_gps=0x7f08001f;
-        public static final int status_internet=0x7f08001e;
-        public static final int textview_age=0x7f080033;
-        public static final int textview_anthropometricData=0x7f080030;
-        public static final int textview_basicInfo=0x7f08002f;
-        public static final int textview_bpL=0x7f08003b;
-        public static final int textview_created=0x7f080041;
-        public static final int textview_erH=0x7f080037;
-        public static final int textview_hB=0x7f08003c;
-        public static final int textview_header=0x7f080025;
-        public static final int textview_height=0x7f080031;
-        public static final int textview_kH=0x7f08003a;
-        public static final int textview_kkB=0x7f08003d;
-        public static final int textview_otherInfo=0x7f08003e;
-        public static final int textview_pH=0x7f080039;
-        public static final int textview_recorded=0x7f08003f;
-        public static final int textview_sH=0x7f080036;
-        public static final int textview_sex=0x7f080034;
-        public static final int textview_sitH=0x7f080035;
-        public static final int textview_tC=0x7f080038;
-        public static final int textview_weight=0x7f080032;
-        public static final int title_activity_capture_activity2=0x7f080046;
-        public static final int title_activity_create_record=0x7f080040;
-        public static final int title_activity_display_process=0x7f080047;
-        public static final int title_activity_login=0x7f080045;
-        public static final int title_activity_settings=0x7f080048;
-        public static final int title_activity_view_insert=0x7f080044;
-        public static final int title_activity_view_record_fragment=0x7f080042;
-        public static final int upload=0x7f080029;
-        public static final int use_other=0x7f080019;
-        public static final int use_this=0x7f080018;
+        public static final int spinner_prompt=0x7f080027;
+        public static final int status_gps=0x7f080020;
+        public static final int status_internet=0x7f08001f;
+        public static final int textview_age=0x7f080034;
+        public static final int textview_anthropometricData=0x7f080031;
+        public static final int textview_basicInfo=0x7f080030;
+        public static final int textview_bpL=0x7f08003c;
+        public static final int textview_created=0x7f080042;
+        public static final int textview_erH=0x7f080038;
+        public static final int textview_hB=0x7f08003d;
+        public static final int textview_header=0x7f080026;
+        public static final int textview_height=0x7f080032;
+        public static final int textview_kH=0x7f08003b;
+        public static final int textview_kkB=0x7f08003e;
+        public static final int textview_otherInfo=0x7f08003f;
+        public static final int textview_pH=0x7f08003a;
+        public static final int textview_recorded=0x7f080040;
+        public static final int textview_sH=0x7f080037;
+        public static final int textview_sex=0x7f080035;
+        public static final int textview_sitH=0x7f080036;
+        public static final int textview_tC=0x7f080039;
+        public static final int textview_weight=0x7f080033;
+        public static final int title_activity_capture_activity2=0x7f080047;
+        public static final int title_activity_create_record=0x7f080041;
+        public static final int title_activity_display_process=0x7f080048;
+        public static final int title_activity_login=0x7f080046;
+        public static final int title_activity_settings=0x7f080049;
+        public static final int title_activity_view_insert=0x7f080045;
+        public static final int title_activity_view_record_fragment=0x7f080043;
+        public static final int upload=0x7f08002a;
+        public static final int url=0x7f080010;
+        public static final int use_other=0x7f08001a;
+        public static final int use_this=0x7f080019;
     }
     public static final class style {
         /** 
