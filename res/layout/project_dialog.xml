@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_root"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@color/emerald" >
+ 	<LinearLayout
+ 	    android:padding="10dp"
+        android:orientation="vertical"        
+        android:weightSum="2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/nephritis">
+	    
+	    <TextView
+	        android:id="@+id/textView_projectId"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="Start a Project"
+	        android:textAppearance="?android:attr/textAppearanceLarge" 
+	        android:textColor="@color/white"
+	        android:padding="2dp"/>
+ 	 </LinearLayout>
+ 	 
+    <EditText
+        android:id="@+id/projectId_Input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Project ID"
+        android:inputType="text" >
+ 
+        <requestFocus />
+    </EditText>
+    
+   
+    <LinearLayout
+        android:orientation="horizontal"        
+        android:weightSum="2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/nephritis">
+ 			
+        	<Button
+	            android:id="@+id/projectid_proceed"
+	            android:layout_width="wrap_content"
+	            android:layout_height="match_parent"
+	            android:layout_margin="2dp"
+	            android:layout_weight="1"
+	            android:onClick="authenticateProject"
+	            android:text="OK" />  
+        
+ 			<Button
+	            android:id="@+id/projectid_cancel"
+	            android:layout_width="wrap_content"
+	            android:layout_height="match_parent"
+	            android:layout_margin="2dp"
+	            android:layout_weight="1"
+	            android:onClick="exit"
+	            android:text="Exit" />
+	
+	        </LinearLayout>    
+ 
+    
+ 
+</LinearLayout>

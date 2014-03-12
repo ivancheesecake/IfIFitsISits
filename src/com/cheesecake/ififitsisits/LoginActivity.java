@@ -38,6 +38,7 @@ public class LoginActivity extends Activity {
 	        	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intent);
 				finish();
+				
 	        }
 	}
 
@@ -63,12 +64,15 @@ public class LoginActivity extends Activity {
 		String authkey = edit_authkey.getText().toString();
 		HttpPostHelper helper = new HttpPostHelper(getString(R.string.url)+"/android_authkey.php"); 	//get url from sharedpreferences
 		
+		Log.d("url",getString(R.string.url)+"/android_authkey.php");
+		
 		ArrayList<NameValuePair> pairs = new ArrayList<NameValuePair>();
 		pairs.add(new BasicNameValuePair("authkey", authkey));
 	
-		if(isAuthenticated(getString(R.string.url), authkey) && helper.post(pairs)){
+		if(helper.post(pairs)){
 			
 			toEdit.putString("authenticated", "true");
+			toEdit.putString("onProject", "false");
 			toEdit.putString("authkey", authkey);
 			toEdit.commit();
 			

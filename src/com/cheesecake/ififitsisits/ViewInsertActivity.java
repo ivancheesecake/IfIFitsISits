@@ -15,9 +15,9 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -44,10 +44,11 @@ public class ViewInsertActivity extends Activity {
 	private String selected = "M";
 	private String selected2 = "NCR";
 	private String selected3 = "Caloocan";
+	private String cachePaths[];
 	private Spinner spinner3;
 	private ArrayAdapter<CharSequence> adapter3;
 	private IfIFitsExtra extra;
-	private Bitmap[] extraBitmaps;
+	//private Bitmap[] extraBitmaps;
 	
 	private static Bitmap bmp,bmp2,bmp3;
 	@Override
@@ -61,16 +62,26 @@ public class ViewInsertActivity extends Activity {
 		Intent intent = getIntent();
 		
 		extra = (IfIFitsExtra) intent.getSerializableExtra(EXTRA_IFIFITS);	
+		cachePaths = extra.get_cachePaths();
 		
-		Parcelable[] ps = intent.getParcelableArrayExtra(EXTRA_IFIFITS_BITMAPS);	
-		extraBitmaps = new Bitmap[ps.length];
-		System.arraycopy(ps, 0, extraBitmaps, 0, ps.length);
+		//Parcelable[] ps = intent.getParcelableArrayExtra(EXTRA_IFIFITS_BITMAPS);	
+		//extraBitmaps = new Bitmap[ps.length];
+		//System.arraycopy(ps, 0, extraBitmaps, 0, ps.length);
 		
 		//r = (Record) intent.getSerializableExtra(DisplayActivity.EXTRA_RECORD);
 		
-		bmp = extraBitmaps[0];
-		bmp2 = extraBitmaps[1];
-		bmp3 = extraBitmaps[2];
+		//bmp = extraBitmaps[0];
+		//bmp2 = extraBitmaps[1];
+		//bmp3 = extraBitmaps[2];
+		
+		Log.d("CACHE PATHS",cachePaths[0]);
+		String folder = Environment.getExternalStorageDirectory() + "/ififits/";
+		
+	
+		
+		bmp = BitmapFactory.decodeFile(folder+cachePaths[0]);
+		bmp2 = BitmapFactory.decodeFile(folder+cachePaths[1]);
+		bmp3 = BitmapFactory.decodeFile(folder+cachePaths[2]);
 		
 		ImageView imageview = (ImageView) findViewById(R.id.imageview_side);
 		ImageView imageview2 = (ImageView) findViewById(R.id.imageview_front);
@@ -104,7 +115,7 @@ public class ViewInsertActivity extends Activity {
 				settingsDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 				settingsDialog.setContentView(R.layout.image_dialog);
 				ImageView i = (ImageView) settingsDialog.findViewById(R.id.image_view_dialog_01);
-				i.setImageBitmap(extraBitmaps[0]);
+				i.setImageBitmap(bmp);
 				settingsDialog.show();
 				
 			}
@@ -119,7 +130,7 @@ public class ViewInsertActivity extends Activity {
 				settingsDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 				settingsDialog.setContentView(R.layout.image_dialog);
 				ImageView i = (ImageView) settingsDialog.findViewById(R.id.image_view_dialog_01);
-				i.setImageBitmap(extraBitmaps[1]);
+				i.setImageBitmap(bmp2);
 				settingsDialog.show();
 				
 			}
@@ -134,7 +145,7 @@ public class ViewInsertActivity extends Activity {
 				settingsDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 				settingsDialog.setContentView(R.layout.image_dialog);
 				ImageView i = (ImageView) settingsDialog.findViewById(R.id.image_view_dialog_01);
-				i.setImageBitmap(extraBitmaps[2]);
+				i.setImageBitmap(bmp3);
 				settingsDialog.show();
 				
 			}
@@ -421,17 +432,17 @@ public class ViewInsertActivity extends Activity {
 				SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ViewInsertActivity.this);
 		        String url = prefs.getString("url", "http://192.168.1.100");
 		        String authkey = prefs.getString("authkey", "gagraduateako");
-				
-		        HttpPostHelper helper = new HttpPostHelper(url+"/android_add_survey.php"); 	//get url from sharedpreferences
+				String projectId = prefs.getString("projectId", "default");
+		        
+				HttpPostHelper helper = new HttpPostHelper(url+"/android_add_survey.php"); 	//get url from sharedpreferences
 				
 				ArrayList<NameValuePair> pairs = new ArrayList<NameValuePair>();
 				
-				
 				pairs.add(new BasicNameValuePair("authkey", authkey));
-				pairs.add(new BasicNameValuePair("project_id", "012"));
-				pairs.add(new BasicNameValuePair("project_name", "Armchair Anthropometry"));
-				pairs.add(new BasicNameValuePair("description", "Anthropometry for Armchairs. Duh."));
-				pairs.add(new BasicNameValuePair("survey_info_id", authkey+"-"+db.getLastId()));
+				pairs.add(new BasicNameValuePair("project_id", projectId));
+				//pairs.add(new BasicNameValuePair("project_name", "Armchair Anthropometry"));
+				//pairs.add(new BasicNameValuePair("description", "Anthropometry for Armchairs. Duh."));
+				pairs.add(new BasicNameValuePair("survey_info_id", projectId+"-"+db.getLastId()));
 				pairs.add(new BasicNameValuePair("gender", selected.substring(0,1)));
 				pairs.add(new BasicNameValuePair("age", age+""));
 				pairs.add(new BasicNameValuePair("height", height+""));

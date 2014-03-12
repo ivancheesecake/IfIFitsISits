@@ -138,7 +138,7 @@ extern "C" {
 		//-------------------- Reference Object ---------------------------->
 
 		
-		refObject_dimension = boundRect[next].height;
+		refObject_dimension = boundRect[next].width;
 		pixelRatio = refObject_dimension / actual_dimensions;
 		cout << refObject_dimension << endl;
 		cout << "There are " << pixelRatio << " pixels in 1 cm." << endl;
@@ -381,7 +381,7 @@ void measureFront(Mat & src, Mat & out, double *measurements,double actual_dimen
 		//-------------------- Reference Object ---------------------------->
 
 		
-		refObject_dimension = boundRect[next].height;
+		refObject_dimension = boundRect[next].width;
 		pixelRatio = refObject_dimension / actual_dimensions;
 		cout << refObject_dimension << endl;
 		cout << "There are " << pixelRatio << " pixels in 1 cm." << endl;
@@ -400,8 +400,8 @@ void measureFront(Mat & src, Mat & out, double *measurements,double actual_dimen
 		//D = Point(subject_x,(int)((subject_y+subject_height)/2)+((subject_y+subject_height)/4));
 		//E = Point(subject_x,(int)((subject_y+subject_height)/2)+((subject_y+subject_height)/4)-(subject_height/10));
 
-		D = Point(subject_x, subject_height - (int)subject_height/6);
-		E = Point(subject_x, subject_height - (int)subject_height/4);
+		D = Point(subject_x, subject_height - (int)subject_height/4);
+		E = Point(subject_x, subject_height - (int)subject_height/3);
 
 		circle(img, D, 5, Scalar( 255, 0, 255 ), -1, 8,0);
 		circle(img, E, 5, Scalar( 0, 255, 255 ), -1, 8,0);
@@ -489,11 +489,12 @@ void measureBack(Mat & src, Mat & out, double *measurements,double actual_dimens
 		
 		Scalar black = Scalar( 0,0,0);
 
+		/*
 		for( int i = 0; i< contours.size(); i++ ){
 			
 			rectangle( img, boundRect[i].tl(), boundRect[i].br(), black, 1, 8, 0 );
 		}
-
+	*/
 		// Identify subject and reference object
 		int maxarea =0, biggest =0,next=0;
 		for(int i=0; i<contours.size(); i++){
@@ -543,7 +544,7 @@ void measureBack(Mat & src, Mat & out, double *measurements,double actual_dimens
 		//-------------------- Reference Object ---------------------------->
 
 		
-		refObject_dimension = boundRect[next].height;
+		refObject_dimension = boundRect[next].width;
 		pixelRatio = refObject_dimension / actual_dimensions;
 		cout << refObject_dimension << endl;
 		cout << "There are " << pixelRatio << " pixels in 1 cm." << endl;
@@ -644,4 +645,16 @@ void measureBack(Mat & src, Mat & out, double *measurements,double actual_dimens
 	}
  }
 
+ float euclideanDistance2d(Point A, Point B) {
+
+ 		int distdist = (A.x-B.x)*(A.x-B.x) + (A.y-B.y)*(A.y-B.y);
+  		return (float)(sqrt(distdist) + 0.5 );  
+	}
+
+void midPoint(Point *midpoint, Point a, Point b){
+	
+		(*midpoint).x = (int)(a.x +b.x)/2;
+		(*midpoint).y = (int)(a.y +b.y)/2;
+
+	}
 }

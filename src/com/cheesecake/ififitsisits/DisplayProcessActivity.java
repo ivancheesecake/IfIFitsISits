@@ -2,6 +2,7 @@ package com.cheesecake.ififitsisits;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 import org.opencv.android.Utils;
 import org.opencv.core.Mat;
@@ -10,6 +11,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Parcelable;
@@ -22,9 +24,11 @@ public class DisplayProcessActivity extends Activity {
 
 	public final static String EXTRA_IFIFITS= "com.cheesecake.ififitsisits.IFIFITS";
 	public final static String EXTRA_IFIFITS_BITMAPS= "com.cheesecake.ififitsisits.IFIFITS_BITMAPS";
+	protected static final String EXTRA_IMAGE_PATH = "com.cheesecake.ififitsisits.IMAGEPATH";
+	
 	private IfIFitsExtra extra;	
 	private Bitmap[] extraBitmaps;
-	private Bitmap keyedBitmap;
+	private Bitmap origBitmap, keyedBitmap,origBitmapCropped;
 	private Mat origMat, origMat_copy;
 	private Mat keyedMat, keyedMat_copy;
 	private ImageView origImageView;
@@ -32,6 +36,7 @@ public class DisplayProcessActivity extends Activity {
 	private int flag;
 	private double[] measurements;
 	private float refObj;
+	private String rawCachePath,filename,cachePaths[];
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,22 +47,30 @@ public class DisplayProcessActivity extends Activity {
 		Intent intent = getIntent();
 
 		extra = (IfIFitsExtra) intent.getSerializableExtra(EXTRA_IFIFITS);	
+		rawCachePath = intent.getStringExtra(EXTRA_IMAGE_PATH); 
+		cachePaths = extra.get_cachePaths();
+		//Parcelable[] ps = intent.getParcelableArrayExtra(EXTRA_IFIFITS_BITMAPS);	
+		//extraBitmaps = new Bitmap[ps.length];
+		//System.arraycopy(ps, 0, extraBitmaps, 0, ps.length);
 		
-		Parcelable[] ps = intent.getParcelableArrayExtra(EXTRA_IFIFITS_BITMAPS);	
-		extraBitmaps = new Bitmap[ps.length];
-		System.arraycopy(ps, 0, extraBitmaps, 0, ps.length);
+		//Prepare bitmap
+		
+		origBitmap = BitmapFactory.decodeFile(rawCachePath);
+		Bitmap.createScaledBitmap(origBitmap, (int)origBitmap.getWidth()/2, (int)origBitmap.getHeight()/2, false);
+		origBitmapCropped = Bitmap.createBitmap(origBitmap, (int)origBitmap.getWidth()/2, 0, (int)origBitmap.getWidth()/2, (int)origBitmap.getHeight());
+		
 		flag = extra.get_flag();
 		
 		measurements = extra.get_measurements();
 		
 		origImageView = (ImageView) findViewById(R.id.display);
-		origImageView.setImageBitmap(extraBitmaps[flag]);
+		origImageView.setImageBitmap(origBitmapCropped);
 		
 		origMat = new Mat();
 		
 		origMat_copy = new Mat();
 		
-		Utils.bitmapToMat(extraBitmaps[flag], origMat);
+		Utils.bitmapToMat(origBitmapCropped, origMat);
 		origMat.copyTo(origMat_copy);
 		keyedMat = new Mat();
 		keyedMat_copy = new Mat();
@@ -71,15 +84,36 @@ public class DisplayProcessActivity extends Activity {
 		keyedMat.copyTo(keyedMat_copy);
 		
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(DisplayProcessActivity.this);
-        refObj = Float.parseFloat(prefs.getString("refObj", "10.0"));
+        refObj = Float.parseFloat(prefs.getString("refObj", "3.0"));
         
 		DeriveData(keyedMat.getNativeObjAddr(), origMat.getNativeObjAddr(),measurements, refObj, flag); //use sharedpreferences for refobj dimensions
-		Utils.matToBitmap(origMat, extraBitmaps[flag]);
+		Utils.matToBitmap(origMat, origBitmapCropped);
+		
+		File folder = new File(Environment.getExternalStorageDirectory() + "/ififits");
+		
+		if (!folder.exists()) 
+			folder.mkdir();
+		
+		filename = "cache-processed"+flag+".jpg";
+		
+		File file = new File(folder, filename);
+		
+		try{
+			FileOutputStream fOut = new FileOutputStream(file);
+			origBitmapCropped.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
+		    fOut.flush();
+		    fOut.close();
+		}
+		catch(IOException e){};
+		
+		cachePaths[flag] = filename;
 		
 		keyedBitmap = Bitmap.createBitmap(origMat.width(), origMat.height(), Bitmap.Config.ARGB_8888);	//Initialize Bitmap
 		Utils.matToBitmap(keyedMat_copy,keyedBitmap);
 		keyedImageView = (ImageView) findViewById(R.id.display2);
 		keyedImageView.setImageBitmap(keyedBitmap);
+		
+		extra.set_cachePaths(cachePaths);
 	
 	}
 	
@@ -96,9 +130,9 @@ public class DisplayProcessActivity extends Activity {
 		
 		if(flag!=2){
 			extra.next_flag();
-			Intent intent = new Intent(this,CaptureActivity2.class);
+			Intent intent = new Intent(this,CameraActivity.class);
 			intent.putExtra(EXTRA_IFIFITS, extra);
-			intent.putExtra(EXTRA_IFIFITS_BITMAPS, extraBitmaps);
+			//intent.putExtra(EXTRA_IFIFITS_BITMAPS, extraBitmaps);
 			startActivity(intent);
 			
 		}
@@ -106,7 +140,7 @@ public class DisplayProcessActivity extends Activity {
 			//extra.set_measurements(new double[] {0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0});
 			Intent intent = new Intent(this,ViewInsertActivity.class);
 			intent.putExtra(EXTRA_IFIFITS, extra);
-			intent.putExtra(EXTRA_IFIFITS_BITMAPS, extraBitmaps);
+			//intent.putExtra(EXTRA_IFIFITS_BITMAPS, extraBitmaps);
 			startActivity(intent);
 		}
 	}

@@ -6,6 +6,7 @@
  *  
  *  Got help from http://stackoverflow.com/questions/3141807/android-service-to-check-internet-connectivity
  *                http://www.recursiverobot.com/post/59404388046/implementing-the-new-navigation-drawer-in-android
+ *                http://www.mkyong.com/android/android-prompt-user-input-dialog-example/
  */
 
 package com.cheesecake.ififitsisits;
@@ -39,12 +40,14 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -64,7 +67,9 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
 	public static List<Integer> queue;
 	public static List<Record> records;
 	private float refObj;
-	private String url;
+	private String url,onProject,projectId,authkey;
+	AlertDialog alertDialog;
+	View promptsView;
 
 	public final static String EXTRA_CAPTURE_FLAG= "com.cheesecake.ififitsisits.CAPTURE_FLAG";
 	public final static String EXTRA_IFIFITS= "com.cheesecake.ififitsisits.IFIFITS";
@@ -107,19 +112,49 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
 		FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
         tx.replace(R.id.main,Fragment.instantiate(MainActivity.this, fragments[0]));
         tx.commit();
-        
+        Editor toEdit;
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-        refObj = Float.parseFloat(prefs.getString("refObj", "10.0"));
-        url = prefs.getString("url", "http://192.168.0.103/SP/Main%20Program");
+        onProject = prefs.getString("onProject", "false");
+        url = prefs.getString("url", "false");
+        projectId = prefs.getString("projectId", "default");
+        authkey = prefs.getString("authkey", "default");
         
-        //Editor toEdit;
-        //toEdit = prefs.edit();
-		//toEdit.putString("url", "http://192.168.0.103/SP/Main%20Program");
-		//toEdit.commit();
+        LayoutInflater li = LayoutInflater.from(this);
+		promptsView = li.inflate(R.layout.project_dialog, null);
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+		alertDialogBuilder.setView(promptsView);
+		alertDialogBuilder.setCancelable(false);
+		alertDialog = alertDialogBuilder.create();
         
-       // Log.d("Reference Object ",refObj+"");
-        //Log.d("URL ",url);
-        //prefs.edit().putFloat("com.cheesecake.ififits.refobject", (float)20.0);
+        if(onProject.equals("false")){
+        	Log.d("PROJECT","WALA");
+			alertDialog.show();	
+        }
+        else{
+        	
+        	if(mayInternets){
+	        	url = prefs.getString("url", "false");
+	        	String projectId = prefs.getString("projectId", "default");
+	        	HttpPostHelper helper = new HttpPostHelper(url+"/project_expired.php"); 	//get url from sharedpreferences
+	            
+	        	ArrayList<NameValuePair> pairs = new ArrayList<NameValuePair>();
+	            pairs.add(new BasicNameValuePair("projectkey", projectId));
+	            
+	            if(!helper.post(pairs)){
+	            	toEdit = prefs.edit();
+	            	toEdit.putString("onProject", "false");
+	    			toEdit.putString("projectId", "null");
+	    			toEdit.commit();
+	            	Toast.makeText(this, "Project is expired.", Toast.LENGTH_SHORT).show();
+	            	alertDialog.show();
+	            }
+        	}
+        }
+        
+        //refObj = Float.parseFloat(prefs.getString("refObj", "3.0"));
+        //url = prefs.getString("url", "http://192.168.0.103/SP/Main%20Program");
+        
+        
         
 	}
 	
@@ -174,7 +209,7 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
       
         if(position==1){
         	
-        	Intent intent = new Intent(this,CaptureActivity2.class);
+        	Intent intent = new Intent(this,CameraActivity.class);
         	IfIFitsExtra extra = new IfIFitsExtra();
         	extra.set_flag(0);
         	
@@ -226,8 +261,6 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
         ArrayList<NameValuePair> pairs = new ArrayList<NameValuePair>();
         pairs.add(new BasicNameValuePair("authkey", authkey));
         
-        
-        
         return helper.post(pairs);  
         //return true;
     }
@@ -255,6 +288,8 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
                     	status_internets.setIcon(R.drawable.ic_action_network_wifi);
                     	mayInternets = true;
                     	
+                    	//project authentication nalang
+                    	/*
                     	if(!isAuthenticated(url)){
                     		
                     		Log.d("Inside installListener","AW");
@@ -270,7 +305,7 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
                 			startActivity(intent);
                 			finish();
                 			
-                    	}
+                    	}*/
                		 
                     } else {
                     	Log.d("Internet Connectivity", "Walang Internet");
@@ -308,6 +343,7 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
     	queue = db.getQueue();
  		
     	
+    	
     	if(mayInternets){
 	    	for(int i=0; i<queue.size(); i++){
 	    		
@@ -316,10 +352,11 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
 	    		//perform upload
 	    		
 	    		pairs = new ArrayList<NameValuePair>();
-				pairs.add(new BasicNameValuePair("project_id", "012"));
-				pairs.add(new BasicNameValuePair("project_name", "Armchair Anthropometry"));
-				pairs.add(new BasicNameValuePair("description", "Anthropometry for Armchairs. Duh."));
-				pairs.add(new BasicNameValuePair("survey_info_id", r.get_id()+""));
+	    		pairs.add(new BasicNameValuePair("authkey", authkey));
+	    		pairs.add(new BasicNameValuePair("project_id", projectId));
+				//pairs.add(new BasicNameValuePair("project_name", "Armchair Anthropometry"));
+				//pairs.add(new BasicNameValuePair("description", "Anthropometry for Armchairs. Duh."));
+				pairs.add(new BasicNameValuePair("survey_info_id", projectId+"-"+r.get_id()));
 				pairs.add(new BasicNameValuePair("gender",  r.get_sex().substring(0,1)));
 				pairs.add(new BasicNameValuePair("age",  r.get_age()+""));
 				pairs.add(new BasicNameValuePair("height",  r.get_height()+""));
@@ -360,9 +397,11 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
 	    	else
 	    		Toast.makeText(this, "Data Sent to Server.", Toast.LENGTH_SHORT).show();
     	}
-    	else
+    	else{
     		Toast.makeText(this, "Upload failed. No Internet Connection.", Toast.LENGTH_SHORT).show();
-    }
+    		Log.d("AUTHKEY",authkey);
+    		}
+    	}
     
     public void deleteAll(View view){
     	
@@ -404,6 +443,45 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
     	
     	return mayInternets;
     	
+    }
+    
+    public void exit(View view){
+    	finish();
+    }
+    public void authenticateProject(View view){
+    	
+    	EditText userInput = (EditText) promptsView.findViewById(R.id.projectId_Input);
+    	String input =  userInput.getText().toString();
+    	
+    	if(mayInternets){
+    		
+    		Editor toEdit;
+    		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+    		String url = prefs.getString("url", "http://192.168.0.103/SP/Main%20Program");
+    		
+    		HttpPostHelper helper = new HttpPostHelper(url+"/project_authenticated.php"); 	//get url from sharedpreferences
+            ArrayList<NameValuePair> pairs = new ArrayList<NameValuePair>();
+            pairs.add(new BasicNameValuePair("projectkey", input));
+            
+            if(helper.post(pairs)){
+            	
+        		
+        		toEdit = prefs.edit();
+    			toEdit.putString("onProject", "true");
+    			toEdit.putString("projectId", input);
+    			toEdit.commit();
+    			Toast.makeText(this, "Project \""+input+"\" started!", Toast.LENGTH_SHORT).show();
+    			alertDialog.dismiss();
+    		
+    			
+            }
+            else{
+            	Toast.makeText(this, "Invalid Project ID", Toast.LENGTH_SHORT).show();
+            }
+    		
+    	}
+    	//Toast.makeText(this, userInput.getText().toString(), Toast.LENGTH_SHORT).show();
+    	//alertDialog.dismiss();
     }
     
 }

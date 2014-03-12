@@ -12,12 +12,14 @@ public class IfIFitsExtra implements Serializable{
 
 	private double refObj;
 	private double[] measurements;
+	private String[] cachePaths;
 	
 	public IfIFitsExtra(){
 		this.flag = 0;
 
 		this.refObj = 0.0;
 		this.measurements = new double[9];
+		this.cachePaths = new String[3];
 		
 	}
 	
@@ -35,6 +37,10 @@ public class IfIFitsExtra implements Serializable{
 		
 		return this.measurements;
 	}
+	public String[] get_cachePaths(){
+		
+		return this.cachePaths;
+	}
 	public void set_flag(int flag){
 		this.flag = flag;
 	}
@@ -47,6 +53,9 @@ public class IfIFitsExtra implements Serializable{
 	}
 	public void set_measurements(double[] measurements){
 		this.measurements = measurements;
+	}
+	public void set_cachePaths(String[] cachePaths){
+		this.cachePaths = cachePaths;
 	}
 
 	

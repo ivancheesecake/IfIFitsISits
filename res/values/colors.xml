@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<color name="emerald">#2ecc71</color>
+	<color name="nephritis">#27ae60</color>
 	<color name="white">#ffffff</color>
 	<color name="black">#000000</color>
 </resources>

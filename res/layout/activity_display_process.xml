@@ -29,7 +29,8 @@
 	        android:layout_gravity="center"
 
 	        android:contentDescription="@string/hello_world" 
-	        android:layout_weight="1"/>
+	        android:layout_weight="1"
+	        android:scaleType="fitStart"/>
 	    
 	    <ImageView
 	        android:id="@+id/display2"
@@ -38,7 +39,8 @@
 	        android:layout_gravity="center"
 
 	        android:contentDescription="@string/hello_world" 
-	        android:layout_weight="1"/>
+	        android:layout_weight="1"
+	        android:scaleType="fitStart"/>
 	</LinearLayout>
 	</LinearLayout>
 </ScrollView>

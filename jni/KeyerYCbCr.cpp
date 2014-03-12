@@ -29,7 +29,7 @@ JNIEXPORT void JNICALL Java_com_cheesecake_ififitsisits_DisplayProcessActivity_K
 	int tola,tolb;
 	float mask;
 	tola = 30;
-	tolb = 180;
+	tolb = 200;
 	char string[30];
 
 	//Mat keyed = Mat(img.size(),CV_8UC1);
@@ -68,10 +68,6 @@ JNIEXPORT void JNICALL Java_com_cheesecake_ififitsisits_DisplayProcessActivity_K
         mask = 1 - mask;	
 		maskConverted  = (int)255*mask;
 
-		//Vec3b intensity = imgCopy.at<cv::Vec3b>(y,x);
-		//int blue = image[y][x];
-		//int green = static_cast<int>(intensity.val[1]);
-		//int red = static_cast<int>(intensity.val[2]);
 		maskara.at<uchar>(y,x)=maskConverted;
 
 
