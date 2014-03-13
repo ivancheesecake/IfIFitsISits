@@ -42,9 +42,9 @@ extern "C" {
      if(flag==0)
      	measureSide(binaryMat,img,measurementsArray,dimensions);
      else if(flag==1)
-     	measureFront(binaryMat,img,measurementsArray,dimensions);
-     else
      	measureBack(binaryMat,img,measurementsArray,dimensions);
+     else
+     	measureFront(binaryMat,img,measurementsArray,dimensions);	
 
      env->ReleaseDoubleArrayElements(arr, measurementsArray, 0);
 
@@ -122,8 +122,8 @@ extern "C" {
 			//cout << boundRect[i].area() << endl;
 		}
 
-		rectangle( img, boundRect[biggest].tl(), boundRect[biggest].br(), black, 1, 8, 0 );
-		rectangle( img, boundRect[next].tl(), boundRect[next].br(), white, 1, 8, 0 );
+		rectangle( img, boundRect[biggest].tl(), boundRect[biggest].br(), black, 3, 8, 0 );
+		rectangle( img, boundRect[next].tl(), boundRect[next].br(), white, 3, 8, 0 );
 		/*
 		==================== It's crunch time (again) =======================
 		*/
@@ -174,9 +174,9 @@ extern "C" {
 			}
 		}
 
-		line( img, A, B, Scalar( 255, 0, 0 ), 1, 8 );
-		circle(img, A, 5, Scalar( 255, 0, 0), -1, 8,0);
-		circle(img, B, 5, Scalar( 255, 0, 0 ), -1, 8,0);
+		//line( img, A, B, Scalar( 255, 0, 0 ), 1, 8 );
+		circle(img, A, 10, Scalar( 255, 0, 0), -1, 8,0);
+		circle(img, B, 10, Scalar( 255, 0, 0 ), -1, 8,0);
 
 		sitH = euclideanDistance2d(A,B);
 		sitH /= pixelRatio;
@@ -195,9 +195,9 @@ extern "C" {
 		D = Point(C.x,subject_height);	
 
 
-		line( img, C, D, Scalar( 255, 0, 255 ), 1, 8 );
-		circle(img, C, 5, Scalar( 255, 0, 255 ), -1, 8,0);
-		circle(img, D, 5, Scalar( 255, 0, 255 ), -1, 8,0);
+		//line( img, C, D, Scalar( 255, 0, 255 ), 1, 8 );
+		circle(img, C, 10, Scalar( 255, 0, 255 ), -1, 8,0);
+		circle(img, D, 10, Scalar( 255, 0, 255 ), -1, 8,0);
 		pH = euclideanDistance2d(C,D);
 		pH /= pixelRatio;
 
@@ -206,11 +206,12 @@ extern "C" {
 
 		midPoint(&E,B,C);
 
+
 		//for robustness of E
 
 		if(binaryMat2.at<uchar>(E.y,E.x) == 0){
 			
-			for(y=E.y; y>subject_height; y--){
+			for(y=E.y; y>subject_y; y--){			//dapat subject_y hindi subject_height
 				if(binaryMat2.at<uchar>(y,E.x) != 0){
 					E = Point(E.x, y);
 					break;
@@ -235,9 +236,9 @@ extern "C" {
 			}
 		}
 		
-		line( img, E, F, Scalar( 0, 0, 255 ), 1, 8 );
-		circle(img, E, 5, Scalar( 0, 0, 255 ), 1, 8,0);
-		circle(img, F, 5, Scalar( 0, 0, 255 ), 1, 8,0);
+		//line( img, E, F, Scalar( 0, 0, 255 ), 1, 8 );
+		circle(img, E, 10, Scalar( 0, 0, 255 ), -1, 8,0);
+		circle(img, F, 10, Scalar( 0, 0, 255 ), -1, 8,0);
 		tC = euclideanDistance2d(E,F);
 		tC /= pixelRatio;
 
@@ -261,9 +262,9 @@ extern "C" {
 				}
 		}
 
-		line( img, H, I, Scalar( 255, 255, 0 ), 1, 8 );
-		circle(img, H, 5, Scalar( 255, 255, 0 ), 1, 8,0);
-		circle(img, I, 5, Scalar( 255, 255, 0 ), 1, 8,0);
+		//line( img, H, I, Scalar( 255, 255, 0 ), 1, 8 );
+		circle(img, H, 10, Scalar( 255, 255, 0 ), -1, 8,0);
+		circle(img, I, 10, Scalar( 255, 255, 0 ), -1, 8,0);
 		bpL = euclideanDistance2d(H,I);
 		bpL /= pixelRatio;
 
@@ -271,9 +272,9 @@ extern "C" {
 		
 		J = Point(I.x, D.y);
 		K = Point(I.x,F.y);
-		line( img, J, K, Scalar( 0, 255, 255 ), 1, 8 );
-		circle(img, J, 5, Scalar( 255, 255, 255 ), 1, 8,0);
-		circle(img, K, 5, Scalar( 0, 255, 255 ), 1, 8,0);
+		//line( img, J, K, Scalar( 0, 255, 255 ), 1, 8 );
+		circle(img, J, 10, Scalar( 255, 255, 255 ), -1, 8,0);
+		circle(img, K, 10, Scalar( 0, 255, 255 ), -1, 8,0);
 
 		knH = euclideanDistance2d(J,K);
 		knH /= pixelRatio;
@@ -361,8 +362,8 @@ void measureFront(Mat & src, Mat & out, double *measurements,double actual_dimen
 			//cout << boundRect[i].area() << endl;
 		}
 
-		rectangle( img, boundRect[biggest].tl(), boundRect[biggest].br(), black, 1, 8, 0 );
-		rectangle( img, boundRect[next].tl(), boundRect[next].br(), black, 1, 8, 0 );
+		rectangle( img, boundRect[biggest].tl(), boundRect[biggest].br(), black, 3, 8, 0 );
+		rectangle( img, boundRect[next].tl(), boundRect[next].br(), black, 3, 8, 0 );
 
 		/*
 		==================== It's crunch time (again) =======================
@@ -400,11 +401,11 @@ void measureFront(Mat & src, Mat & out, double *measurements,double actual_dimen
 		//D = Point(subject_x,(int)((subject_y+subject_height)/2)+((subject_y+subject_height)/4));
 		//E = Point(subject_x,(int)((subject_y+subject_height)/2)+((subject_y+subject_height)/4)-(subject_height/10));
 
-		D = Point(subject_x, subject_height - (int)subject_height/4);
+		D = Point(subject_x, subject_height - (int)subject_height/4.5);
 		E = Point(subject_x, subject_height - (int)subject_height/3);
 
-		circle(img, D, 5, Scalar( 255, 0, 255 ), -1, 8,0);
-		circle(img, E, 5, Scalar( 0, 255, 255 ), -1, 8,0);
+		circle(img, D, 10, Scalar( 255, 0, 255 ), -1, 8,0);
+		circle(img, E, 10, Scalar( 0, 255, 255 ), -1, 8,0);
 
 		for(int y=D.y; y>E.y; y--){
 
@@ -432,9 +433,9 @@ void measureFront(Mat & src, Mat & out, double *measurements,double actual_dimen
 		H = Point(min_x1,min_y);
 		I = Point(min_x2,min_y);
 
-		line( img, H, I, Scalar( 0, 255, 255 ), 1, 8 );
-		circle(img, H, 5, Scalar( 0, 255, 255 ), 1, 8,0);
-		circle(img, I, 5, Scalar( 0, 255, 255), 1, 8,0);
+		//line( img, H, I, Scalar( 0, 255, 255 ), 1, 8 );
+		circle(img, H, 10, Scalar( 0, 255, 255 ), -1, 8,0);
+		circle(img, I, 10, Scalar( 0, 255, 255), -1, 8,0);
 		kkB = euclideanDistance2d(H,I);
 		kkB /= pixelRatio;
 
@@ -484,7 +485,7 @@ void measureBack(Mat & src, Mat & out, double *measurements,double actual_dimens
 			approxPolyDP( Mat(contours[i]), contours_poly[i], 3, true );
 			boundRect[i] = boundingRect( Mat(contours_poly[i]) );
 		}
-
+	
 		Mat drawing = Mat::zeros( binaryMat.size(), CV_8UC3 );
 		
 		Scalar black = Scalar( 0,0,0);
@@ -522,8 +523,8 @@ void measureBack(Mat & src, Mat & out, double *measurements,double actual_dimens
 			//cout << boundRect[i].area() << endl;
 		}
 
-		rectangle( img, boundRect[biggest].tl(), boundRect[biggest].br(), black, 1, 8, 0 );
-		rectangle( img, boundRect[next].tl(), boundRect[next].br(), black, 1, 8, 0 );
+		rectangle( img, boundRect[biggest].tl(), boundRect[biggest].br(), black, 3, 8, 0 );
+		rectangle( img, boundRect[next].tl(), boundRect[next].br(), black, 3, 8, 0 );
 
 		/*
 		==================== It's crunch time (again) =======================
@@ -589,9 +590,9 @@ void measureBack(Mat & src, Mat & out, double *measurements,double actual_dimens
 
 		A = Point(min_x,min_y);
 		B = Point(min_x,subject_height);
-		circle(img, A, 5, Scalar( 255, 0, 255 ), -1, 8,0);
-		circle(img, B, 5, Scalar( 255, 0, 255 ), -1, 8,0);
-		line( img, A, B, Scalar( 255, 0, 255 ), 1, 8 );
+		circle(img, A, 10, Scalar( 255, 0, 255 ), -1, 8,0);
+		circle(img, B, 10, Scalar( 255, 0, 255 ), -1, 8,0);
+		//line( img, A, B, Scalar( 255, 0, 255 ), 1, 8 );
 		
 		erH = euclideanDistance2d(A,B)/pixelRatio;
 
@@ -606,9 +607,9 @@ void measureBack(Mat & src, Mat & out, double *measurements,double actual_dimens
 
 		D = Point(min_x-5,subject_height);
 
-		circle(img, C, 5, Scalar( 0, 128, 255 ), -1, 8,0);
-		circle(img, D, 5, Scalar( 0, 128, 255 ), -1, 8,0);
-		line( img, C, D, Scalar( 0, 128, 255 ), 1, 8 );
+		circle(img, C, 10, Scalar( 0, 128, 255 ), -1, 8,0);
+		circle(img, D, 10, Scalar( 0, 128, 255 ), -1, 8,0);
+		//line( img, C, D, Scalar( 0, 128, 255 ), 1, 8 );
 
 		sH = euclideanDistance2d(C,D);
 		sH /= pixelRatio;
@@ -628,9 +629,9 @@ void measureBack(Mat & src, Mat & out, double *measurements,double actual_dimens
 
 		F = Point(x,hip_y);
 
-		circle(img, E, 5, Scalar( 0, 255, 255 ), -1, 8,0);
-		circle(img, F, 5, Scalar( 0, 255, 255 ), -1, 8,0);
-		line( img, E, F, Scalar( 0, 255, 255 ), 1, 8 );
+		circle(img, E, 10, Scalar( 0, 255, 255 ), -1, 8,0);
+		circle(img, F, 10, Scalar( 0, 255, 255 ), -1, 8,0);
+		//line( img, E, F, Scalar( 0, 255, 255 ), 1, 8 );
 
 		hB = (float) euclideanDistance2d(E,F)/pixelRatio;
 

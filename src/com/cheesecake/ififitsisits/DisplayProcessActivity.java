@@ -76,7 +76,7 @@ public class DisplayProcessActivity extends Activity {
 		keyedMat_copy = new Mat();
 		
 		
-		KeyerYCbCr(origMat.getNativeObjAddr(),keyedMat.getNativeObjAddr());	
+		SimpleKeyer(origMat.getNativeObjAddr(),keyedMat.getNativeObjAddr());	
 
 		//Utils.matToBitmap(origMat, extraBitmaps[flag]);
 		//origImageView.setImageBitmap(extraBitmaps[flag]);
@@ -84,7 +84,7 @@ public class DisplayProcessActivity extends Activity {
 		keyedMat.copyTo(keyedMat_copy);
 		
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(DisplayProcessActivity.this);
-        refObj = Float.parseFloat(prefs.getString("refObj", "3.0"));
+        refObj = Float.parseFloat(prefs.getString("refObj", "20.0"));
         
 		DeriveData(keyedMat.getNativeObjAddr(), origMat.getNativeObjAddr(),measurements, refObj, flag); //use sharedpreferences for refobj dimensions
 		Utils.matToBitmap(origMat, origBitmapCropped);
@@ -146,11 +146,17 @@ public class DisplayProcessActivity extends Activity {
 	}
 	
 	public void cancel(View view){
+		
+		Intent intent = new Intent(this,CameraActivity.class);
+		intent.putExtra(EXTRA_IFIFITS, extra);
+		//intent.putExtra(EXTRA_IFIFITS_BITMAPS, extraBitmaps);
+		startActivity(intent);
 		finish();
 		
 	}
 	
 	public native void Keyer(long src, long dst);
+	public native void SimpleKeyer(long src, long dst);
 	public native void KeyerYCbCr(long src, long dst);
 	public native void DeriveData(long src,long dst, double [] measurements, double actualDimensions, int flag);
 	

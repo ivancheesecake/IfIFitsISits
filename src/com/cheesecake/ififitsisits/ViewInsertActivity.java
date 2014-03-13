@@ -84,8 +84,9 @@ public class ViewInsertActivity extends Activity {
 		bmp3 = BitmapFactory.decodeFile(folder+cachePaths[2]);
 		
 		ImageView imageview = (ImageView) findViewById(R.id.imageview_side);
-		ImageView imageview2 = (ImageView) findViewById(R.id.imageview_front);
-		ImageView imageview3 = (ImageView) findViewById(R.id.imageview_back);
+		ImageView imageview2 = (ImageView) findViewById(R.id.imageview_back);
+		ImageView imageview3 = (ImageView) findViewById(R.id.imageview_front);
+		
 		
 		DisplayMetrics displaymetrics = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
@@ -381,7 +382,7 @@ public class ViewInsertActivity extends Activity {
 			}
 			catch(IOException e){};
 			
-			String filename2 = front_id+".jpg";
+			String filename2 = back_id+".jpg";
 			File file2 = new File(folder, filename2);
 			try{
 				FileOutputStream fOut = new FileOutputStream(file2);
@@ -391,7 +392,7 @@ public class ViewInsertActivity extends Activity {
 			}
 			catch(IOException e){};
 			
-			String filename3 = back_id+".jpg";
+			String filename3 = front_id+".jpg";
 			File file3 = new File(folder, filename3);
 			try{
 				FileOutputStream fOut = new FileOutputStream(file3);
@@ -419,8 +420,8 @@ public class ViewInsertActivity extends Activity {
 					extra.get_measurements()[7],
 					extra.get_measurements()[8],
 					filename,
-					filename2,
-					filename3));
+					filename3,
+					filename2));
 			
 			if(!MainActivity.mayInternetsBa()){
 				db.enqueueUpload();

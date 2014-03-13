@@ -289,7 +289,7 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
                     	mayInternets = true;
                     	
                     	//project authentication nalang
-                    	/*
+                    	
                     	if(!isAuthenticated(url)){
                     		
                     		Log.d("Inside installListener","AW");
@@ -305,7 +305,7 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
                 			startActivity(intent);
                 			finish();
                 			
-                    	}*/
+                    	}
                		 
                     } else {
                     	Log.d("Internet Connectivity", "Walang Internet");
@@ -480,8 +480,8 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
             }
     		
     	}
-    	//Toast.makeText(this, userInput.getText().toString(), Toast.LENGTH_SHORT).show();
-    	//alertDialog.dismiss();
+    	Toast.makeText(this, userInput.getText().toString(), Toast.LENGTH_SHORT).show();
+    	alertDialog.dismiss();
     }
     
 }

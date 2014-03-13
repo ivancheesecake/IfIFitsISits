@@ -6,25 +6,22 @@ import static com.cheesecake.ififitsisits.camerautils.MediaHelper.getOutputMedia
 import static com.cheesecake.ififitsisits.camerautils.MediaHelper.saveToFile;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
-import org.opencv.android.Utils;
-import org.opencv.core.Mat;
-import org.opencv.core.Size;
-import org.opencv.highgui.Highgui;
-import org.opencv.imgproc.Imgproc;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.cheesecake.ififitsisits.camerautils.CameraPreview;
  
@@ -89,6 +86,30 @@ public class CameraActivity extends Activity implements PictureCallback {
         Intent intent = getIntent();
         extra = (IfIFitsExtra) intent.getSerializableExtra(EXTRA_IFIFITS);
         flag = extra.get_flag();
+        /*
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+		
+		int screen_height = displaymetrics.heightPixels;
+		int screen_width = displaymetrics.widthPixels;
+		*/
+        ImageView img = (ImageView) findViewById(R.id.camera_prompt);
+        Bitmap bmp = null;
+        
+        switch(flag){
+        	case 0:
+        		bmp = BitmapFactory.decodeResource(getResources(),R.drawable.prompt_side_dark);
+        		break;
+        	case 1:
+        		bmp = BitmapFactory.decodeResource(getResources(),R.drawable.prompt_back_dark);
+        		break;
+        	case 2:
+        		bmp = BitmapFactory.decodeResource(getResources(),R.drawable.prompt_front_dark);
+        		break;
+        }
+        
+        
+        img.setImageBitmap(bmp);
         
     }
  

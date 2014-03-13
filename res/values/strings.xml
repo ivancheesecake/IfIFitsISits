@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="url">http://192.168.0.108/SP/Main%20Program</string>
+    <string name="url">http://192.168.1.101</string>
     
     <!-- General Purpose Strings -->
     <string name="app_name">If I Fits, I Sits</string>

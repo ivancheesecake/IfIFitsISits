@@ -9,15 +9,15 @@
         android:layout_height="fill_parent" />
     
     <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:id="@+id/camera_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:contentDescription="content"
-        android:src="@drawable/prompt_side_dark" 
-        android:scaleType="fitStart" />
+        android:scaleType="fitStart"
+        android:contentDescription="content"/>
     
-    <Button
+     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
