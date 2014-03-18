@@ -281,7 +281,7 @@ extern "C" {
 
 		//Store Measurements
 
-		measurements[0] = sitH;
+		//measurements[0] = sitH;
 		measurements[1] = pH;
 		measurements[2] = tC;
 		measurements[3] = bpL;
@@ -537,7 +537,7 @@ void measureBack(Mat & src, Mat & out, double *measurements,double actual_dimens
 		int x,y,pixcount=0,pixcount_prev=0;
 		int subject_x,subject_y, subject_width, subject_height;
 		int refObject_y,refObject_dimension;
-		float sH=0,erH=0,hB=0;
+		float sH=0,erH=0,hB=0,sitH=0;
 		float pixelRatio;
 		int mincount, min_x=0, min_y=0,min;
 		int hip_y;
@@ -553,66 +553,22 @@ void measureBack(Mat & src, Mat & out, double *measurements,double actual_dimens
 		//------------------------------------------------------------------>
 		
 		
-		Point A,B,C,D,E,F,G;
+		Point A,B,C,D,E,F,G,H,I,J;
 
 		subject_x = boundRect[biggest].x;
 		subject_y = boundRect[biggest].y;
 		subject_width = boundRect[biggest].width + subject_x;
 		subject_height = boundRect[biggest].height + subject_y;
 
-		//Elbow Rest Height
+		//sitting height
+		H = Point((boundRect[biggest].width/2)+subject_x,subject_y);
+		I = Point((boundRect[biggest].width/2)+subject_x,subject_height);
 
-		min = subject_height;
+		circle(img, H, 10, Scalar( 255, 128, 0 ), -1, 8,0);
+		circle(img, I, 10, Scalar( 255, 128, 0 ), -1, 8,0);
 
-		for(x=subject_x; x<subject_width; x++){
+		sitH = (float)(euclideanDistance2d(H,I)/pixelRatio);
 
-			pixcount = 0;
-			
-			for(y=subject_height; y>0; y--){
-				pixcount++;
-				if(binaryMat2.at<uchar>(y,x)==255)
-					break;
-
-			}
-			
-			if((float)pixcount < (float)(pixcount_prev*0.3))
-				break;
-
-			if(pixcount < min){
-				mincount = pixcount;
-				min_x = x;
-				min_y = y;
-			}
-
-			pixcount_prev = pixcount;
-
-		}
-
-		A = Point(min_x,min_y);
-		B = Point(min_x,subject_height);
-		circle(img, A, 10, Scalar( 255, 0, 255 ), -1, 8,0);
-		circle(img, B, 10, Scalar( 255, 0, 255 ), -1, 8,0);
-		//line( img, A, B, Scalar( 255, 0, 255 ), 1, 8 );
-		
-		erH = euclideanDistance2d(A,B)/pixelRatio;
-
-		//Shoulder Height
-
-		for(y=subject_y; y<subject_height; y++){
-			if(binaryMat2.at<uchar>(y,x)==255){
-					C = Point(A.x-5,y);
-					break;
-				}
-		}
-
-		D = Point(min_x-5,subject_height);
-
-		circle(img, C, 10, Scalar( 0, 128, 255 ), -1, 8,0);
-		circle(img, D, 10, Scalar( 0, 128, 255 ), -1, 8,0);
-		//line( img, C, D, Scalar( 0, 128, 255 ), 1, 8 );
-
-		sH = euclideanDistance2d(C,D);
-		sH /= pixelRatio;
 
 		//Hip Breadth
 		hip_y = subject_height-(subject_height*1/15);
@@ -635,11 +591,77 @@ void measureBack(Mat & src, Mat & out, double *measurements,double actual_dimens
 
 		hB = (float) euclideanDistance2d(E,F)/pixelRatio;
 
+		//Elbow Rest Height
+
+		min = boundRect[biggest].height;
+		pixcount = 0;
+		pixcount_prev = 0;
+
+		for(x=subject_x; x<(E.x*0.9); x++){
+
+			pixcount = 0;
+			
+			for(y=subject_height; y>0; y--){
+				pixcount++;
+				if(binaryMat2.at<uchar>(y,x)==255)
+					break;
+
+			}
+			
+			if((float)pixcount < (float)(pixcount_prev*0.2))
+				break;
+
+			if(pixcount < min){
+				min = pixcount;
+				min_x = x;
+				min_y = y;
+			}
+
+			pixcount_prev = pixcount;
+
+		}
+
+		A = Point(min_x,min_y);
+		B = Point(min_x,subject_height);
+		circle(img, A, 10, Scalar( 255, 0, 255 ), -1, 8,0);
+		circle(img, B, 10, Scalar( 255, 0, 255 ), -1, 8,0);
+		//line( img, A, B, Scalar( 255, 0, 255 ), 1, 8 );
+		
+		erH = euclideanDistance2d(A,B)/pixelRatio;
+
+		//Shoulder Height
+
+		C = Point(subject_x+(boundRect[biggest].width*0.15),subject_y);
+
+
+		for(y=subject_y; y<subject_height; y++){
+			if(binaryMat2.at<uchar>(y,C.x)==255){
+					D = Point(C.x,y);					
+					break;
+				}
+		}
+
+		J=Point(C.x,subject_height);
+		
+		circle(img, C, 10, Scalar( 255, 255, 255 ), -1, 8,0);
+		circle(img, D, 10, Scalar( 255, 255, 255 ), -1, 8,0);
+		circle(img, J, 10, Scalar( 255, 255, 255 ), -1, 8,0);
+		//line( img, C, D, Scalar( 0, 128, 255 ), 1, 8 );
+
+		sH = euclideanDistance2d(D,J)/pixelRatio;
+		//sH /= pixelRatio;
+
+		
+
+		measurements[0] = (float)boundRect[biggest].height/pixelRatio;
 		measurements[5] = erH;
 		measurements[6] = sH;
 		measurements[7] = hB;
+	
+		cout << "height:  " << (float)boundRect[biggest].height/pixelRatio << endl;
 	}
 	else{
+		measurements[0] = 0.0;
 		measurements[5] = 0.0;
 		measurements[6] = 0.0;
 		measurements[7] = 0.0;	
@@ -649,7 +671,7 @@ void measureBack(Mat & src, Mat & out, double *measurements,double actual_dimens
  float euclideanDistance2d(Point A, Point B) {
 
  		int distdist = (A.x-B.x)*(A.x-B.x) + (A.y-B.y)*(A.y-B.y);
-  		return (float)(sqrt(distdist) + 0.5 );  
+  		return (float)(sqrt(distdist));  				//lecheng +0.5
 	}
 
 void midPoint(Point *midpoint, Point a, Point b){

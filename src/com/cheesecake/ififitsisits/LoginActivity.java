@@ -62,12 +62,16 @@ public class LoginActivity extends Activity {
 		
 		EditText edit_authkey = (EditText) findViewById(R.id.edit_authkey);
 		String authkey = edit_authkey.getText().toString();
+		EditText edit_password = (EditText) findViewById(R.id.edit_password);
+		String password = edit_password.getText().toString();
+		
 		HttpPostHelper helper = new HttpPostHelper(getString(R.string.url)+"/android_authkey.php"); 	//get url from sharedpreferences
 		
 		Log.d("url",getString(R.string.url)+"/android_authkey.php");
 		
 		ArrayList<NameValuePair> pairs = new ArrayList<NameValuePair>();
 		pairs.add(new BasicNameValuePair("authkey", authkey));
+		pairs.add(new BasicNameValuePair("password", password));
 	
 		if(helper.post(pairs)){
 			

@@ -366,7 +366,7 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
 				pairs.add(new BasicNameValuePair("body_measurement", "sitH:"+r.get_sitH()+","+
 																	 "pH:"+r.get_pH()+","+
 																	 "tC:"+r.get_tC()+","+
-																	 "bpL:"+r.get_bpL()+","+
+																	 "bkL:"+r.get_bpL()+","+
 																	 "kH:"+r.get_kH()+","+
 																	 "sH:"+r.get_sH()+","+
 																	 "erH:"+r.get_erH()+","+
@@ -472,7 +472,6 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
     			toEdit.commit();
     			Toast.makeText(this, "Project \""+input+"\" started!", Toast.LENGTH_SHORT).show();
     			alertDialog.dismiss();
-    		
     			
             }
             else{
@@ -480,8 +479,9 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
             }
     		
     	}
-    	Toast.makeText(this, userInput.getText().toString(), Toast.LENGTH_SHORT).show();
-    	alertDialog.dismiss();
+    	Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+    
+    	//alertDialog.dismiss();
     }
     
 }

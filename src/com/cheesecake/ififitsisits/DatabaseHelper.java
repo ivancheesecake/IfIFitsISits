@@ -295,8 +295,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     		//add deletion for img3
     		File img = new File(Environment.getExternalStorageDirectory() + "/ififits/"+r.get_sideImg());
     		File img2 = new File(Environment.getExternalStorageDirectory() + "/ififits/"+r.get_backImg());
+    		File img3 = new File(Environment.getExternalStorageDirectory() + "/ififits/"+r.get_frontImg());
     		img.delete();
     		img2.delete();
+    		img3.delete();
     	}
     	
     	SQLiteDatabase db = this.getWritableDatabase();

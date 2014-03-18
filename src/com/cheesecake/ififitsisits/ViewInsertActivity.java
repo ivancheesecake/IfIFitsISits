@@ -237,72 +237,72 @@ public class ViewInsertActivity extends Activity {
 		    		        R.array.car_array, android.R.layout.simple_spinner_item);
 		        	
 		        }
-		        else if(selected2.equals("Region I")){
+		        else if(selected2.equals("Region1")){
 		        	adapter3 = ArrayAdapter.createFromResource(getApplicationContext(),
 		    		        R.array.regioni_array, android.R.layout.simple_spinner_item);
 		        	
 		        }
-		        else if(selected2.equals("Region II")){
+		        else if(selected2.equals("Region2")){
 		        	adapter3 = ArrayAdapter.createFromResource(getApplicationContext(),
 		    		        R.array.regionii_array, android.R.layout.simple_spinner_item);
 		        	
 		        }
-		        else if(selected2.equals("Region III")){
+		        else if(selected2.equals("Region3")){
 		        	adapter3 = ArrayAdapter.createFromResource(getApplicationContext(),
 		    		        R.array.regioniii_array, android.R.layout.simple_spinner_item);
 		        	
 		        }
-		        else if(selected2.equals("Region IV-A")){
+		        else if(selected2.equals("Region4a")){
 		        	adapter3 = ArrayAdapter.createFromResource(getApplicationContext(),
 		    		        R.array.regioniva_array, android.R.layout.simple_spinner_item);
 		        	
 		        }
-		        else if(selected2.equals("Region IV-B")){
+		        else if(selected2.equals("Region4b")){
 		        	adapter3 = ArrayAdapter.createFromResource(getApplicationContext(),
 		    		        R.array.regionivb_array, android.R.layout.simple_spinner_item);
 		        	
 		        }
-		        else if(selected2.equals("Region V")){
+		        else if(selected2.equals("Region5")){
 		        	adapter3 = ArrayAdapter.createFromResource(getApplicationContext(),
 		    		        R.array.regionv_array, android.R.layout.simple_spinner_item);
 		        	
 		        }
-		        else if(selected2.equals("Region VI")){
+		        else if(selected2.equals("Region6")){
 		        	adapter3 = ArrayAdapter.createFromResource(getApplicationContext(),
 		    		        R.array.regionvi_array, android.R.layout.simple_spinner_item);
 		        	
 		        }
-		        else if(selected2.equals("Region VII")){
+		        else if(selected2.equals("Region7")){
 		        	adapter3 = ArrayAdapter.createFromResource(getApplicationContext(),
 		    		        R.array.regionvii_array, android.R.layout.simple_spinner_item);
 		        	
 		        }
-		        else if(selected2.equals("Region VIII")){
+		        else if(selected2.equals("Region8")){
 		        	adapter3 = ArrayAdapter.createFromResource(getApplicationContext(),
 		    		        R.array.regionviii_array, android.R.layout.simple_spinner_item);
 		        	
 		        }
-		        else if(selected2.equals("Region IX")){
+		        else if(selected2.equals("Region9")){
 		        	adapter3 = ArrayAdapter.createFromResource(getApplicationContext(),
 		    		        R.array.regionix_array, android.R.layout.simple_spinner_item);
 		        	
 		        }
-		        else if(selected2.equals("Region X")){
+		        else if(selected2.equals("Region10")){
 		        	adapter3 = ArrayAdapter.createFromResource(getApplicationContext(),
 		    		        R.array.regionx_array, android.R.layout.simple_spinner_item);
 		        	
 		        }
-		        else if(selected2.equals("Region XI")){
+		        else if(selected2.equals("Region11")){
 		        	adapter3 = ArrayAdapter.createFromResource(getApplicationContext(),
 		    		        R.array.regionxi_array, android.R.layout.simple_spinner_item);
 		        	
 		        }
-		        else if(selected2.equals("Region XII")){
+		        else if(selected2.equals("Region12")){
 		        	adapter3 = ArrayAdapter.createFromResource(getApplicationContext(),
 		    		        R.array.regionxii_array, android.R.layout.simple_spinner_item);
 		        	
 		        }
-		        else if(selected2.equals("Region XIII")){
+		        else if(selected2.equals("Region13")){
 		        	adapter3 = ArrayAdapter.createFromResource(getApplicationContext(),
 		    		        R.array.regionxiii_array, android.R.layout.simple_spinner_item);
 		        	

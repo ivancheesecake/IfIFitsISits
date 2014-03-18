@@ -4,26 +4,26 @@
 	<string-array name="region_array">
 		<item>NCR</item>
 		<item>CAR</item>
-		<item>Region I</item>
-		<item>Region II</item>
-		<item>Region III</item>
-		<item>Region IV-A</item>
-		<item>Region IV-B</item>
-		<item>Region V</item>
-		<item>Region VI</item>
-		<item>Region VII</item>
-		<item>Region VIII</item>
-		<item>Region IX</item>
-		<item>Region X</item>
-		<item>Region XI</item>
-		<item>Region XII</item>
-		<item>Region XIII</item>
+		<item>Region1</item>
+		<item>Region2</item>
+		<item>Region3</item>
+		<item>Region4a</item>
+		<item>Region4b</item>
+		<item>Region5</item>
+		<item>Region6</item>
+		<item>Region7</item>
+		<item>Region8</item>
+		<item>Region9</item>
+		<item>Region10</item>
+		<item>Region11</item>
+		<item>Region12</item>
+		<item>Region13</item>
 		<item>ARMM</item>
 	</string-array>
 	  
 	<string-array name="ncr_array">
 		<item>Caloocan</item>
-		<item>Las Piñas</item>
+		<item>Las Pinas</item>
 		<item>Makati</item>
 		<item>Malabon</item>
 		<item>Mandaluyong</item>
@@ -31,7 +31,7 @@
 		<item>Marikina</item>
 		<item>Muntinlupa</item>
 		<item>Navotas</item>
-		<item>Parañaque</item>
+		<item>Paranaque</item>
 		<item>Pasay</item>
 		<item>Pasig</item>
 		<item>Quezon City</item>
@@ -57,7 +57,7 @@
 		<item>Luba, Abra</item>
 		<item>Malibcong, Abra</item>
 		<item>Manabo, Abra</item>
-		<item>Peñarrubia, Abra</item>
+		<item>Penarrubia, Abra</item>
 		<item>Pidigan, Abra</item>
 		<item>Pilar, Abra</item>
 		<item>Sallapadan, Abra</item>
@@ -271,14 +271,14 @@
 		<item>Lal-Lo, Cagayan</item>
 		<item>Lasam, Cagayan</item>
 		<item>Pamplona, Cagayan</item>
-		<item>Peñablanca, Cagayan</item>
+		<item>Penablanca, Cagayan</item>
 		<item>Piat, Cagayan</item>
 		<item>Rizal, Cagayan</item>
 		<item>Sanchez-Mira, Cagayan</item>
 		<item>Santa Ana, Cagayan</item>
 		<item>Santa Praxedes, Cagayan</item>
 		<item>Santa Teresita, Cagayan</item>
-		<item>Santo Niño, Cagayan</item>
+		<item>Santo Nino, Cagayan</item>
 		<item>Solana, Cagayan</item>
 		<item>Tuao, Cagayan</item>
 		<item>Tuguegarao City, Cagayan</item>
@@ -370,7 +370,7 @@
 		<item>Bulacan, Bulacan</item>
 		<item>Bustos, Bulacan</item>
 		<item>Calumpit, Bulacan</item>
-		<item>Doña Remedios Trinidad, Bulacan</item>
+		<item>Dona Remedios Trinidad, Bulacan</item>
 		<item>Guiguinto, Bulacan</item>
 		<item>Hagonoy, Bulacan</item>
 		<item>Malolos City, Bulacan</item>
@@ -406,7 +406,7 @@
 		<item>Nampicuan, Nueva Ecija</item>
 		<item>Palayan City, Nueva Ecija</item>
 		<item>Pantabangan, Nueva Ecija</item>
-		<item>Peñaranda, Nueva Ecija</item>
+		<item>Penaranda, Nueva Ecija</item>
 		<item>Quezon, Nueva Ecija</item>
 		<item>Rizal, Nueva Ecija</item>
 		<item>San Antonio, Nueva Ecija</item>
@@ -415,7 +415,7 @@
 		<item>San Leonardo, Nueva Ecija</item>
 		<item>Santa Rosa, Nueva Ecija</item>
 		<item>Santo Domingo, Nueva Ecija</item>
-		<item>Science City of Muñoz, Nueva Ecija</item>
+		<item>Science City of Munoz, Nueva Ecija</item>
 		<item>Talavera, Nueva Ecija</item>
 		<item>Talugtug, Nueva Ecija</item>
 		<item>Zaragoza, Nueva Ecija</item>
@@ -513,7 +513,7 @@
 		<item>Bacoor, Cavite</item>
 		<item>Carmona, Cavite</item>
 		<item>Cavite City, Cavite</item>
-		<item>Dasmariñas, Cavite</item>
+		<item>Dasmarinas, Cavite</item>
 		<item>Gen. Mariano Alvarez, Cavite</item>
 		<item>Gen. Emilio Aguinaldo, Cavite</item>
 		<item>Gen. Trias, Cavite</item>
@@ -533,7 +533,7 @@
 		<item>Trece Martires City, Cavite</item>
 		<item>Alaminos, Laguna</item>
 		<item>Bay, Laguna</item>
-		<item>Biñan, Laguna</item>
+		<item>Binan, Laguna</item>
 		<item>Cabuyao, Laguna</item>
 		<item>Calamba City, Laguna</item>
 		<item>Calauan, Laguna</item>
@@ -541,7 +541,7 @@
 		<item>Famy, Laguna</item>
 		<item>Kalayaan, Laguna</item>
 		<item>Liliw, Laguna</item>
-		<item>Los Baños, Laguna</item>
+		<item>Los Banos, Laguna</item>
 		<item>Luisiana, Laguna</item>
 		<item>Lumban, Laguna</item>
 		<item>Mabitac, Laguna</item>
@@ -671,7 +671,7 @@
 		<item>Rizal, Palawan</item>
 		<item>Roxas, Palawan</item>
 		<item>San Vicente, Palawan</item>
-		<item>Sofronio Española, Palawan</item>
+		<item>Sofronio Espanola, Palawan</item>
 		<item>Taytay, Palawan</item>
 		<item>Puerto Princesa City</item>
 		<item>Alcantara, Romblon</item>
@@ -751,7 +751,7 @@
 		<item>Pili, Camarines Sur</item>
 		<item>Presentacion, Camarines Sur</item>
 		<item>Ragay, Camarines Sur</item>
-		<item>Sagñay, Camarines Sur</item>
+		<item>Sagnay, Camarines Sur</item>
 		<item>San Fernando, Camarines Sur</item>
 		<item>San Jose, Camarines Sur</item>
 		<item>Sipocot, Camarines Sur</item>
@@ -882,7 +882,7 @@
 		<item>Carles, Iloilo</item>
 		<item>Concepcion, Iloilo</item>
 		<item>Dingle, Iloilo</item>
-		<item>Dueñas, Iloilo</item>
+		<item>Duenas, Iloilo</item>
 		<item>Dumangas, Iloilo</item>
 		<item>Estancia, Iloilo</item>
 		<item>Guimbal, Iloilo</item>
@@ -1174,7 +1174,7 @@
 		<item>San Sebastian, Samar</item>
 		<item>Santa Margarita, Samar</item>
 		<item>Santa Rita, Samar</item>
-		<item>Santo Niño, Samar</item>
+		<item>Santo Nino, Samar</item>
 		<item>Tagapul-an, Samar</item>
 		<item>Talalora, Samar</item>
 		<item>Tarangnan, Samar</item>
@@ -1217,12 +1217,12 @@
 		<item>Liloy, Zamboanga del Norte</item>
 		<item>Manukan, Zamboanga del Norte</item>
 		<item>Mutia, Zamboanga del Norte</item>
-		<item>Piñan, Zamboanga del Norte</item>
+		<item>Pinan, Zamboanga del Norte</item>
 		<item>Polanco, Zamboanga del Norte</item>
 		<item>Pres. Manuel A. Roxas, Zamboanga del Norte</item>
 		<item>Rizal, Zamboanga del Norte</item>
 		<item>Salug, Zamboanga del Norte</item>
-		<item>Sergio Osmeña Sr., Zamboanga del Norte</item>
+		<item>Sergio Osmena Sr., Zamboanga del Norte</item>
 		<item>Siayan, Zamboanga del Norte</item>
 		<item>Sibuco, Zamboanga del Norte</item>
 		<item>Sibutad, Zamboanga del Norte</item>
@@ -1454,7 +1454,7 @@
 		<item>Lake Sebu, South Cotabato</item>
 		<item>Norala, South Cotabato</item>
 		<item>Polomolok, South Cotabato</item>
-		<item>Santo Niño, South Cotabato</item>
+		<item>Santo Nino, South Cotabato</item>
 		<item>Surallah, South Cotabato</item>
 		<item>T\'Boli, South Cotabato</item>
 		<item>Tampakan, South Cotabato</item>
