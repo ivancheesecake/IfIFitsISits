@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="url">http://192.168.0.109/SP/Main%20Program/</string>
+    <string name="url">http://192.168.74.51/SP/Main%20Program/</string>
     
     <!-- General Purpose Strings -->
     <string name="app_name">If I Fits, I Sits</string>
@@ -78,7 +78,7 @@
     <string name="textview_tC">Thigh Clearance</string>
     <string name="textview_pH">Popliteal Height</string>
     <string name="textview_kH">Knee Height</string>
-    <string name="textview_bpL">Buttock-Popliteal Length</string>
+    <string name="textview_bpL">Buttock-Knee Length</string>
     <string name="textview_hB">Hip Breadth</string>
     <string name="textview_kkB">Knee-to-knee Breadth</string>
     <string name="textview_otherInfo">OTHER INFORMATION</string>

@@ -15,7 +15,7 @@ public class SettingsActivity extends PreferenceActivity {
 		addPreferencesFromResource(R.xml.preferences);
 		
 		 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(SettingsActivity.this);
-		 String refObj = prefs.getString("refObj", "10.0");
+		 String refObj = prefs.getString("refObj", "20.0");
 		 String url = prefs.getString("url", "http://192.168.0.103/SP/Main%20Program");
 		 
 		 EditTextPreference refObjPreference = (EditTextPreference) findPreference("refObj");

@@ -27,8 +27,9 @@ public class LoginActivity extends Activity {
 		setContentView(R.layout.activity_login);
 		
 		prefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+		
 		authenticated = prefs.getString("authenticated", "false");
-	        
+	    
 	        Log.d("authenticated",authenticated);
 	        
 	        if(authenticated.equals("true")){

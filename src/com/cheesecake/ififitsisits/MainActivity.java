@@ -63,7 +63,7 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
 	private DatabaseHelper db;
 	public static ActionBar actionbar;
 	private static boolean mayInternets=false;
-	private int prevPosition =0;
+	private int prevPosition = 0;
 	public static List<Integer> queue;
 	public static List<Record> records;
 	private float refObj;
@@ -135,7 +135,7 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
         	if(mayInternets){
 	        	url = prefs.getString("url", "false");
 	        	String projectId = prefs.getString("projectId", "default");
-	        	HttpPostHelper helper = new HttpPostHelper(url+"/project_expired.php"); 	//get url from sharedpreferences
+	        	HttpPostHelper helper = new HttpPostHelper(url+"/project_authenticated.php"); 	//get url from sharedpreferences
 	            
 	        	ArrayList<NameValuePair> pairs = new ArrayList<NameValuePair>();
 	            pairs.add(new BasicNameValuePair("projectkey", projectId));
@@ -154,6 +154,8 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
         //refObj = Float.parseFloat(prefs.getString("refObj", "3.0"));
         //url = prefs.getString("url", "http://192.168.0.103/SP/Main%20Program");
         
+        
+        Log.d("Project ID",projectId);
         
         
 	}
@@ -289,7 +291,7 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
                     	mayInternets = true;
                     	
                     	//project authentication nalang
-                    	
+                    	/*
                     	if(!isAuthenticated(url)){
                     		
                     		Log.d("Inside installListener","AW");
@@ -305,7 +307,7 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
                 			startActivity(intent);
                 			finish();
                 			
-                    	}
+                    	}*/
                		 
                     } else {
                     	Log.d("Internet Connectivity", "Walang Internet");
@@ -479,8 +481,9 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
             }
     		
     	}
-    	Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
-    
+    	else{
+    		Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+    	}
     	//alertDialog.dismiss();
     }
     

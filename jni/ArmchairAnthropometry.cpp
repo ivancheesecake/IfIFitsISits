@@ -671,7 +671,12 @@ void measureBack(Mat & src, Mat & out, double *measurements,double actual_dimens
  float euclideanDistance2d(Point A, Point B) {
 
  		int distdist = (A.x-B.x)*(A.x-B.x) + (A.y-B.y)*(A.y-B.y);
+  		
+  		__android_log_write(ANDROID_LOG_INFO, "Wala na", "Wala ng 0.5");//Or ANDROID_LOG_INFO, ...
+
   		return (float)(sqrt(distdist));  				//lecheng +0.5
+
+
 	}
 
 void midPoint(Point *midpoint, Point a, Point b){
