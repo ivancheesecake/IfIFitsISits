@@ -282,10 +282,10 @@ extern "C" {
 		//Store Measurements
 
 		//measurements[0] = sitH;
-		measurements[1] = pH;
-		measurements[2] = tC;
-		measurements[3] = bpL;
-		measurements[4] = knH;
+		measurements[1] = 0.6339*pH +11.896;
+		measurements[2] = 0.4868*tC +6.9836;
+		measurements[3] = 0.6024*bpL + 19.855;
+		measurements[4] = 0.6302*knH + 17.425;
 	}
 	else{
 		measurements[0] =0.0;
@@ -654,7 +654,7 @@ void measureBack(Mat & src, Mat & out, double *measurements,double actual_dimens
 		
 
 		measurements[0] = (float)boundRect[biggest].height/pixelRatio;
-		measurements[5] = erH;
+		measurements[5] = 0.8086* erH + 2.8667;
 		measurements[6] = sH;
 		measurements[7] = hB;
 	
@@ -672,7 +672,7 @@ void measureBack(Mat & src, Mat & out, double *measurements,double actual_dimens
 
  		int distdist = (A.x-B.x)*(A.x-B.x) + (A.y-B.y)*(A.y-B.y);
   		
-  		__android_log_write(ANDROID_LOG_INFO, "Wala na", "Wala ng 0.5");//Or ANDROID_LOG_INFO, ...
+  		//__android_log_write(ANDROID_LOG_INFO, "Wala na", "Wala ng 0.5");//Or ANDROID_LOG_INFO, ...
 
   		return (float)(sqrt(distdist));  				//lecheng +0.5
 

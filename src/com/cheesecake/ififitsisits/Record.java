@@ -26,6 +26,8 @@ public class Record implements Serializable{
 	private String side_img;
 	private String front_img;
 	private String back_img;
+	private String projectId;
+	private String otherFields;
 	
 	public Record(){
 		
@@ -79,7 +81,7 @@ public class Record implements Serializable{
 	
 	public Record(double height, double weight, int age, String sex, String region, String cityprov,
 			double sitH, double sH, double erH, double tC, double pH, double kH, double bpL,
-			double hB, double kkB, String side_img, String front_img, String back_img) {
+			double hB, double kkB, String side_img, String front_img, String back_img,String projectId, String otherFields) {
 		
 		super();
 	    
@@ -101,6 +103,8 @@ public class Record implements Serializable{
 	    this.side_img = side_img;
 	    this.front_img = front_img;
 	    this.back_img = back_img;
+	    this.projectId = projectId;
+	    this.otherFields = otherFields;
 	    }
 	
 	//Getter methods
@@ -165,6 +169,12 @@ public class Record implements Serializable{
 	public String get_backImg(){
 		return this.back_img;
 	}
+	public String get_projectId(){
+		return this.projectId;
+	}
+	public String get_otherFields(){
+		return this.otherFields;
+	}
 	
 	//Setter Methods
 	public void set_id(int id){
@@ -226,6 +236,12 @@ public class Record implements Serializable{
 	}
 	public void set_backImg(String back_img){
 		this.back_img = back_img;
+	}
+	public void set_projectId(String projectId){
+		this.projectId = projectId;
+	}
+	public void set_otherFields(String otherFields){
+		this.otherFields = otherFields;
 	}
 	
 	@Override

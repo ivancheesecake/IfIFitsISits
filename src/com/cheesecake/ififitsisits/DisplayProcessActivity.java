@@ -14,10 +14,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 public class DisplayProcessActivity extends Activity {
@@ -137,10 +137,8 @@ public class DisplayProcessActivity extends Activity {
 			
 		}
 		else{
-			//extra.set_measurements(new double[] {0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0});
 			Intent intent = new Intent(this,ViewInsertActivity.class);
 			intent.putExtra(EXTRA_IFIFITS, extra);
-			//intent.putExtra(EXTRA_IFIFITS_BITMAPS, extraBitmaps);
 			startActivity(intent);
 		}
 	}
@@ -154,6 +152,26 @@ public class DisplayProcessActivity extends Activity {
 		finish();
 		
 	}
+	
+	@Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        unbindDrawables(findViewById(R.id.displayProcessRoot));
+        System.gc();
+    }
+
+    private void unbindDrawables(View view) {
+        if (view.getBackground() != null) {
+            view.getBackground().setCallback(null);
+        }
+        if (view instanceof ViewGroup) {
+            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
+                unbindDrawables(((ViewGroup) view).getChildAt(i));
+            }
+            ((ViewGroup) view).removeAllViews();
+        }
+    }
 	
 	public native void Keyer(long src, long dst);
 	public native void SimpleKeyer(long src, long dst);

@@ -23,8 +23,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.webkit.WebView.FindListener;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class ViewRecordFragment extends Fragment{
@@ -147,7 +147,7 @@ public class ViewRecordFragment extends Fragment{
 		TextView textview_regionVal = (TextView) v.findViewById(R.id.textview_regionVal);
 		TextView textview_dateVal = (TextView) v.findViewById(R.id.textview_dateVal);
 		
-		DecimalFormat df = new DecimalFormat("#.00");
+		DecimalFormat df = new DecimalFormat("#.0000");
 		
 		textview_subjectId.setText("Subject #"+r.get_id());
 		textview_heightVal.setText(df.format(r.get_height())+"cm");
@@ -166,6 +166,34 @@ public class ViewRecordFragment extends Fragment{
 		textview_cityprovVal.setText(r.get_cityprov());
 		textview_regionVal.setText(r.get_region());
 		textview_dateVal.setText(r.get_date());
+		
+		LinearLayout ll = (LinearLayout) v.findViewById(R.id.other_fields);
+		
+		Log.d("Other Fields",r.get_otherFields());
+		String otherFields[] = r.get_otherFields().split(",");
+		TextView[] otherTvsHeader = new TextView[otherFields.length]; 
+		TextView[] otherTvsContent = new TextView[otherFields.length]; 
+		String otherFieldSplit[] = new String[2];
+		
+		for(int i=0; i< otherFields.length; i++){
+			otherTvsHeader[i] = new TextView(getActivity());
+			otherTvsContent[i] = new TextView(getActivity());
+			
+			otherFieldSplit = otherFields[i].split(":");
+			otherTvsHeader[i].setText(otherFieldSplit[0]);
+			otherTvsHeader[i].setTextSize(16);
+			otherTvsHeader[i].setTextColor(getResources().getColor(R.color.black));
+			otherTvsHeader[i].setPadding(5,5,5,5);
+			
+			otherTvsContent[i].setText(otherFieldSplit[1]);
+			otherTvsContent[i].setTextSize(14);
+			otherTvsContent[i].setTextColor(getResources().getColor(17170432));
+			otherTvsContent[i].setPadding(5,0,0,0);
+			
+			ll.addView(otherTvsHeader[i]);
+			ll.addView(otherTvsContent[i]);
+			
+		}
         
         return v;
     }

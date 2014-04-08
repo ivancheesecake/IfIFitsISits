@@ -11,13 +11,15 @@ public class HelpFragment extends Fragment {
  
     public static Fragment newInstance(Context context) {
         HelpFragment f = new HelpFragment();
- 
+        
         return f;
     }
  
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.help_fragment, null);
+        MainActivity.actionbar.setSubtitle("Help");
+        
         return root;
     }
  

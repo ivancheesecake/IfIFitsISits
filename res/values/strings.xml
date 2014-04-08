@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="url">http://192.168.74.51/SP/Main%20Program/</string>
-    
+     <string name="url">http://192.168.0.109/SP/Main%20Program/</string> 
+    <!--  <string name="url">http://192.168.1.102</string> -->
+
     <!-- General Purpose Strings -->
-    <string name="app_name">If I Fits, I Sits</string>
+    <string name="app_name">If It Fits, I Sits</string>
     <string name="action_settings">Settings</string>
     <string name="desc">Content Description</string>
     <string name="measure">Measure</string>
@@ -23,6 +24,9 @@
     <string name="hint_password">Password</string>
     <string name="login">Login</string>
 
+    <string name="addproject">Add Project</string>
+    
+    
     <!-- Strings for Navigation Drawer and Action Bar -->
 
     <string-array name="drawer_options">
@@ -54,7 +58,7 @@
         <item>Female</item>
     </string-array>
 
-    <string name="upload">Upload</string>
+    <string name="upload">Sync All</string>
     <string name="delete">Delete All</string>
 
     <!-- Strings for ViewRecordsFragment -->
@@ -92,5 +96,37 @@
     <string name="title_activity_capture_activity2">CaptureActivity2</string>
     <string name="title_activity_display_process">DisplayProcessActivity</string>
     <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_project">ProjectActivity</string>
+    
+    <!-- Strings for Help Fragment -->
+    <string name="overview_header"> I. Overview </string>
+    <string name="overview_text"> If It Fits, I Sits is a mobile application that allows its users to gather anthropometric data for armchair design. It uses digital images captured by the mobile device\'s camera to derive body measurements. Gathered data can be synced to the National Anthropometric Database if a network connection is available. </string>
 
+    <string name="subject_header"> II. Subject Preparation </string>
+    <string name="subject_text"> To be able to reap the full benefits of this application, a certain protocol for preparing subjects must be followed. The application needs three(3) digital images that follow certain criteria. </string>
+    
+     <string name="subject_a_header"> Background </string>
+     <string name="subject_a"> A green screen must be used as the background for all images. For good results, the screen must be well lit. </string>
+
+	<string name="subject_b_header"> Reference Object </string>
+    <string name="subject_b"> The reference object serves as a the basis for deriving the ratio of real world measurements and pixels. A valid reference object must be of any color except green and preferably a square. By default, the reference object must measure 20x20cm.</string>
+    
+    <string name="subject_c_header">Subject</string>
+    <string name="subject_c">The subject must not wear clothes with a green hue. The subject must wear a bonnet/swimming cap to remove the irregularites caused by hair (when necessary). The subject (as much as possible) must wear tight fitting clothes.</string>
+    
+    <string name="subject_d_header">Positioning</string>
+    <string name="subject_d">Three images with the subject and the reference object properly positioned are needed: \n
+  
+    Side: The subject must sit straight, with hands on the shoulder, with the knees on a 90 degree flexion angle, and face towards the right with respect to the camera frame. To suit different kinds of subjects, use an adjustable chair covered with green fabric.  Cover the left thigh of the subject with green material. The reference object must be aligned to the surface of the subject closest to the camera. (Fig. A) \n
+   
+    Back: The subject must sit straight, with the elbows on the side (emulation of using an armchair), and face towards the wall. Just like the first setup, the reference object must be also aligned to the surface of the subject closest to the camera. (Fig. B) \n
+   
+    Front: The subject must stand straight, with hands on the shoulder, and with both feet touching. The reference object must be aligned with the surface of the subject’s knees. (Fig. C) \n  
+	</string> 
+	
+     <string name="usage_header"> III. Application Usage </string>
+    <string name="usage_text">
+    Gather Data: To start gathering anthropometric data, select "Gather Data" from the navigation drawer. Follow the prompts given by the application on what configuration is needed for each capture. After three captures, fill in the necessary details, then click proceed to continue. After gathering data, if a connection to the server can be established, the data is automatically sent to the national anthropometric database.\n
+    Manage Database: All gathered data will be stored in the local database. Here, you are given the option to sync to the server unsent data.
+    </string>
 </resources>

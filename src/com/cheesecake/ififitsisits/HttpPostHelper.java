@@ -22,6 +22,7 @@ import android.util.Log;
 public class HttpPostHelper {
 
 	private String url;
+	public String response;
 	
 	public HttpPostHelper(String url){
 		
@@ -82,6 +83,7 @@ public String post_string(ArrayList<NameValuePair> pairs){
 			return "ERR";
 		}
 		
+		this.response = response;
 		return response;
 	}
 	

@@ -28,14 +28,14 @@ public class LoginActivity extends Activity {
 		
 		prefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
 		
-		authenticated = prefs.getString("authenticated", "false");
+		authenticated = prefs.getString("authenticated", "false");	
 	    
 	        Log.d("authenticated",authenticated);
 	        
 	        if(authenticated.equals("true")){
 	        	
 	        	Toast.makeText(this, "Welcome, Researcher!", Toast.LENGTH_LONG).show();
-	        	Intent intent = new Intent(this,MainActivity.class);
+	        	Intent intent = new Intent(this,ProjectActivity.class);
 	        	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intent);
 				finish();
@@ -85,7 +85,7 @@ public class LoginActivity extends Activity {
 		    Log.d("authenticated",authenticated);
 			
 		    Toast.makeText(this, "Welcome, Researcher!", Toast.LENGTH_LONG).show();
-			Intent intent = new Intent(this,MainActivity.class);
+			Intent intent = new Intent(this,ProjectActivity.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 			finish();

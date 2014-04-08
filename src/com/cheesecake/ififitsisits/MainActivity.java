@@ -106,19 +106,22 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
         actionbar.setHomeButtonEnabled(true);
         actionbar.setSubtitle("Home");
         
-        db = new DatabaseHelper(this);
-		ViewRecordsFragment.records = db.getAllRecords();
-		
+      
 		FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
         tx.replace(R.id.main,Fragment.instantiate(MainActivity.this, fragments[0]));
         tx.commit();
         Editor toEdit;
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
         onProject = prefs.getString("onProject", "false");
-        url = prefs.getString("url", "false");
+        url = prefs.getString("url", "http://192.168.0.101/SP/Main%20Program");
         projectId = prefs.getString("projectId", "default");
         authkey = prefs.getString("authkey", "default");
         
+        Log.d("PROJECT ID", projectId);
+        
+        db = new DatabaseHelper(this);
+      	ViewRecordsFragment.records = db.getAllRecords(projectId);
+      		
         LayoutInflater li = LayoutInflater.from(this);
 		promptsView = li.inflate(R.layout.project_dialog, null);
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -345,8 +348,7 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
     	queue = db.getQueue();
  		
     	
-    	
-    	if(mayInternets){
+    	if(mayInternets()){
 	    	for(int i=0; i<queue.size(); i++){
 	    		
 	    		Record r = db.getRecord(queue.get(i));
@@ -363,8 +365,8 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
 				pairs.add(new BasicNameValuePair("age",  r.get_age()+""));
 				pairs.add(new BasicNameValuePair("height",  r.get_height()+""));
 				pairs.add(new BasicNameValuePair("weight", r.get_weight()+""));
-				pairs.add(new BasicNameValuePair("region",  r.get_region()));	//add for cityprov
-				pairs.add(new BasicNameValuePair("cityprov", r.get_cityprov()));	//add for cityprov
+				pairs.add(new BasicNameValuePair("region",  r.get_region()));	
+				pairs.add(new BasicNameValuePair("cityprov", r.get_cityprov()));	
 				pairs.add(new BasicNameValuePair("body_measurement", "sitH:"+r.get_sitH()+","+
 																	 "pH:"+r.get_pH()+","+
 																	 "tC:"+r.get_tC()+","+
@@ -374,8 +376,11 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
 																	 "erH:"+r.get_erH()+","+
 																	 "hB:"+r.get_hB()+","+
 																	 "kkB:"+r.get_kkB()));
+				pairs.add(new BasicNameValuePair("other_category",r.get_otherFields()));
 				
-				
+				Log.d("Project ID",projectId);
+				Log.d("Survey Info ID",projectId+"-"+r.get_id());
+				Log.d("other_category",r.get_otherFields());
 				if(helper.post(pairs)){
 					Log.d("Uploaded",queue.get(i)+"");
 					db.dequeue(queue.get(i));
@@ -418,7 +423,7 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
             public void onClick(DialogInterface dialog, int id) {
                 // User clicked OK button
             	
-            	db.deleteAll();
+            	db.deleteAll(projectId);
             	
             	FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
             	tx.replace(R.id.main, Fragment.instantiate(MainActivity.this, fragments[2])).addToBackStack("fragment_2");
@@ -459,22 +464,31 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
     		
     		Editor toEdit;
     		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-    		String url = prefs.getString("url", "http://192.168.0.103/SP/Main%20Program");
+    		String url = prefs.getString("url", "http://192.168.0.101/SP/Main%20Program");
+    		String response;
     		
     		HttpPostHelper helper = new HttpPostHelper(url+"/project_authenticated.php"); 	//get url from sharedpreferences
             ArrayList<NameValuePair> pairs = new ArrayList<NameValuePair>();
             pairs.add(new BasicNameValuePair("projectkey", input));
             
-            if(helper.post(pairs)){
+            if(helper.post_string(pairs).compareTo("ERR")!=0){		//try ibalik sa helper.post
             	
-        		
+            	response = helper.response;
+            	
+            	
+            	
+            	response = response.replace("[", "");
+            	response = response.replace("]", "");
+            	response = response.replace("\"", "");
+            	
         		toEdit = prefs.edit();
     			toEdit.putString("onProject", "true");
     			toEdit.putString("projectId", input);
+    			toEdit.putString("otherFields", response);
     			toEdit.commit();
     			Toast.makeText(this, "Project \""+input+"\" started!", Toast.LENGTH_SHORT).show();
     			alertDialog.dismiss();
-    			
+    			Log.d("otherFields",response);
             }
             else{
             	Toast.makeText(this, "Invalid Project ID", Toast.LENGTH_SHORT).show();
@@ -486,5 +500,12 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
     	}
     	//alertDialog.dismiss();
     }
+    
+    public boolean mayInternets() {
+	    ConnectivityManager connectivityManager 
+	          = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+	    NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+	    return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+	 }
     
 }

@@ -28,6 +28,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     private static final String TABLE_RECORD = "record";
+    private static final String TABLE_PROJECT = "project";
     private static final String TABLE_UPLOADQUEUE = "upload_queue";
     
     private static final String KEY_ID = "id";
@@ -49,6 +50,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String KEY_SIDEIMG = "side_img";
     private static final String KEY_FRONTIMG = "front_img";
     private static final String KEY_BACKIMG = "back_img";
+  
+    private static final String KEY_PROJECTID = "project_id";
+    private static final String KEY_PROJECTNAME = "project_name";
+    private static final String KEY_OTHERFIELDS = "other_fields";
     //private static final String KEY_DATE = "date";
     
     private LinkedList<Integer> queue;
@@ -88,11 +93,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "side_img TEXT, "+
                 "front_img TEXT, "+
                 "back_img TEXT, "+
+                "project_id TEXT, "+
+                "other_fields TEXT, "+
                 "date DATETIME DEFAULT CURRENT_DATE"+
                 ")";
         String CREATE_UPLOADQUEUE_TABLE = "CREATE TABLE upload_queue (id INTEGER, FOREIGN KEY(id) REFERENCES record(id))";
+        String CREATE_PROJECT_TABLE = "CREATE TABLE project (project_id TEXT, project_name TEXT, other_fields TEXT)";
         db.execSQL(CREATE_RECORD_TABLE);
         db.execSQL(CREATE_UPLOADQUEUE_TABLE);
+        db.execSQL(CREATE_PROJECT_TABLE);
         
         
     }
@@ -101,6 +110,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.execSQL("DROP TABLE IF EXISTS record");
         db.execSQL("DROP TABLE IF EXISTS upload_queue");
+        db.execSQL("DROP TABLE IF EXISTS project");
         this.onCreate(db);
     }
     
@@ -131,6 +141,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(KEY_SIDEIMG, record.get_sideImg());
         values.put(KEY_FRONTIMG, record.get_frontImg());
         values.put(KEY_BACKIMG, record.get_backImg());
+        values.put(KEY_PROJECTID, record.get_projectId());
+        values.put(KEY_OTHERFIELDS, record.get_otherFields());
        
 
         db.insert(TABLE_RECORD, null, values); 
@@ -139,12 +151,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close(); 
     }
     
-    public List<Record> getAllRecords() {
+    public List<Record> getAllRecords(String projectId) {
     	Log.d("Current Records","");
         List<Record> records = new LinkedList<Record>();
   
   
-        String query = "SELECT  * FROM " + TABLE_RECORD +" ORDER BY id DESC";
+        String query = "SELECT  * FROM " + TABLE_RECORD + " WHERE project_id='" +projectId + "' ORDER BY id DESC" ;
   
    
         SQLiteDatabase db = this.getWritableDatabase();
@@ -175,7 +187,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 record.set_sideImg(cursor.getString(16));
                 record.set_frontImg(cursor.getString(17));
                 record.set_backImg(cursor.getString(18));
-                record.set_date(cursor.getString(19));
+                record.set_projectId(cursor.getString(19));
+                record.set_otherFields(cursor.getString(20));
+                record.set_date(cursor.getString(21));
                 Log.d(record.get_date(),""+record.get_id());
                 records.add(record);
             } while (cursor.moveToNext());
@@ -215,7 +229,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 record.set_sideImg(cursor.getString(16));
                 record.set_frontImg(cursor.getString(17));
                 record.set_backImg(cursor.getString(18));
-                record.set_date(cursor.getString(19));
+                record.set_projectId(cursor.getString(19));
+                record.set_otherFields(cursor.getString(20));
+                record.set_date(cursor.getString(21));
                 Log.d(record.get_date(),""+record.get_id());
 
             } while (cursor.moveToNext());
@@ -287,9 +303,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.d("Dequeued: ", id+"");
     }
     
-    public void deleteAll(){
+    public void deleteAll(String projectId){
     	
-    	List<Record> records = getAllRecords();
+    	List<Record> records = getAllRecords(projectId);
     	for(Record r: records){
     		
     		//add deletion for img3
@@ -309,5 +325,51 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     	db.close(); 
     	
     }
+    
+ public void addProject(Project project){
+    
+        
+    	SQLiteDatabase db = this.getWritableDatabase();
+ 
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_PROJECTID, project.get_projectId());
+        values.put(KEY_PROJECTNAME, project.get_projectName());
+        values.put(KEY_OTHERFIELDS, project.get_otherFields());
+      
+        db.insert(TABLE_PROJECT, null, values); 
+ 
+
+        db.close(); 
+    }
+ 
+ public List<Project> getAllProjects() {
+ 	 
+	 Log.d("Current Records","");
+     List<Project> projects = new LinkedList<Project>();
+
+
+     String query = "SELECT  * FROM " + TABLE_PROJECT;
+
+
+     SQLiteDatabase db = this.getWritableDatabase();
+     Cursor cursor = db.rawQuery(query, null);
+
+
+     Project project = null;
+     if (cursor.moveToFirst()) {
+     	
+         do {
+             project = new Project();
+             project.set_projectId(cursor.getString(0));
+             project.set_projectName(cursor.getString(1));
+             project.set_otherFields(cursor.getString(2));
+             projects.add(project);
+             
+         } while (cursor.moveToNext());
+     }
+     db.close(); 
+     return projects;
+ }
     
 }

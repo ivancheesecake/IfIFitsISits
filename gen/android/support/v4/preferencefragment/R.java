@@ -12,16 +12,16 @@ public final class R {
 		public static final int preference_fragment_padding_side = 0x7f060001;
 	}
 	public static final class id {
-		public static final int back_button = 0x7f090076;
-		public static final int button_bar = 0x7f090075;
-		public static final int next_button = 0x7f090078;
-		public static final int skip_button = 0x7f090077;
+		public static final int back_button = 0x7f09008a;
+		public static final int button_bar = 0x7f090089;
+		public static final int next_button = 0x7f09008c;
+		public static final int skip_button = 0x7f09008b;
 	}
 	public static final class integer {
 		public static final int preference_fragment_scrollbarStyle = 0x7f070000;
 	}
 	public static final class layout {
-		public static final int preference_list_fragment = 0x7f030028;
+		public static final int preference_list_fragment = 0x7f030029;
 	}
 	public static final class string {
 		public static final int back_button_label = 0x7f080000;

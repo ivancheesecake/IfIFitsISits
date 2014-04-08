@@ -30,6 +30,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,9 +46,12 @@ public class ViewInsertActivity extends Activity {
 	private String selected2 = "NCR";
 	private String selected3 = "Caloocan";
 	private String cachePaths[];
+	private EditText etArray[];
+	private String otherFieldsArray[];
 	private Spinner spinner3;
 	private ArrayAdapter<CharSequence> adapter3;
 	private IfIFitsExtra extra;
+	String otherFields,otherFieldsSend;
 	//private Bitmap[] extraBitmaps;
 	
 	private static Bitmap bmp,bmp2,bmp3;
@@ -56,7 +60,7 @@ public class ViewInsertActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_view_insert);
 		
-		System.loadLibrary("ififits_native");
+		//System.loadLibrary("ififits_native");
 		
 		//Log.d("LOG","Nasa View Insert na.");
 		Intent intent = getIntent();
@@ -73,6 +77,8 @@ public class ViewInsertActivity extends Activity {
 		//bmp = extraBitmaps[0];
 		//bmp2 = extraBitmaps[1];
 		//bmp3 = extraBitmaps[2];
+		
+		
 		
 		Log.d("CACHE PATHS",cachePaths[0]);
 		String folder = Environment.getExternalStorageDirectory() + "/ififits/";
@@ -163,7 +169,7 @@ public class ViewInsertActivity extends Activity {
 		TextView textview_kkBVal = (TextView) findViewById(R.id.textview_kkBVal);
 		//TextView textview_locationVal = (TextView) findViewById(R.id.textview_locationVal);
 
-		DecimalFormat df = new DecimalFormat("#.00"); 
+		DecimalFormat df = new DecimalFormat("#.0000"); 
 		
 		//textview_subjectId.setText("Subject #"+r.get_id());
 		textview_sitHVal.setText(df.format(extra.get_measurements()[0])+" cm");		//double check mo yung indices
@@ -199,6 +205,23 @@ public class ViewInsertActivity extends Activity {
 		spinner3.setAdapter(adapter3);
 		spinner3.setOnItemSelectedListener(new SelectedListener3());	
 		
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ViewInsertActivity.this);
+        otherFields = prefs.getString("otherFields", "");
+        
+        Log.d("otherfields laman",otherFields);
+        
+        if(otherFields.compareTo("OK")!=0){
+      
+			LinearLayout ll = (LinearLayout) findViewById(R.id.otherInfoLayout);
+			otherFieldsArray = otherFields.split(",");
+			etArray = new EditText[otherFieldsArray.length];
+			
+			for(int i=0; i<otherFieldsArray.length; i++){
+				etArray[i] = new EditText(this);
+				etArray[i].setHint(otherFieldsArray[i]);
+				ll.addView(etArray[i]);
+			}
+        }
 	}
 
 	@Override
@@ -344,6 +367,8 @@ public class ViewInsertActivity extends Activity {
 			EditText edit_age = (EditText) findViewById(R.id.edit_age);
 			double height =0.0, weight =0.0;
 			int age = 0;
+			
+			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ViewInsertActivity.this);
 			try {
 				height = Double.parseDouble(edit_height.getText().toString());
 			} catch (NumberFormatException e) {
@@ -359,6 +384,15 @@ public class ViewInsertActivity extends Activity {
 				age = Integer.parseInt(edit_age.getText().toString());;
 			} catch (NumberFormatException e) {
 				proceed = false;
+			}
+			
+			if(otherFields.compareTo("OK")!=0){
+				for(int i=0; i<etArray.length; i++){
+					if(etArray[i].getText().toString().compareTo("")==0){
+						proceed = false;
+						break;
+					}
+				}
 			}
 			
 			if(proceed){
@@ -408,6 +442,19 @@ public class ViewInsertActivity extends Activity {
 			Log.d("Front: ",filename2);
 			Log.d("Back: ",filename3);
 			
+			otherFieldsSend = "";
+			if(otherFields.compareTo("OK")!=0){
+				for(int i=0; i<otherFieldsArray.length; i++){
+					otherFieldsSend += otherFieldsArray[i]+":";
+					otherFieldsSend += etArray[i].getText().toString();
+					if(i!=otherFieldsArray.length-1)
+						otherFieldsSend +=",";	
+					
+				}
+			}
+			
+			String projectId = prefs.getString("projectId", "default");
+			
 			db.addRecord(new Record(height,weight,age,selected,
 					selected2,selected3,
 					extra.get_measurements()[0],		//double check indices
@@ -421,19 +468,27 @@ public class ViewInsertActivity extends Activity {
 					extra.get_measurements()[8],
 					filename,
 					filename3,
-					filename2));
+					filename2,
+					projectId,
+					otherFieldsSend));
+			
+			
 			
 			if(!MainActivity.mayInternetsBa()){
 				db.enqueueUpload();
 				Toast.makeText(this, "Data Enqueued for Uploading.", Toast.LENGTH_SHORT).show();
 				
+				//pairs.add(new BasicNameValuePair("other_category", otherFieldsSend));
+				
+				Log.d("Other Categories",otherFieldsSend);
+				
 			}
 			else{
 				
-				SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ViewInsertActivity.this);
+				
 		        String url = prefs.getString("url", "http://192.168.1.100");
 		        String authkey = prefs.getString("authkey", "gagraduateako");
-				String projectId = prefs.getString("projectId", "default");
+			
 		        
 				HttpPostHelper helper = new HttpPostHelper(url+"/android_add_survey.php"); 	//get url from sharedpreferences
 				
@@ -460,6 +515,10 @@ public class ViewInsertActivity extends Activity {
 																	 "hB:"+extra.get_measurements()[7]+","+
 																	 "kkB:"+extra.get_measurements()[8]));	
 				
+				if(otherFields.compareTo("OK")!=0){
+					pairs.add(new BasicNameValuePair("other_category", otherFieldsSend));
+					Log.d("Other Categories",otherFieldsSend);
+				}
 				
 				if(helper.post(pairs))
 					Toast.makeText(this, "Data Sent to Server.", Toast.LENGTH_SHORT).show();
@@ -479,5 +538,20 @@ public class ViewInsertActivity extends Activity {
 				Toast.makeText(this, "Please fill up all input fields.", Toast.LENGTH_SHORT).show();
 			}
 	    }
+	
+	public void cancel(View view){
+		
+		 Intent intent = new Intent(this, CameraActivity.class);
+		 
+		 IfIFitsExtra extra = new IfIFitsExtra();
+     	 extra.set_flag(0);
+     	
+     	
+     	 intent.putExtra(EXTRA_IFIFITS, extra);
+     	 startActivity(intent);
+        
+         finish();
+		
+	}
 
 }

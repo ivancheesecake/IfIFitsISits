@@ -38,19 +38,17 @@
             android:name="com.cheesecake.ififitsisits.LoginActivity"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-            
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
         <activity
             android:name="com.cheesecake.ififitsisits.MainActivity"
             android:configChanges="orientation"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustResize" >
-            
         </activity>
         <activity
             android:name="com.cheesecake.ififitsisits.CaptureActivity"
@@ -74,18 +72,22 @@
         </activity>
         <activity
             android:name="com.cheesecake.ififitsisits.DisplayProcessActivity"
-            android:label="@string/title_activity_display_process" 
-            android:configChanges="orientation">
+            android:configChanges="orientation"
+            android:label="@string/title_activity_display_process" >
         </activity>
         <activity
             android:name="com.cheesecake.ififitsisits.SettingsActivity"
-            android:label="@string/title_activity_settings" 
-            android:theme="@android:style/Theme.Black.NoTitleBar">
+            android:label="@string/title_activity_settings"
+            android:theme="@android:style/Theme.Black.NoTitleBar" >
         </activity>
         <activity
             android:name="com.cheesecake.ififitsisits.CameraActivity"
-            android:label="@string/title_activity_capture_activity2" 
-            android:screenOrientation="landscape">
+            android:label="@string/title_activity_capture_activity2"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name="com.cheesecake.ififitsisits.ProjectActivity"
+            android:label="@string/title_activity_project" >
         </activity>
     </application>
 

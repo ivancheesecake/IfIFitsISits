@@ -3,7 +3,9 @@ package com.cheesecake.ififitsisits;
 import java.util.List;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -31,9 +33,11 @@ public class ViewRecordsFragment extends Fragment {
         View v = (View) inflater.inflate(R.layout.viewrecords_fragment, container,false);
         MainActivity.actionbar.setSubtitle("Manage Database");
         final ListView listview = (ListView) v.findViewById(R.id.listview_allrecords);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.getActivity());
+        String projectId = prefs.getString("projectId", "default");
         
         db = new DatabaseHelper(getActivity());
-        records = db.getAllRecords();
+        records = db.getAllRecords(projectId);
 		queue = db.getQueue();
         
         stringIds = new String[records.size()];
