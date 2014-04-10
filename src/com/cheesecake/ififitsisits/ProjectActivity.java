@@ -35,17 +35,21 @@ public class ProjectActivity extends ActionBarActivity {
 	//int projectIds[];
 	String projectNames[];
 	Project p;
+	SharedPreferences prefs;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_project);
 		
-		final ListView listview = (ListView) findViewById(R.id.listview_allprojects);
-		;
 		db = new DatabaseHelper(this);
-		
+		prefs = PreferenceManager.getDefaultSharedPreferences(ProjectActivity.this);
+    	
 		projects = db.getAllProjects();
+		
+		
+		//if(projects!=null)
+			
 		projectNames = new String[projects.size()];
 		for(int i=0; i<projects.size(); i++){
 			
@@ -55,41 +59,62 @@ public class ProjectActivity extends ActionBarActivity {
 		
 		setTitle("My Projects");
 		
+		
+		String url = prefs.getString("url", "false");
+		Editor toEdit;
+    	toEdit = prefs.edit();
+		
+		
+		if(mayInternets()){
+        
+			HttpPostHelper helper = new HttpPostHelper(url+"/project_authenticated.php"); 	//get url from sharedpreferences
+            
+        	ArrayList<NameValuePair> pairs = new ArrayList<NameValuePair>();
+            
+            Log.d("Projects.size",projects.size()+"");
+            
+            for(int i=0; i< projects.size(); i++){
+            	
+            	p = projects.get(i);
+            	pairs.add(new BasicNameValuePair("projectkey", p.get_projectId()));
+	            
+            	if(!helper.post(pairs)){
+	            		
+	            	toEdit = prefs.edit();
+	            	toEdit.putString("onProject", "false");
+	    			toEdit.putString("projectId", "null");
+	    			toEdit.commit();
+	            	Toast.makeText(getApplicationContext(), "Project "+p.get_projectName()+ " is invalid.", Toast.LENGTH_SHORT).show();
+	            	
+	            	db.deleteProject(p.get_projectId());
+	            	Log.d("deleted",p.get_projectName());
+	    
+	            }
+            	
+            	Log.d("Loop","loop");
+            }
+            
+            
+    	}
+		
+		
+		final ListView listview = (ListView) findViewById(R.id.listview_allprojects);
+		
+		
 		AkingSimpleAdapter adapter = new AkingSimpleAdapter(this,projectNames);
 		listview.setAdapter(adapter);
 		
 		listview.setOnItemClickListener(new OnItemClickListener() {
 		    public void onItemClick(AdapterView<?> listView, View itemView, int itemPosition, long itemId)
 		        {
+		    	
 		    	p = projects.get(itemPosition);
-		    	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ProjectActivity.this);
+		    	
 		    	Editor toEdit;
 		    	toEdit = prefs.edit();
 		    	boolean tuloy = true;
-		    	if(mayInternets()){
-		        	
-		    		String url = prefs.getString("url", "false");
-		        	String projectId = prefs.getString("projectId", "default");
-		        	HttpPostHelper helper = new HttpPostHelper(url+"/project_authenticated.php"); 	//get url from sharedpreferences
-		            
-		        	ArrayList<NameValuePair> pairs = new ArrayList<NameValuePair>();
-		            pairs.add(new BasicNameValuePair("projectkey", projectId));
-		            
-		            if(!helper.post(pairs)){
-		            	toEdit = prefs.edit();
-		            	toEdit.putString("onProject", "false");
-		    			toEdit.putString("projectId", "null");
-		    			toEdit.commit();
-		            	Toast.makeText(getApplicationContext(), "Project is expired.", Toast.LENGTH_SHORT).show();
-		            	alertDialog.show();
-		            	tuloy = false;
-		            }
-		            
-		            	
-	        	}
 		    	
 		    	if(tuloy){
-			    	p = projects.get(itemPosition);
 			    
 			    	toEdit = prefs.edit();				 
 	    			toEdit.putString("onProject", "true");    
@@ -105,6 +130,8 @@ public class ProjectActivity extends ActionBarActivity {
 		    });
 		
 	}
+	
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -144,27 +171,27 @@ public class ProjectActivity extends ActionBarActivity {
             
             if(helper.post_string(pairs).compareTo("ERR")!=0){		//try ibalik sa helper.post
             	
-            	
+            	Project p;
             	responseRaw = helper.response;
             	
             	response = responseRaw.split("\\[");
             	
-            	response[1] = response[1].replace("[", "");
-            	response[1] = response[1].replace("]", "");
-            	response[1] = response[1].replace("\"", "");
             	
-        		//toEdit = prefs.edit();					--> ilipat ito taas 
-    			//toEdit.putString("onProject", "true");    
-    			//toEdit.putString("projectId", input);
-    			//toEdit.putString("projectName", response[0]);
-    			//toEdit.putString("otherFields", response[1]);
-    			//toEdit.commit();
+            	if(response.length > 1){
+	            	response[1] = response[1].replace("[", "");
+	            	response[1] = response[1].replace("]", "");
+	            	response[1] = response[1].replace("\"", "");
+	            	p = new Project(input,response[0],response[1]);
+	            	
+            	}
+            	else{
+            		p = new Project(input,response[0],"OK");	
+            	}
     			
-    			Project p = new Project(input,response[0],response[1]);
     			db.addProject(p);
     			Toast.makeText(this, "Project \""+response[0]+"\" started!", Toast.LENGTH_SHORT).show();
     			alertDialog.dismiss();
-    			Log.d("otherFields",response[1]);
+    			//Log.d("otherFields",response[1]);
     			
     			finish();
     			startActivity(getIntent());

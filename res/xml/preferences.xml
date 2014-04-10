@@ -12,11 +12,6 @@
    		android:dialogTitle="Reference Object Size"
    		android:inputType="numberDecimal"
 	/>
-    <EditTextPreference android:key="url"
-   		android:title="Server URL"
-   		android:summary="URL of the National Anthropometric Database"
-   		android:dialogTitle="Server URL"
-   		android:inputType="text"
-	/>
+    
     </PreferenceCategory> 
 </PreferenceScreen>

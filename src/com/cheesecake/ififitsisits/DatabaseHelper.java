@@ -270,7 +270,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     	   lastId = c.getLong(0);
     	}
     	
+    	db.close();
+    	
     	return (int) lastId;
+    		
     }
     
     public LinkedList<Integer> getQueue(){
@@ -319,11 +322,40 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     	
     	SQLiteDatabase db = this.getWritableDatabase();
     	
-    	db.delete(TABLE_UPLOADQUEUE, null, null);
+    	db.delete(TABLE_UPLOADQUEUE, null, null);    	
     	db.delete(TABLE_RECORD, null, null);
 
     	db.close(); 
     	
+    }
+    
+    public void deleteProject(String projectId){
+    	
+    	SQLiteDatabase db = this.getWritableDatabase();
+    	
+    	List<Record> records = getAllRecords(projectId);
+    	Log.d("Nakapasok", "yep");
+    	for(Record r: records){
+    		db = this.getWritableDatabase();
+    		//add deletion for img3
+    		File img = new File(Environment.getExternalStorageDirectory() + "/ififits/"+r.get_sideImg());
+    		File img2 = new File(Environment.getExternalStorageDirectory() + "/ififits/"+r.get_backImg());
+    		File img3 = new File(Environment.getExternalStorageDirectory() + "/ififits/"+r.get_frontImg());
+    		img.delete();
+    		img2.delete();
+    		img3.delete();
+    		db.delete(TABLE_UPLOADQUEUE, KEY_ID+" = ?", new String[] { r.get_id()+""});  //dequeue
+    		db.delete(TABLE_RECORD, KEY_ID+" = ?", new String[] { r.get_id()+""});  //dequeue
+    		db.close();
+    		
+    		Log.d("Nakapasok", "yepyep");
+    	}
+    	db = this.getWritableDatabase();
+    	db.delete(TABLE_PROJECT, KEY_PROJECTID+" = ?", new String[] {projectId});  //dequeue
+    	db.close();
+    	Log.d("Nakapasok", "yepyep");
+    	
+    	 
     }
     
  public void addProject(Project project){
@@ -353,8 +385,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
      SQLiteDatabase db = this.getWritableDatabase();
+        
      Cursor cursor = db.rawQuery(query, null);
-
 
      Project project = null;
      if (cursor.moveToFirst()) {

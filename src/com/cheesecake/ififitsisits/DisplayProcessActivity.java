@@ -108,10 +108,10 @@ public class DisplayProcessActivity extends Activity {
 		
 		cachePaths[flag] = filename;
 		
-		keyedBitmap = Bitmap.createBitmap(origMat.width(), origMat.height(), Bitmap.Config.ARGB_8888);	//Initialize Bitmap
-		Utils.matToBitmap(keyedMat_copy,keyedBitmap);
-		keyedImageView = (ImageView) findViewById(R.id.display2);
-		keyedImageView.setImageBitmap(keyedBitmap);
+		//keyedBitmap = Bitmap.createBitmap(origMat.width(), origMat.height(), Bitmap.Config.ARGB_8888);	//Initialize Bitmap
+		//Utils.matToBitmap(keyedMat_copy,keyedBitmap);
+		//keyedImageView = (ImageView) findViewById(R.id.display2);
+		//keyedImageView.setImageBitmap(keyedBitmap);
 		
 		extra.set_cachePaths(cachePaths);
 	
