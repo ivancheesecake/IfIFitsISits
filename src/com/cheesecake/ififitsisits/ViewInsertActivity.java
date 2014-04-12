@@ -1,3 +1,11 @@
+/*
+ *	ViewInsertActivity.java
+ *  Description: This activity displays the form to be filled up by the surveyor. This also displays the derived measurements and performs data uploads when network connections are present. 
+ *  Author: Escamos, Ivan Marc H. 
+ *  Date last modified: 04/10/14
+ *  
+ */
+
 package com.cheesecake.ififitsisits;
 
 import java.io.File;
@@ -12,10 +20,13 @@ import org.apache.http.message.BasicNameValuePair;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
@@ -41,7 +52,6 @@ public class ViewInsertActivity extends Activity {
 	public final static String EXTRA_IFIFITS= "com.cheesecake.ififitsisits.IFIFITS";
 	public final static String EXTRA_IFIFITS_BITMAPS= "com.cheesecake.ififitsisits.IFIFITS_BITMAPS";
 	
-	private static Record r;
 	private String selected = "M";
 	private String selected2 = "NCR";
 	private String selected3 = "Caloocan";
@@ -52,40 +62,23 @@ public class ViewInsertActivity extends Activity {
 	private ArrayAdapter<CharSequence> adapter3;
 	private IfIFitsExtra extra;
 	String otherFields,otherFieldsSend;
-	//private Bitmap[] extraBitmaps;
 	
 	private static Bitmap bmp,bmp2,bmp3;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_view_insert);
-		
-		//System.loadLibrary("ififits_native");
-		
-		//Log.d("LOG","Nasa View Insert na.");
-		Intent intent = getIntent();
+
+		Intent intent = getIntent();				//get data from previous activity
 		
 		extra = (IfIFitsExtra) intent.getSerializableExtra(EXTRA_IFIFITS);	
 		cachePaths = extra.get_cachePaths();
-		
-		//Parcelable[] ps = intent.getParcelableArrayExtra(EXTRA_IFIFITS_BITMAPS);	
-		//extraBitmaps = new Bitmap[ps.length];
-		//System.arraycopy(ps, 0, extraBitmaps, 0, ps.length);
-		
-		//r = (Record) intent.getSerializableExtra(DisplayActivity.EXTRA_RECORD);
-		
-		//bmp = extraBitmaps[0];
-		//bmp2 = extraBitmaps[1];
-		//bmp3 = extraBitmaps[2];
-		
-		
-		
+			
 		Log.d("CACHE PATHS",cachePaths[0]);
 		String folder = Environment.getExternalStorageDirectory() + "/ififits/";
 		
-	
-		
-		bmp = BitmapFactory.decodeFile(folder+cachePaths[0]);
+		bmp = BitmapFactory.decodeFile(folder+cachePaths[0]);					//display processed images 
 		bmp2 = BitmapFactory.decodeFile(folder+cachePaths[1]);
 		bmp3 = BitmapFactory.decodeFile(folder+cachePaths[2]);
 		
@@ -113,7 +106,7 @@ public class ViewInsertActivity extends Activity {
 		imageview2.setImageBitmap(Bitmap.createScaledBitmap(bmp2, image_width, image_height, false));
 		imageview3.setImageBitmap(Bitmap.createScaledBitmap(bmp3, image_width, image_height, false));
 		
-		imageview.setOnClickListener(new OnClickListener() {
+		imageview.setOnClickListener(new OnClickListener() {		//add image enlargement dialogs for every image
 			
 			@Override
 			public void onClick(View arg0) {
@@ -157,8 +150,9 @@ public class ViewInsertActivity extends Activity {
 				
 			}
 		});
-		//TextView textview_subjectId = (TextView) findViewById(R.id.textview_subjectId);
-		TextView textview_sitHVal = (TextView) findViewById(R.id.textview_sitHVal);
+		
+		
+		TextView textview_sitHVal = (TextView) findViewById(R.id.textview_sitHVal);		//get TextViews
 		TextView textview_sHVal = (TextView) findViewById(R.id.textview_sHVal);
 		TextView textview_erHVal = (TextView) findViewById(R.id.textview_erHVal);
 		TextView textview_tCVal = (TextView) findViewById(R.id.textview_tCVal);
@@ -167,12 +161,10 @@ public class ViewInsertActivity extends Activity {
 		TextView textview_bpLVal = (TextView) findViewById(R.id.textview_bpLVal);
 		TextView textview_hBVal = (TextView) findViewById(R.id.textview_hBVal);
 		TextView textview_kkBVal = (TextView) findViewById(R.id.textview_kkBVal);
-		//TextView textview_locationVal = (TextView) findViewById(R.id.textview_locationVal);
-
+		
 		DecimalFormat df = new DecimalFormat("#.0000"); 
 		
-		//textview_subjectId.setText("Subject #"+r.get_id());
-		textview_sitHVal.setText(df.format(extra.get_measurements()[0])+" cm");		//double check mo yung indices
+		textview_sitHVal.setText(df.format(extra.get_measurements()[0])+" cm");		//set values of TextViews
 		textview_pHVal.setText(df.format(extra.get_measurements()[1])+" cm");
 		textview_tCVal.setText(df.format(extra.get_measurements()[2])+" cm");
 		textview_bpLVal.setText(df.format(extra.get_measurements()[3])+" cm");
@@ -181,23 +173,22 @@ public class ViewInsertActivity extends Activity {
 		textview_sHVal.setText(df.format(extra.get_measurements()[6])+" cm");
 		textview_hBVal.setText(df.format(extra.get_measurements()[7])+" cm");
 		textview_kkBVal.setText(df.format(extra.get_measurements()[8])+" cm");
-		//textview_locationVal.setText(r.get_region());
 		
-		Spinner spinner = (Spinner) findViewById(R.id.sex_spinner);
+		Spinner spinner = (Spinner) findViewById(R.id.sex_spinner);					//configure spinner for sex
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
 	        R.array.sex_array, android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner.setAdapter(adapter);
 		spinner.setOnItemSelectedListener(new SelectedListener());
 		
-		Spinner spinner2 = (Spinner) findViewById(R.id.region_spinner);
+		Spinner spinner2 = (Spinner) findViewById(R.id.region_spinner);					//configure spinner for region
 		ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
 		        R.array.region_array, android.R.layout.simple_spinner_item);
 		adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner2.setAdapter(adapter2);
 		spinner2.setOnItemSelectedListener(new SelectedListener2());
 		
-		spinner3 = (Spinner) findViewById(R.id.cityprov_spinner);
+		spinner3 = (Spinner) findViewById(R.id.cityprov_spinner);			//configure spinner for city/municipality, province
 		adapter3 = ArrayAdapter.createFromResource(this,
 		        R.array.ncr_array, android.R.layout.simple_spinner_item);
 		adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -210,13 +201,13 @@ public class ViewInsertActivity extends Activity {
         
         Log.d("otherfields laman",otherFields);
         
-        if(otherFields.compareTo("OK")!=0){
+        if(otherFields.compareTo("OK")!=0){						//check if other fields exist
       
-			LinearLayout ll = (LinearLayout) findViewById(R.id.otherInfoLayout);
+			LinearLayout ll = (LinearLayout) findViewById(R.id.otherInfoLayout);		
 			otherFieldsArray = otherFields.split(",");
-			etArray = new EditText[otherFieldsArray.length];
+			etArray = new EditText[otherFieldsArray.length];			//if other fields exist, generate enough EditText fields
 			
-			for(int i=0; i<otherFieldsArray.length; i++){
+			for(int i=0; i<otherFieldsArray.length; i++){		
 				etArray[i] = new EditText(this);
 				etArray[i].setHint(otherFieldsArray[i]);
 				ll.addView(etArray[i]);
@@ -231,12 +222,11 @@ public class ViewInsertActivity extends Activity {
 		return true;
 	}
 	
-	 public class SelectedListener implements OnItemSelectedListener {
+	 public class SelectedListener implements OnItemSelectedListener {				//configure listener for sex spinner
 
 		    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 		        selected = parent.getItemAtPosition(pos).toString();
-		        //selected = selected.substring(0,1);
-		        //Log.d("Selected",selected);
+
 		    }
 
 		    public void onNothingSelected(AdapterView<?> parent) {
@@ -244,7 +234,7 @@ public class ViewInsertActivity extends Activity {
 		    }
 	}
 	
-	 public class SelectedListener2 implements OnItemSelectedListener {
+	 public class SelectedListener2 implements OnItemSelectedListener {		//configure listener region spinner
 
 		    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 		        selected2 = parent.getItemAtPosition(pos).toString();
@@ -345,13 +335,11 @@ public class ViewInsertActivity extends Activity {
 		    }
 	 }
 	 
-	 public class SelectedListener3 implements OnItemSelectedListener {
+	 public class SelectedListener3 implements OnItemSelectedListener {			//configure listener for city/municipality, province spinner
 
 		    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 		        selected3 = parent.getItemAtPosition(pos).toString();
 		        
-		        
-		        //Log.d("Selected",selected);
 		    }
 
 		    public void onNothingSelected(AdapterView<?> parent) {
@@ -359,9 +347,9 @@ public class ViewInsertActivity extends Activity {
 		    }
 	} 
 	 
-	public void createRecord(View view){
+	public void createRecord(View view){			//function for adding data to the records table
 	    	
-		 	boolean proceed = true;
+		 	boolean proceed = true;												//retrieve data from the EditText fields
 		 	EditText edit_height = (EditText) findViewById(R.id.edit_height);
 			EditText edit_weight = (EditText) findViewById(R.id.edit_weight);
 			EditText edit_age = (EditText) findViewById(R.id.edit_age);
@@ -369,7 +357,8 @@ public class ViewInsertActivity extends Activity {
 			int age = 0;
 			
 			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ViewInsertActivity.this);
-			try {
+			
+			try {																//perform form validation
 				height = Double.parseDouble(edit_height.getText().toString());
 			} catch (NumberFormatException e) {
 				proceed = false;
@@ -395,9 +384,9 @@ public class ViewInsertActivity extends Activity {
 				}
 			}
 			
-			if(proceed){
+			if(proceed){				//if all fields are filled up, prepare data for insertion
 			
-			UUID side_id = UUID.randomUUID();
+			UUID side_id = UUID.randomUUID();			//generate filenames for the captured images
 			UUID front_id = UUID.randomUUID();
 			UUID back_id = UUID.randomUUID();
 			
@@ -409,7 +398,7 @@ public class ViewInsertActivity extends Activity {
 			String filename = side_id+".jpg";
 			File file = new File(folder, filename);
 			try{
-				FileOutputStream fOut = new FileOutputStream(file);
+				FileOutputStream fOut = new FileOutputStream(file);			//write the image files on sd card
 				bmp.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
 			    fOut.flush();
 			    fOut.close();
@@ -436,14 +425,14 @@ public class ViewInsertActivity extends Activity {
 			}
 			catch(IOException e){};
 			
-			DatabaseHelper db = new DatabaseHelper(this);
+			DatabaseHelper db = new DatabaseHelper(this);			
 			
 			Log.d("Side: ",filename);
 			Log.d("Front: ",filename2);
 			Log.d("Back: ",filename3);
 			
 			otherFieldsSend = "";
-			if(otherFields.compareTo("OK")!=0){
+			if(otherFields.compareTo("OK")!=0){						//retrieve other field information
 				for(int i=0; i<otherFieldsArray.length; i++){
 					otherFieldsSend += otherFieldsArray[i]+":";
 					otherFieldsSend += etArray[i].getText().toString();
@@ -455,9 +444,9 @@ public class ViewInsertActivity extends Activity {
 			
 			String projectId = prefs.getString("projectId", "default");
 			
-			db.addRecord(new Record(height,weight,age,selected,
+			db.addRecord(new Record(height,weight,age,selected,				//perform database insertion
 					selected2,selected3,
-					extra.get_measurements()[0],		//double check indices
+					extra.get_measurements()[0],		
 					extra.get_measurements()[6],
 					extra.get_measurements()[5],
 					extra.get_measurements()[2],
@@ -474,37 +463,30 @@ public class ViewInsertActivity extends Activity {
 			
 			
 			
-			if(!MainActivity.mayInternetsBa()){
-				db.enqueueUpload();
+			if(!mayInternets()){				//if no network connection is available
+				db.enqueueUpload();				//enqueue the upload
 				Toast.makeText(this, "Data Enqueued for Uploading.", Toast.LENGTH_SHORT).show();
-				
-				//pairs.add(new BasicNameValuePair("other_category", otherFieldsSend));
-				
 				Log.d("Other Categories",otherFieldsSend);
 				
 			}
 			else{
 				
-				
 		        String url = prefs.getString("url", "http://192.168.1.100");
 		        String authkey = prefs.getString("authkey", "gagraduateako");
 			
-		        
-				HttpPostHelper helper = new HttpPostHelper(url+"/android_add_survey.php"); 	//get url from sharedpreferences
+				HttpPostHelper helper = new HttpPostHelper(url+"/android_add_survey.php"); 		//prepare for making the request
 				
 				ArrayList<NameValuePair> pairs = new ArrayList<NameValuePair>();
 				
 				pairs.add(new BasicNameValuePair("authkey", authkey));
 				pairs.add(new BasicNameValuePair("project_id", projectId));
-				//pairs.add(new BasicNameValuePair("project_name", "Armchair Anthropometry"));
-				//pairs.add(new BasicNameValuePair("description", "Anthropometry for Armchairs. Duh."));
 				pairs.add(new BasicNameValuePair("survey_info_id", projectId+"-"+db.getLastId()));
 				pairs.add(new BasicNameValuePair("gender", selected.substring(0,1)));
 				pairs.add(new BasicNameValuePair("age", age+""));
 				pairs.add(new BasicNameValuePair("height", height+""));
 				pairs.add(new BasicNameValuePair("weight", weight+""));
-				pairs.add(new BasicNameValuePair("region", selected2));	//add for cityprov
-				pairs.add(new BasicNameValuePair("cityprov", selected3));	//add for cityprov
+				pairs.add(new BasicNameValuePair("region", selected2));	
+				pairs.add(new BasicNameValuePair("cityprov", selected3));	
 				pairs.add(new BasicNameValuePair("body_measurement", "sitH:"+extra.get_measurements()[0]+","+
 																	 "pH:"+extra.get_measurements()[1]+","+
 																	 "tC:"+extra.get_measurements()[2]+","+
@@ -520,7 +502,7 @@ public class ViewInsertActivity extends Activity {
 					Log.d("Other Categories",otherFieldsSend);
 				}
 				
-				if(helper.post(pairs))
+				if(helper.post(pairs))				//make the request, prompt user regarding the result
 					Toast.makeText(this, "Data Sent to Server.", Toast.LENGTH_SHORT).show();
 				else{
 					db.enqueueUpload();
@@ -528,7 +510,8 @@ public class ViewInsertActivity extends Activity {
 					}
 				}
 			db.close();
-            Intent intent = new Intent(this, MainActivity.class);
+			
+            Intent intent = new Intent(this, MainActivity.class);			//fire intent to main activity
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP); 
             startActivity(intent);
@@ -539,7 +522,7 @@ public class ViewInsertActivity extends Activity {
 			}
 	    }
 	
-	public void cancel(View view){
+	public void cancel(View view){				//function that brings the researcher back to the first capture
 		
 		 Intent intent = new Intent(this, CameraActivity.class);
 		 
@@ -553,5 +536,13 @@ public class ViewInsertActivity extends Activity {
          finish();
 		
 	}
+	
+	public boolean mayInternets() {			//function for checking the network connection
+	    ConnectivityManager connectivityManager 
+	          = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+	    NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+	    return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+	 }
+	
 
 }

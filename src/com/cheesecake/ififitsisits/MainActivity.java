@@ -20,11 +20,9 @@ import org.apache.http.message.BasicNameValuePair;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -40,14 +38,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -62,12 +58,10 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
 	private BroadcastReceiver broadcastReceiver;
 	private DatabaseHelper db;
 	public static ActionBar actionbar;
-	private static boolean mayInternets=false;
 	private int prevPosition = 0;
 	public static List<Integer> queue;
 	public static List<Record> records;
-	private float refObj;
-	private String url,onProject,projectId,authkey;
+	private String url,projectId,authkey;
 	AlertDialog alertDialog;
 	View promptsView;
 
@@ -90,10 +84,10 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
 		
 		setContentView(R.layout.activity_main);
 		
-	    mTitle = getResources().getString(R.string.app_name);
+	    mTitle = getResources().getString(R.string.app_name);					
 		menuOptions= getResources().getStringArray(R.array.drawer_options); 
 	    
-		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);		//setup navigation drawer
 	    mDrawerList = (ListView) findViewById(R.id.left_drawer);
 	    mDrawerList.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, menuOptions));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
@@ -101,66 +95,24 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         
-        actionbar  = getSupportActionBar();
+        actionbar  = getSupportActionBar();				//setup action bar
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeButtonEnabled(true);
         actionbar.setSubtitle("Home");
         
       
-		FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
+		FragmentTransaction tx = getSupportFragmentManager().beginTransaction();				//initialize user interface
         tx.replace(R.id.main,Fragment.instantiate(MainActivity.this, fragments[0]));
         tx.commit();
-        Editor toEdit;
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-        onProject = prefs.getString("onProject", "false");
-        url = prefs.getString("url", "http://192.168.0.101/SP/Main%20Program");
+        
+        url = prefs.getString("url", "http://192.168.0.101/SP/Main%20Program");		//get sharedpreferences
         projectId = prefs.getString("projectId", "default");
         authkey = prefs.getString("authkey", "default");
         
-        Log.d("PROJECT ID", projectId);
-        
-        db = new DatabaseHelper(this);
+        db = new DatabaseHelper(this);						//setup records
       	ViewRecordsFragment.records = db.getAllRecords(projectId);
-      		
-        LayoutInflater li = LayoutInflater.from(this);
-		promptsView = li.inflate(R.layout.project_dialog, null);
-		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-		alertDialogBuilder.setView(promptsView);
-		alertDialogBuilder.setCancelable(false);
-		alertDialog = alertDialogBuilder.create();
-        
-        if(onProject.equals("false")){
-        	Log.d("PROJECT","WALA");
-			alertDialog.show();	
-        }
-        else{
-        	
-        	if(mayInternets){
-	        	url = prefs.getString("url", "false");
-	        	String projectId = prefs.getString("projectId", "default");
-	        	HttpPostHelper helper = new HttpPostHelper(url+"/project_authenticated.php"); 	//get url from sharedpreferences
-	            
-	        	ArrayList<NameValuePair> pairs = new ArrayList<NameValuePair>();
-	            pairs.add(new BasicNameValuePair("projectkey", projectId));
-	            
-	            if(!helper.post(pairs)){
-	            	toEdit = prefs.edit();
-	            	toEdit.putString("onProject", "false");
-	    			toEdit.putString("projectId", "null");
-	    			toEdit.commit();
-	            	Toast.makeText(this, "Project is expired.", Toast.LENGTH_SHORT).show();
-	            	alertDialog.show();
-	            }
-        	}
-        }
-        
-        //refObj = Float.parseFloat(prefs.getString("refObj", "3.0"));
-        //url = prefs.getString("url", "http://192.168.0.103/SP/Main%20Program");
-        
-        
-        Log.d("Project ID",projectId);
-        
-        
+      		  
 	}
 	
 	@Override
@@ -206,19 +158,18 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
     }
  
 
-    private void selectItem(int position) {
+    private void selectItem(int position) {			//provides navigation to the functionalities of the application
        
     	mDrawerList.setItemChecked(position, true);
    
         mDrawerLayout.closeDrawer(mDrawerList);
       
-        if(position==1){
+        if(position==1){					
         	
         	Intent intent = new Intent(this,CameraActivity.class);
         	IfIFitsExtra extra = new IfIFitsExtra();
         	extra.set_flag(0);
-        	
-        	//intent.putExtra(EXTRA_CAPTURE_FLAG, 0);
+    
         	intent.putExtra(EXTRA_IFIFITS, extra);
         	
             startActivity(intent);
@@ -251,26 +202,12 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             selectItem(position);
-            
-            
+          
         }
     }
     
-    private boolean isAuthenticated(String url){
-    	
-    	Log.d("Inside isAuthenticated","HIHI");
-    	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-        String authkey = prefs.getString("authkey", "");
-        
-        HttpPostHelper helper = new HttpPostHelper(url+"/is_authenticated.php"); 	//get url from sharedpreferences
-        ArrayList<NameValuePair> pairs = new ArrayList<NameValuePair>();
-        pairs.add(new BasicNameValuePair("authkey", authkey));
-        
-        return helper.post(pairs);  
-        //return true;
-    }
     
-    private void installListener() {
+    private void installListener() {		//detects the state of the network connection of the mobile device
 
         if (broadcastReceiver == null) {
 
@@ -288,34 +225,15 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
                     Log.d("InternalBroadcastReceiver", info.toString() + " "
                             + state.toString());
 
-                    if (state == State.CONNECTED) {
+                    if (state == State.CONNECTED) {			//updates the icon on the top right of the action bar
                     	Log.d("Internet Connectivity", "May Internet");
                     	status_internets.setIcon(R.drawable.ic_action_network_wifi);
-                    	mayInternets = true;
+
                     	
-                    	//project authentication nalang
-                    	/*
-                    	if(!isAuthenticated(url)){
-                    		
-                    		Log.d("Inside installListener","AW");
-                    		Editor toEdit;
-                    		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-                    		
-                    		toEdit = prefs.edit();
-                			toEdit.putString("authenticated", "false");
-                			toEdit.commit();
-                			
-                			intent = new Intent(getApplicationContext(),LoginActivity.class);
-                			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                			startActivity(intent);
-                			finish();
-                			
-                    	}*/
                		 
                     } else {
                     	Log.d("Internet Connectivity", "Walang Internet");
                     	status_internets.setIcon(R.drawable.ic_action_network_wifi_dark);
-                    	mayInternets = false;
 
                     }
 
@@ -337,29 +255,28 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
     }
     
     
-    /*DB management stuff*/
+    /*
+     * Database management stuff 
+     * 
+     * */
     
     
-    public void upload(View view){
+    public void upload(View view){		//implementation of the bulk upload functionality
     	
-    	HttpPostHelper helper = new HttpPostHelper(url+"/android_add_survey.php"); 	//get url from sharedpreferences
+    	HttpPostHelper helper = new HttpPostHelper(url+"/android_add_survey.php"); 	
     	ArrayList<NameValuePair> pairs;
  		boolean fail = false;
     	queue = db.getQueue();
  		
     	
-    	if(mayInternets()){
-	    	for(int i=0; i<queue.size(); i++){
+    	if(mayInternets()){				//if a network connection is available
+	    	for(int i=0; i<queue.size(); i++){		//run through the upload queue
 	    		
 	    		Record r = db.getRecord(queue.get(i));
 	    		
-	    		//perform upload
-	    		
-	    		pairs = new ArrayList<NameValuePair>();
+	    		pairs = new ArrayList<NameValuePair>();			//prepare for request
 	    		pairs.add(new BasicNameValuePair("authkey", authkey));
 	    		pairs.add(new BasicNameValuePair("project_id", projectId));
-				//pairs.add(new BasicNameValuePair("project_name", "Armchair Anthropometry"));
-				//pairs.add(new BasicNameValuePair("description", "Anthropometry for Armchairs. Duh."));
 				pairs.add(new BasicNameValuePair("survey_info_id", projectId+"-"+r.get_id()));
 				pairs.add(new BasicNameValuePair("gender",  r.get_sex().substring(0,1)));
 				pairs.add(new BasicNameValuePair("age",  r.get_age()+""));
@@ -377,16 +294,12 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
 																	 "hB:"+r.get_hB()+","+
 																	 "kkB:"+r.get_kkB()));
 				pairs.add(new BasicNameValuePair("other_category",r.get_otherFields()));
-				
-				Log.d("Project ID",projectId);
-				Log.d("Survey Info ID",projectId+"-"+r.get_id());
-				Log.d("other_category",r.get_otherFields());
-				if(helper.post(pairs)){
+			
+				if(helper.post(pairs)){					//perform request
 					Log.d("Uploaded",queue.get(i)+"");
 					db.dequeue(queue.get(i));
-					
-					//refresh fragment
-			    	FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
+			
+			    	FragmentTransaction tx = getSupportFragmentManager().beginTransaction();		//refresh fragment
 		        	tx.replace(R.id.main, Fragment.instantiate(MainActivity.this, fragments[2])).addToBackStack("fragment_2");
 		        	FragmentManager fm = MainActivity.this.getSupportFragmentManager();
 		            fm.popBackStack ("fragment_2", FragmentManager.POP_BACK_STACK_INCLUSIVE);
@@ -399,7 +312,7 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
 				}
 	    	}
 	    	
-	    	if(fail)
+	    	if(fail)			//display error messages if necessary
 	    		Toast.makeText(this, "Not all data was successfully uploaded.", Toast.LENGTH_SHORT).show();
 	    	else
 	    		Toast.makeText(this, "Data Sent to Server.", Toast.LENGTH_SHORT).show();
@@ -409,99 +322,15 @@ public class MainActivity extends ActionBarActivity {		//Start of class MainActi
     		Log.d("AUTHKEY",authkey);
     		}
     	}
-    
-    public void deleteAll(View view){
-    	
-    	// 1. Instantiate an AlertDialog.Builder with its constructor
-    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-    	// 2. Chain together various setter methods to set the dialog characteristics
-    	builder.setMessage(R.string.confirm_delete_msg).setTitle(R.string.confirm_delete_title);
-    	
-    	
-    	builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                // User clicked OK button
-            	
-            	db.deleteAll(projectId);
-            	
-            	FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-            	tx.replace(R.id.main, Fragment.instantiate(MainActivity.this, fragments[2])).addToBackStack("fragment_2");
-            	FragmentManager fm = MainActivity.this.getSupportFragmentManager();
-                fm.popBackStack ("fragment_2", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-            	tx.commit();
-            	
-            	Toast.makeText(MainActivity.this, "All Records Deleted.", Toast.LENGTH_SHORT).show();
-            }
-        });
-    	
-    	builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                // User cancelled the dialog
-            }
-        });
-    	
-    	// 3. Get the AlertDialog from create()
-    	AlertDialog dialog = builder.create();
-    	dialog.show();
-    }
-    
-    public static boolean mayInternetsBa(){
-    	
-    	return mayInternets;
-    	
-    }
+   
     
     public void exit(View view){
     	finish();
     }
-    public void authenticateProject(View view){
-    	
-    	EditText userInput = (EditText) promptsView.findViewById(R.id.projectId_Input);
-    	String input =  userInput.getText().toString();
-    	
-    	if(mayInternets){
-    		
-    		Editor toEdit;
-    		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-    		String url = prefs.getString("url", "http://192.168.0.101/SP/Main%20Program");
-    		String response;
-    		
-    		HttpPostHelper helper = new HttpPostHelper(url+"/project_authenticated.php"); 	//get url from sharedpreferences
-            ArrayList<NameValuePair> pairs = new ArrayList<NameValuePair>();
-            pairs.add(new BasicNameValuePair("projectkey", input));
-            
-            if(helper.post_string(pairs).compareTo("ERR")!=0){		//try ibalik sa helper.post
-            	
-            	response = helper.response;
-            	
-            	
-            	
-            	response = response.replace("[", "");
-            	response = response.replace("]", "");
-            	response = response.replace("\"", "");
-            	
-        		toEdit = prefs.edit();
-    			toEdit.putString("onProject", "true");
-    			toEdit.putString("projectId", input);
-    			toEdit.putString("otherFields", response);
-    			toEdit.commit();
-    			Toast.makeText(this, "Project \""+input+"\" started!", Toast.LENGTH_SHORT).show();
-    			alertDialog.dismiss();
-    			Log.d("otherFields",response);
-            }
-            else{
-            	Toast.makeText(this, "Invalid Project ID", Toast.LENGTH_SHORT).show();
-            }
-    		
-    	}
-    	else{
-    		Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
-    	}
-    	//alertDialog.dismiss();
-    }
     
-    public boolean mayInternets() {
+    
+    
+    public boolean mayInternets() {			//function for checking network connection status
 	    ConnectivityManager connectivityManager 
 	          = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 	    NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();

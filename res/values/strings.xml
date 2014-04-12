@@ -137,4 +137,9 @@
     <string name="ics">Institute of Computer Science</string>
     <string name="uplb">UPLB</string>
     
+    <!-- Strings for Project Dialog -->
+    
+    <string name="startproject">Start a Project</string>
+    <string name="hint_projectId">Enter Project ID</string>
+    
 </resources>

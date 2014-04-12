@@ -1,12 +1,20 @@
+/*
+ *	Project.java
+ *  Description: This is the model class for projects. 
+ *  Author: Escamos, Ivan Marc H. 
+ *  Date last modified: 04/10/14
+ *  
+ */
+
 package com.cheesecake.ififitsisits;
 
-public class Project {
+public class Project {		//start of class Project
 
 	private String projectId;
 	private String projectName;
 	private String otherFields;
 	
-	public Project(){
+	public Project(){		//default constructor for class project
 		
 		this.projectId = "";
 		this.projectName = "";
@@ -14,7 +22,7 @@ public class Project {
 		
 	}
 	
-	public Project(String projectId,String projectName,String otherFields){
+	public Project(String projectId,String projectName,String otherFields){	//overloaded constructor for class project
 		
 		this.projectId = projectId;
 		this.projectName = projectName;
@@ -22,7 +30,7 @@ public class Project {
 		
 	}
 	
-	public String get_projectId(){
+	public String get_projectId(){		//getters and setters
 		return this.projectId;
 	}
 	

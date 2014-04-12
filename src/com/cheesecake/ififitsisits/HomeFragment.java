@@ -1,3 +1,11 @@
+/*
+ *	HelpFragment.java
+ *  Description: This fragment serves as the "home screen" of the application.  
+ *  Author: Escamos, Ivan Marc H. 
+ *  Date last modified: 04/10/14
+ *  
+ */
+
 package com.cheesecake.ififitsisits;
 
 import android.content.Context;

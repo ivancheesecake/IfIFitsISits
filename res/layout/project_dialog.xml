@@ -17,7 +17,7 @@
 	        android:id="@+id/textView_projectId"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:text="Start a Project"
+	        android:text="@string/startproject"
 	        android:textAppearance="?android:attr/textAppearanceLarge" 
 	        android:textColor="@color/white"
 	        android:padding="2dp"/>
@@ -27,7 +27,7 @@
         android:id="@+id/projectId_Input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Project ID"
+        android:hint="@string/hint_projectId"
         android:inputType="text" >
  
         <requestFocus />
@@ -48,7 +48,7 @@
 	            android:layout_margin="2dp"
 	            android:layout_weight="1"
 	            android:onClick="authenticateProject"
-	            android:text="OK" />  
+	            android:text="@string/ok" />  
         
  			<Button
 	            android:id="@+id/projectid_cancel"
@@ -57,7 +57,7 @@
 	            android:layout_margin="2dp"
 	            android:layout_weight="1"
 	            android:onClick="exit"
-	            android:text="Cancel" />
+	            android:text="@string/cancel" />
 	
 	        </LinearLayout>    
  

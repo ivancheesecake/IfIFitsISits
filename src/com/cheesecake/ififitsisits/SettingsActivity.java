@@ -1,3 +1,11 @@
+/*
+ *	SettingsActivity.java
+ *  Description: This activity serves as the settings screen of the application. This allows the user to modify the reference object size. 
+ *  Author: Escamos, Ivan Marc H. 
+ *  Date last modified: 04/10/14
+ *  
+ */
+
 package com.cheesecake.ififitsisits;
 
 import android.content.SharedPreferences;

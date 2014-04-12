@@ -1,3 +1,11 @@
+/*
+ *	AboutFragment.java
+ *  Description: This fragment serves as the About screen of the application. 
+ *  Author: Escamos, Ivan Marc H. 
+ *  Date last modified: 04/10/14
+ *  
+ */
+
 package com.cheesecake.ififitsisits;
 
 import android.content.Context;
@@ -7,11 +15,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
  
-public class AboutFragment extends Fragment {
+public class AboutFragment extends Fragment {		//Start of class AboutFragment
  
     public static Fragment newInstance(Context context) {
        AboutFragment f = new AboutFragment();
- 
+       MainActivity.actionbar.setSubtitle("About");
         return f;
     }
  

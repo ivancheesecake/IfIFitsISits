@@ -1,8 +1,8 @@
 /*
- *	AkingAdapter.java
- *  Description: This is a customized ArrayAdapter<String> class to be used
+ *	AkingSimpleAdapter.java
+ *  Description: This is another customized ArrayAdapter<String> class to be used.
  *  Author: Escamos, Ivan Marc H. 
- *  Date last modified: 02/05/2014
+ *  Date last modified: 04/10/2014
  *  
  *  Got help from http://www.vogella.com/articles/AndroidListView/article.html
  */
@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class AkingSimpleAdapter extends ArrayAdapter<String> {						//Start of class AkingAdapter
+public class AkingSimpleAdapter extends ArrayAdapter<String> {						//Start of class AkingSimpleAdapter
 	private Context context;
 	private String[] contents;
 

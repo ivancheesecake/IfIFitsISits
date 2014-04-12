@@ -1,3 +1,11 @@
+/*
+ *	ProjectActivity.java
+ *  Description: This activity serves as the "project selection screen" of the application. It allows the user to add and select projects to work on. 
+ *  Author: Escamos, Ivan Marc H. 
+ *  Date last modified: 104/10/14
+ *  
+ */
+
 package com.cheesecake.ififitsisits;
 
 import java.util.ArrayList;
@@ -32,7 +40,6 @@ public class ProjectActivity extends ActionBarActivity {
 	View promptsView;
 	List<Project> projects;
 	DatabaseHelper db;
-	//int projectIds[];
 	String projectNames[];
 	Project p;
 	SharedPreferences prefs;
@@ -46,9 +53,6 @@ public class ProjectActivity extends ActionBarActivity {
 		prefs = PreferenceManager.getDefaultSharedPreferences(ProjectActivity.this);
     	
 		projects = db.getAllProjects();
-		
-		
-		//if(projects!=null)
 			
 		projectNames = new String[projects.size()];
 		for(int i=0; i<projects.size(); i++){
@@ -65,20 +69,20 @@ public class ProjectActivity extends ActionBarActivity {
     	toEdit = prefs.edit();
 		
 		
-		if(mayInternets()){
+		if(mayInternets()){			//if a network connection is available
         
-			HttpPostHelper helper = new HttpPostHelper(url+"/project_authenticated.php"); 	//get url from sharedpreferences
+			HttpPostHelper helper = new HttpPostHelper(url+"/project_authenticated.php"); 	
             
         	ArrayList<NameValuePair> pairs = new ArrayList<NameValuePair>();
             
             Log.d("Projects.size",projects.size()+"");
             
-            for(int i=0; i< projects.size(); i++){
+            for(int i=0; i< projects.size(); i++){		//check if all current projects are still valid
             	
             	p = projects.get(i);
             	pairs.add(new BasicNameValuePair("projectkey", p.get_projectId()));
 	            
-            	if(!helper.post(pairs)){
+            	if(!helper.post(pairs)){		//if the project is invalid, remove the project and all related data
 	            		
 	            	toEdit = prefs.edit();
 	            	toEdit.putString("onProject", "false");
@@ -91,15 +95,13 @@ public class ProjectActivity extends ActionBarActivity {
 	    
 	            }
             	
-            	Log.d("Loop","loop");
             }
             
             
     	}
 		
 		
-		final ListView listview = (ListView) findViewById(R.id.listview_allprojects);
-		
+		final ListView listview = (ListView) findViewById(R.id.listview_allprojects);			//display all current valid projects
 		
 		AkingSimpleAdapter adapter = new AkingSimpleAdapter(this,projectNames);
 		listview.setAdapter(adapter);
@@ -112,20 +114,17 @@ public class ProjectActivity extends ActionBarActivity {
 		    	
 		    	Editor toEdit;
 		    	toEdit = prefs.edit();
-		    	boolean tuloy = true;
-		    	
-		    	if(tuloy){
 			    
-			    	toEdit = prefs.edit();				 
+			    	toEdit = prefs.edit();				 				//set sharedpreferences that define the project
 	    			toEdit.putString("onProject", "true");    
 	    			toEdit.putString("projectId", p.get_projectId());
 	    			toEdit.putString("projectName", p.get_projectName());
 	    			toEdit.putString("otherFields", p.get_otherFields());
 	    			toEdit.commit();
 	    			
-	    			Intent intent = new Intent(ProjectActivity.this,MainActivity.class);
+	    			Intent intent = new Intent(ProjectActivity.this,MainActivity.class);	//fire intent to main activity
 	    			startActivity(intent);
-		    		}
+		    		
 		        }
 		    });
 		
@@ -140,7 +139,7 @@ public class ProjectActivity extends ActionBarActivity {
 		return true;
 	}
 
-	public void addProject(View view){
+	public void addProject(View view){			//function that displays an alertdialog for adding projects
 		
 		LayoutInflater li = LayoutInflater.from(this);
 		promptsView = li.inflate(R.layout.project_dialog, null);
@@ -152,30 +151,28 @@ public class ProjectActivity extends ActionBarActivity {
 		alertDialog.show();
 	}
 	
-	public void authenticateProject(View view){
+	public void authenticateProject(View view){		//function for adding projects
     	
     	EditText userInput = (EditText) promptsView.findViewById(R.id.projectId_Input);
     	String input =  userInput.getText().toString();
     	
-    	if(mayInternets()){
+    	if(mayInternets()){		//if a network connection is available
     		
-    		Editor toEdit;
     		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ProjectActivity.this);
     		String url = prefs.getString("url", "http://192.168.0.101/SP/Main%20Program");
     		String responseRaw;
     		String response[] = new String[2];
     		
-    		HttpPostHelper helper = new HttpPostHelper(url+"/project_authenticated.php"); 	//get url from sharedpreferences
+    		HttpPostHelper helper = new HttpPostHelper(url+"/project_authenticated.php"); 	
             ArrayList<NameValuePair> pairs = new ArrayList<NameValuePair>();
             pairs.add(new BasicNameValuePair("projectkey", input));
             
-            if(helper.post_string(pairs).compareTo("ERR")!=0){		//try ibalik sa helper.post
+            if(helper.post_string(pairs).compareTo("ERR")!=0){		//if the project is valid
             	
-            	Project p;
-            	responseRaw = helper.response;
+            	Project p;							
+            	responseRaw = helper.response;			//get the response string
             	
-            	response = responseRaw.split("\\[");
-            	
+            	response = responseRaw.split("\\[");		//parse for the project name and other field names if they exist
             	
             	if(response.length > 1){
 	            	response[1] = response[1].replace("[", "");
@@ -184,16 +181,15 @@ public class ProjectActivity extends ActionBarActivity {
 	            	p = new Project(input,response[0],response[1]);
 	            	
             	}
-            	else{
+            	else{										//else, create a project with no other field names
             		p = new Project(input,response[0],"OK");	
             	}
     			
-    			db.addProject(p);
-    			Toast.makeText(this, "Project \""+response[0]+"\" started!", Toast.LENGTH_SHORT).show();
+    			db.addProject(p);		//insert the new project to the database
+    			Toast.makeText(this, "Project \""+response[0]+"\" started!", Toast.LENGTH_SHORT).show();		//notify the user
     			alertDialog.dismiss();
-    			//Log.d("otherFields",response[1]);
     			
-    			finish();
+    			finish();				//refresh the activity
     			startActivity(getIntent());
             }
             else{
@@ -204,7 +200,7 @@ public class ProjectActivity extends ActionBarActivity {
     	else{
     		Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
     	}
-    	//alertDialog.dismiss();
+  
     }
 	
 	public boolean mayInternets() {

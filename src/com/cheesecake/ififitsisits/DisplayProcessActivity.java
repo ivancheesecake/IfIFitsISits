@@ -1,3 +1,12 @@
+/*
+ *	MainActivity.java
+ *  Description: This activity performs the digital image processing for deriving anthropometric data and displays the result. 
+ *  Author: Escamos, Ivan Marc H. 
+ *  Date last modified: 04/10/14
+ *  
+ */
+
+
 package com.cheesecake.ififitsisits;
 
 import java.io.File;
@@ -43,31 +52,23 @@ public class DisplayProcessActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_display_process);
 		
-		System.loadLibrary("ififits_native");
-		Intent intent = getIntent();
-
+		System.loadLibrary("ififits_native");				//Load the native library
+		
+		Intent intent = getIntent();			//get the data from the previous activity
 		extra = (IfIFitsExtra) intent.getSerializableExtra(EXTRA_IFIFITS);	
 		rawCachePath = intent.getStringExtra(EXTRA_IMAGE_PATH); 
 		cachePaths = extra.get_cachePaths();
-		//Parcelable[] ps = intent.getParcelableArrayExtra(EXTRA_IFIFITS_BITMAPS);	
-		//extraBitmaps = new Bitmap[ps.length];
-		//System.arraycopy(ps, 0, extraBitmaps, 0, ps.length);
+		flag = extra.get_flag();
+		measurements = extra.get_measurements();
 		
-		//Prepare bitmap
-		
-		origBitmap = BitmapFactory.decodeFile(rawCachePath);
+		origBitmap = BitmapFactory.decodeFile(rawCachePath);   
 		Bitmap.createScaledBitmap(origBitmap, (int)origBitmap.getWidth()/2, (int)origBitmap.getHeight()/2, false);
 		origBitmapCropped = Bitmap.createBitmap(origBitmap, (int)origBitmap.getWidth()/2, 0, (int)origBitmap.getWidth()/2, (int)origBitmap.getHeight());
-		
-		flag = extra.get_flag();
-		
-		measurements = extra.get_measurements();
 		
 		origImageView = (ImageView) findViewById(R.id.display);
 		origImageView.setImageBitmap(origBitmapCropped);
 		
 		origMat = new Mat();
-		
 		origMat_copy = new Mat();
 		
 		Utils.bitmapToMat(origBitmapCropped, origMat);
@@ -75,21 +76,17 @@ public class DisplayProcessActivity extends Activity {
 		keyedMat = new Mat();
 		keyedMat_copy = new Mat();
 		
-		
-		SimpleKeyer(origMat.getNativeObjAddr(),keyedMat.getNativeObjAddr());	
+		SimpleKeyer(origMat.getNativeObjAddr(),keyedMat.getNativeObjAddr());	//perform chroma keying
 
-		//Utils.matToBitmap(origMat, extraBitmaps[flag]);
-		//origImageView.setImageBitmap(extraBitmaps[flag]);
-		
 		keyedMat.copyTo(keyedMat_copy);
 		
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(DisplayProcessActivity.this);
         refObj = Float.parseFloat(prefs.getString("refObj", "20.0"));
         
-		DeriveData(keyedMat.getNativeObjAddr(), origMat.getNativeObjAddr(),measurements, refObj, flag); //use sharedpreferences for refobj dimensions
+		DeriveData(keyedMat.getNativeObjAddr(), origMat.getNativeObjAddr(),measurements, refObj, flag); //derive measurements 
 		Utils.matToBitmap(origMat, origBitmapCropped);
 		
-		File folder = new File(Environment.getExternalStorageDirectory() + "/ififits");
+		File folder = new File(Environment.getExternalStorageDirectory() + "/ififits");	 //save processed image to sd card
 		
 		if (!folder.exists()) 
 			folder.mkdir();
@@ -98,7 +95,7 @@ public class DisplayProcessActivity extends Activity {
 		
 		File file = new File(folder, filename);
 		
-		try{
+		try{										
 			FileOutputStream fOut = new FileOutputStream(file);
 			origBitmapCropped.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
 		    fOut.flush();
@@ -107,11 +104,7 @@ public class DisplayProcessActivity extends Activity {
 		catch(IOException e){};
 		
 		cachePaths[flag] = filename;
-		
-		//keyedBitmap = Bitmap.createBitmap(origMat.width(), origMat.height(), Bitmap.Config.ARGB_8888);	//Initialize Bitmap
-		//Utils.matToBitmap(keyedMat_copy,keyedBitmap);
-		//keyedImageView = (ImageView) findViewById(R.id.display2);
-		//keyedImageView.setImageBitmap(keyedBitmap);
+
 		
 		extra.set_cachePaths(cachePaths);
 	
@@ -126,13 +119,12 @@ public class DisplayProcessActivity extends Activity {
 		return true;
 	}
 	
-	public void proceed(View view){
+	public void proceed(View view){		//fires intent to next capture or to ViewInsertActivity
 		
 		if(flag!=2){
 			extra.next_flag();
 			Intent intent = new Intent(this,CameraActivity.class);
 			intent.putExtra(EXTRA_IFIFITS, extra);
-			//intent.putExtra(EXTRA_IFIFITS_BITMAPS, extraBitmaps);
 			startActivity(intent);
 			
 		}
@@ -143,11 +135,10 @@ public class DisplayProcessActivity extends Activity {
 		}
 	}
 	
-	public void cancel(View view){
+	public void cancel(View view){  //fires intent to previous capture
 		
 		Intent intent = new Intent(this,CameraActivity.class);
 		intent.putExtra(EXTRA_IFIFITS, extra);
-		//intent.putExtra(EXTRA_IFIFITS_BITMAPS, extraBitmaps);
 		startActivity(intent);
 		finish();
 		
@@ -173,11 +164,8 @@ public class DisplayProcessActivity extends Activity {
         }
     }
 	
-	public native void Keyer(long src, long dst);
-	public native void SimpleKeyer(long src, long dst);
-	public native void KeyerYCbCr(long src, long dst);
+
+	public native void SimpleKeyer(long src, long dst);			//Native methods
 	public native void DeriveData(long src,long dst, double [] measurements, double actualDimensions, int flag);
-	
-	
 
 }

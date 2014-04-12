@@ -1,4 +1,9 @@
 /*
+ * ViewRecordFragment.java
+ * Description: This fragment allows the researcher to view data associated with a certain subject.
+ * Author: Escamos, Ivan Marc H. 
+ * Date last modified: 04/10/14
+ * Got help from: 
  * http://stackoverflow.com/questions/7693633/android-image-dialog-popup
  * http://www.dreamincode.net/forums/topic/331525-full-screen-dialog-with-scaled-image/
  * 
@@ -27,7 +32,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class ViewRecordFragment extends Fragment{
+public class ViewRecordFragment extends Fragment{		//Start of class ViewRecordFragment
 
 	public static Record r;
 	Bitmap side,front,back;
@@ -46,10 +51,10 @@ public class ViewRecordFragment extends Fragment{
         
         MainActivity.actionbar.setSubtitle("View Record");
         
-        DisplayMetrics displaymetrics = new DisplayMetrics();
+        DisplayMetrics displaymetrics = new DisplayMetrics();						//get screen size
 		getActivity().getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
 		
-		int screen_height = displaymetrics.heightPixels;
+		int screen_height = displaymetrics.heightPixels;			
 		int screen_width = displaymetrics.widthPixels;
 		
 		File extStore = Environment.getExternalStorageDirectory();
@@ -59,15 +64,15 @@ public class ViewRecordFragment extends Fragment{
 		Log.d("Front: ",r.get_frontImg());
 		Log.d("Back: ",r.get_backImg());
 		
-		side = BitmapFactory.decodeFile(path+"/ififits/"+r.get_sideImg());
+		side = BitmapFactory.decodeFile(path+"/ififits/"+r.get_sideImg());		//load processed images
 		front = BitmapFactory.decodeFile(path+"/ififits/"+r.get_frontImg());
 		back = BitmapFactory.decodeFile(path+"/ififits/"+r.get_backImg());
 		
-		ImageView imageview_side = (ImageView) v.findViewById(R.id.imageview_side);
+		ImageView imageview_side = (ImageView) v.findViewById(R.id.imageview_side);		
 		ImageView imageview_front = (ImageView) v.findViewById(R.id.imageview_front);
 		ImageView imageview_back = (ImageView) v.findViewById(R.id.imageview_back);
 		
-		imageview_side.setOnClickListener(new OnClickListener() {
+		imageview_side.setOnClickListener(new OnClickListener() {			//add enlarged image dialogs
 			
 			@Override
 			public void onClick(View arg0) {
@@ -113,7 +118,6 @@ public class ViewRecordFragment extends Fragment{
 		});
 		
 		
-		
 		int image_width = (int)screen_width/3;
 		int image_height = (int)screen_height/3;
 		
@@ -123,13 +127,11 @@ public class ViewRecordFragment extends Fragment{
 			image_width = temp;
 		}
 		
-		imageview_side.setImageBitmap(Bitmap.createScaledBitmap(side, image_width, image_height, false));
+		imageview_side.setImageBitmap(Bitmap.createScaledBitmap(side, image_width, image_height, false));		//display images
 		imageview_front.setImageBitmap(Bitmap.createScaledBitmap(front, image_width, image_height, false));
 		imageview_back.setImageBitmap(Bitmap.createScaledBitmap(back, image_width, image_height, false));
-        
-		
-		
-		TextView textview_subjectId = (TextView) v.findViewById(R.id.textview_subjectId);
+				
+		TextView textview_subjectId = (TextView) v.findViewById(R.id.textview_subjectId);			//get TextViews
 		TextView textview_heightVal = (TextView) v.findViewById(R.id.textview_heightVal);
 		TextView textview_weightVal = (TextView) v.findViewById(R.id.textview_weightVal);
 		TextView textview_ageVal = (TextView) v.findViewById(R.id.textview_ageVal);
@@ -149,7 +151,7 @@ public class ViewRecordFragment extends Fragment{
 		
 		DecimalFormat df = new DecimalFormat("#.0000");
 		
-		textview_subjectId.setText("Subject #"+r.get_id());
+		textview_subjectId.setText("Subject #"+r.get_id());						//place values in TextViews
 		textview_heightVal.setText(df.format(r.get_height())+"cm");
 		textview_weightVal.setText(df.format(r.get_weight())+"kg");
 		textview_ageVal.setText(r.get_age()+" y/o");
@@ -167,7 +169,7 @@ public class ViewRecordFragment extends Fragment{
 		textview_regionVal.setText(r.get_region());
 		textview_dateVal.setText(r.get_date());
 		
-		LinearLayout ll = (LinearLayout) v.findViewById(R.id.other_fields);
+		LinearLayout ll = (LinearLayout) v.findViewById(R.id.other_fields);			//display other fields
 		
 		Log.d("Other Fields",r.get_otherFields());
 		String otherFields[] = r.get_otherFields().split(",");

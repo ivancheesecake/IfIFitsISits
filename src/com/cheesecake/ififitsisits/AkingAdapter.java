@@ -1,6 +1,6 @@
 /*
  *	AkingAdapter.java
- *  Description: This is a customized ArrayAdapter<String> class to be used
+ *  Description: This is a customized ArrayAdapter<String> class.
  *  Author: Escamos, Ivan Marc H. 
  *  Date last modified: 02/05/2014
  *  

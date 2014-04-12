@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,8 +14,7 @@
     android:layout_height="wrap_content"
     tools:context=".LoginActivity"
     android:background="@color/emerald" 
-    android:orientation="vertical"
-    android:layout_centerInParent="true">
+    android:orientation="vertical">
     
     <ImageView android:id="@+id/login_graphic"
         android:src="@drawable/login_graphic_small"
@@ -82,4 +81,4 @@
    
 
 </LinearLayout>
-</RelativeLayout>
+</ScrollView>

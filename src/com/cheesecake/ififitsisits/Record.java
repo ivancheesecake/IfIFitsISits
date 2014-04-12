@@ -1,3 +1,11 @@
+/*
+ *	Record.java
+ *  Description: This is the model class for records. 
+ *  Author: Escamos, Ivan Marc H. 
+ *  Date last modified: 04/10/14
+ *  
+ */
+
 package com.cheesecake.ififitsisits;
 
 import java.io.Serializable;
@@ -29,7 +37,9 @@ public class Record implements Serializable{
 	private String projectId;
 	private String otherFields;
 	
-	public Record(){
+	//Constructors
+	
+	public Record(){		
 		
 		this.height = 0.0;
 	    this.weight = 0.0;

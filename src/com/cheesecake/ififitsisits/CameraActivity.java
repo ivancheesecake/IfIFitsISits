@@ -1,3 +1,12 @@
+/*
+ *	CameraActivity.java
+ *  Description: This activity allows the user to capture images and store them in the SD Card. 
+ *  Author: Escamos, Ivan Marc H. 
+ *  Date last modified: 02/05/14
+ *  
+ *  Got a lot of help from: http://blog.blundell-apps.com/tut-using-the-camera-with-a-custom-overlay/
+ */
+
 package com.cheesecake.ififitsisits;
 
 import static com.cheesecake.ififitsisits.camerautils.CameraHelper.cameraAvailable;
@@ -18,7 +27,6 @@ import android.graphics.BitmapFactory;
 import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -27,7 +35,6 @@ import com.cheesecake.ififitsisits.camerautils.CameraPreview;
  
 /**
  * Takes a photo saves it to the SD card and returns the path of this photo to the calling Activity
- * @author paul.blundell
  *
  */
 public class CameraActivity extends Activity implements PictureCallback {
@@ -86,17 +93,11 @@ public class CameraActivity extends Activity implements PictureCallback {
         Intent intent = getIntent();
         extra = (IfIFitsExtra) intent.getSerializableExtra(EXTRA_IFIFITS);
         flag = extra.get_flag();
-        /*
-        DisplayMetrics displaymetrics = new DisplayMetrics();
-		getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-		
-		int screen_height = displaymetrics.heightPixels;
-		int screen_width = displaymetrics.widthPixels;
-		*/
+
         ImageView img = (ImageView) findViewById(R.id.camera_prompt);
         Bitmap bmp = null;
         
-        switch(flag){
+        switch(flag){				//select prompt image based on current flag
         	case 0:
         		bmp = BitmapFactory.decodeResource(getResources(),R.drawable.prompt_side_dark);
         		break;
@@ -109,7 +110,7 @@ public class CameraActivity extends Activity implements PictureCallback {
         }
         
         
-        img.setImageBitmap(bmp);
+        img.setImageBitmap(bmp);	//display prompt image
         
     }
  
@@ -145,7 +146,6 @@ public class CameraActivity extends Activity implements PictureCallback {
         Intent intent = new Intent(this,DisplayProcessActivity.class);
         intent.putExtra(EXTRA_IMAGE_PATH, path);
         intent.putExtra(EXTRA_IFIFITS, extra);
-       // setResult(RESULT_OK, intent);
         releaseCamera();
         startActivity(intent);
     }

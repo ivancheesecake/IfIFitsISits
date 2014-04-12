@@ -1,3 +1,12 @@
+/*
+
+ArmchairAnthropometry.cpp
+Descripiton: Contains native functions for deriving anthropometric data using digital image processing.
+Author: Escamos, Ivan Marc H.
+Date last modified: 04/10/2014
+
+*/
+
 #include <jni.h>
 #include <opencv2/core/core.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
@@ -12,7 +21,7 @@ using namespace cv;
 
 extern "C" {
 
-	float euclideanDistance2d(Point A, Point B);
+	float euclideanDistance2d(Point A, Point B);			//function prototypes
 	void midPoint(Point *midpoint, Point a, Point b);
 	void measureSide(Mat & src, Mat & out, double *measurements, double actual_dimensions);
 	void measureFront(Mat & src, Mat & out, double *measurements,double actual_dimensions);
@@ -24,12 +33,6 @@ extern "C" {
 
 	Mat & binaryMat = *(Mat*)src;
 	Mat & img = *(Mat*)out;
-	//Mat & binaryMat2 = *(Mat*)src2;
-	//Mat & img2 = *(Mat*)out2;
-
-	//Mat binaryMat2;
-
-    //binaryMat.copyTo(binaryMat2);
 
     jdouble *measurementsArray;
     measurementsArray = env->GetDoubleArrayElements(arr, NULL);
@@ -39,18 +42,18 @@ extern "C" {
          return -1; /* exception occurred */
      }	
 
-     if(flag==0)
+     if(flag==0)			//call appropriate function based on current flag
      	measureSide(binaryMat,img,measurementsArray,dimensions);
      else if(flag==1)
      	measureBack(binaryMat,img,measurementsArray,dimensions);
      else
      	measureFront(binaryMat,img,measurementsArray,dimensions);	
 
-     env->ReleaseDoubleArrayElements(arr, measurementsArray, 0);
+     env->ReleaseDoubleArrayElements(arr, measurementsArray, 0);		//return the float array to java
 
 	}
 
-	void measureSide(Mat & src, Mat & out, double *measurements, double actual_dimensions){
+	void measureSide(Mat & src, Mat & out, double *measurements, double actual_dimensions){		//function for deriving anthropometric data in the side image
 
 	Mat & binaryMat = *(&src);
 	Mat & img = *(&out);
@@ -58,11 +61,9 @@ extern "C" {
 
     binaryMat.copyTo(binaryMat2);
 
-    
-
     char output[50];
    	sprintf(output,"%f",actual_dimensions);
-	__android_log_write(ANDROID_LOG_INFO, "Measure", "Side");//Or ANDROID_LOG_INFO, ... 
+	__android_log_write(ANDROID_LOG_INFO, "Measure", "Side");
 
 	/*
 	=========== Find the Subject and the Reference Object ==============
@@ -194,8 +195,6 @@ extern "C" {
 
 		D = Point(C.x,subject_height);	
 
-
-		//line( img, C, D, Scalar( 255, 0, 255 ), 1, 8 );
 		circle(img, C, 10, Scalar( 255, 0, 255 ), -1, 8,0);
 		circle(img, D, 10, Scalar( 255, 0, 255 ), -1, 8,0);
 		pH = euclideanDistance2d(C,D);
@@ -262,7 +261,6 @@ extern "C" {
 				}
 		}
 
-		//line( img, H, I, Scalar( 255, 255, 0 ), 1, 8 );
 		circle(img, H, 10, Scalar( 255, 255, 0 ), -1, 8,0);
 		circle(img, I, 10, Scalar( 255, 255, 0 ), -1, 8,0);
 		bpL = euclideanDistance2d(H,I);
@@ -272,7 +270,6 @@ extern "C" {
 		
 		J = Point(I.x, D.y);
 		K = Point(I.x,F.y);
-		//line( img, J, K, Scalar( 0, 255, 255 ), 1, 8 );
 		circle(img, J, 10, Scalar( 255, 255, 255 ), -1, 8,0);
 		circle(img, K, 10, Scalar( 0, 255, 255 ), -1, 8,0);
 
@@ -280,8 +277,6 @@ extern "C" {
 		knH /= pixelRatio;
 
 		//Store Measurements
-
-		//measurements[0] = sitH;
 		measurements[1] = 0.6339*pH +11.896;
 		measurements[2] = 0.4868*tC +6.9836;
 		measurements[3] = 0.6024*bpL + 19.855;
@@ -297,7 +292,7 @@ extern "C" {
 	
 }
 
-void measureFront(Mat & src, Mat & out, double *measurements,double actual_dimensions){
+void measureFront(Mat & src, Mat & out, double *measurements,double actual_dimensions){		//function for deriving anthropometric data in the front image
 
 	__android_log_write(ANDROID_LOG_INFO, "Measure", "Front");//Or ANDROID_LOG_INFO, ...
 
@@ -398,9 +393,6 @@ void measureFront(Mat & src, Mat & out, double *measurements,double actual_dimen
 
 		float hip,maxHip=0,knee,minKnee=subject_width,temp_x1,temp_x2,max_x1=0,max_x2=0,max_y=0,min_x1=0,min_x2=0,min_y=0;
 		
-		//D = Point(subject_x,(int)((subject_y+subject_height)/2)+((subject_y+subject_height)/4));
-		//E = Point(subject_x,(int)((subject_y+subject_height)/2)+((subject_y+subject_height)/4)-(subject_height/10));
-
 		D = Point(subject_x, subject_height - (int)subject_height/4.5);
 		E = Point(subject_x, subject_height - (int)subject_height/3);
 
@@ -433,7 +425,6 @@ void measureFront(Mat & src, Mat & out, double *measurements,double actual_dimen
 		H = Point(min_x1,min_y);
 		I = Point(min_x2,min_y);
 
-		//line( img, H, I, Scalar( 0, 255, 255 ), 1, 8 );
 		circle(img, H, 10, Scalar( 0, 255, 255 ), -1, 8,0);
 		circle(img, I, 10, Scalar( 0, 255, 255), -1, 8,0);
 		kkB = euclideanDistance2d(H,I);
@@ -441,7 +432,6 @@ void measureFront(Mat & src, Mat & out, double *measurements,double actual_dimen
 
 		//------------------------------------------------------------------->
 
-		//measurements[7] = hB;
 		measurements[8] = kkB;
 	}
 	else{
@@ -452,9 +442,9 @@ void measureFront(Mat & src, Mat & out, double *measurements,double actual_dimen
 
 
 
-void measureBack(Mat & src, Mat & out, double *measurements,double actual_dimensions){
+void measureBack(Mat & src, Mat & out, double *measurements,double actual_dimensions){		//function for deriving anthropometric data in the back image
 
-	__android_log_write(ANDROID_LOG_INFO, "Measure", "Back");//Or ANDROID_LOG_INFO, ...
+	__android_log_write(ANDROID_LOG_INFO, "Measure", "Back");
 
 	Mat & binaryMat = *(&src);
 	Mat & img = *(&out);
@@ -490,12 +480,6 @@ void measureBack(Mat & src, Mat & out, double *measurements,double actual_dimens
 		
 		Scalar black = Scalar( 0,0,0);
 
-		/*
-		for( int i = 0; i< contours.size(); i++ ){
-			
-			rectangle( img, boundRect[i].tl(), boundRect[i].br(), black, 1, 8, 0 );
-		}
-	*/
 		// Identify subject and reference object
 		int maxarea =0, biggest =0,next=0;
 		for(int i=0; i<contours.size(); i++){
@@ -520,7 +504,6 @@ void measureBack(Mat & src, Mat & out, double *measurements,double actual_dimens
 				difference = boundRect[biggest].area()-boundRect[i].area();
 			}
 
-			//cout << boundRect[i].area() << endl;
 		}
 
 		rectangle( img, boundRect[biggest].tl(), boundRect[biggest].br(), black, 3, 8, 0 );
@@ -587,7 +570,7 @@ void measureBack(Mat & src, Mat & out, double *measurements,double actual_dimens
 
 		circle(img, E, 10, Scalar( 0, 255, 255 ), -1, 8,0);
 		circle(img, F, 10, Scalar( 0, 255, 255 ), -1, 8,0);
-		//line( img, E, F, Scalar( 0, 255, 255 ), 1, 8 );
+		
 
 		hB = (float) euclideanDistance2d(E,F)/pixelRatio;
 
@@ -625,7 +608,7 @@ void measureBack(Mat & src, Mat & out, double *measurements,double actual_dimens
 		B = Point(min_x,subject_height);
 		circle(img, A, 10, Scalar( 255, 0, 255 ), -1, 8,0);
 		circle(img, B, 10, Scalar( 255, 0, 255 ), -1, 8,0);
-		//line( img, A, B, Scalar( 255, 0, 255 ), 1, 8 );
+		
 		
 		erH = euclideanDistance2d(A,B)/pixelRatio;
 
@@ -668,19 +651,17 @@ void measureBack(Mat & src, Mat & out, double *measurements,double actual_dimens
 	}
  }
 
- float euclideanDistance2d(Point A, Point B) {
+ float euclideanDistance2d(Point A, Point B) {		//function for computing the distance between two points
 
  		int distdist = (A.x-B.x)*(A.x-B.x) + (A.y-B.y)*(A.y-B.y);
   		
-  		//__android_log_write(ANDROID_LOG_INFO, "Wala na", "Wala ng 0.5");//Or ANDROID_LOG_INFO, ...
-
-  		return (float)(sqrt(distdist));  				//lecheng +0.5
+  		return (float)(sqrt(distdist));  				
 
 
 	}
 
-void midPoint(Point *midpoint, Point a, Point b){
-	
+void midPoint(Point *midpoint, Point a, Point b){	//function for locating the midpoint between two points
+		
 		(*midpoint).x = (int)(a.x +b.x)/2;
 		(*midpoint).y = (int)(a.y +b.y)/2;
 

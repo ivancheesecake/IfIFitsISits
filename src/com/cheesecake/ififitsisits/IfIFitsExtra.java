@@ -1,10 +1,16 @@
+/*
+ *	IfIFitsExtra.java
+ *  Description: This class bundles the data passed in between intents.  
+ *  Author: Escamos, Ivan Marc H. 
+ *  Date last modified: 04/10/14
+ *  
+ */
+
 package com.cheesecake.ififitsisits;
 
 import java.io.Serializable;
 
-import android.graphics.Bitmap;
-
-public class IfIFitsExtra implements Serializable{
+public class IfIFitsExtra implements Serializable{		//Start of class IfIFitsExtra
 
 	private static final long serialVersionUID = 133868465534245470L;
 
@@ -14,7 +20,7 @@ public class IfIFitsExtra implements Serializable{
 	private double[] measurements;
 	private String[] cachePaths;
 	
-	public IfIFitsExtra(){
+	public IfIFitsExtra(){			//Constructor for class IfIFitsExtra
 		this.flag = 0;
 
 		this.refObj = 0.0;
@@ -23,12 +29,11 @@ public class IfIFitsExtra implements Serializable{
 		
 	}
 	
-	public int get_flag(){
+	public int get_flag(){		//Getter and Setter Methods
 		
 		return this.flag;
 	}
 	
-
 	public double get_refObj(){
 		
 		return this.refObj;

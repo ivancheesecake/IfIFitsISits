@@ -1,3 +1,11 @@
+/*
+ *	LoginActivity.java
+ *  Description: This activity serves as the Login Screen of the application.  
+ *  Author: Escamos, Ivan Marc H. 
+ *  Date last modified: 04/10/14
+ *  
+ */
+
 package com.cheesecake.ififitsisits;
 
 import java.util.ArrayList;
@@ -32,12 +40,12 @@ public class LoginActivity extends Activity {
 	    
 	        Log.d("authenticated",authenticated);
 	        
-	        if(authenticated.equals("true")){
+	        if(authenticated.equals("true")){			//Check if the user is already logged in
 	        	
 	        	Toast.makeText(this, "Welcome, Researcher!", Toast.LENGTH_LONG).show();
 	        	Intent intent = new Intent(this,ProjectActivity.class);
 	        	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(intent);
+				startActivity(intent);		//fire intent to the next activity
 				finish();
 				
 	        }
@@ -50,23 +58,20 @@ public class LoginActivity extends Activity {
 		return true;
 	}
 
-	public void login(View view){
+	public void login(View view){			//callback function when the login button is pressed
 		
-		//check if app is authenticated
-		
-		Editor toEdit;
+		Editor toEdit;				//prepare data for request
 		
 		toEdit = prefs.edit();
 		toEdit.putString("url", getString(R.string.url));
 		toEdit.commit();
-		
 		
 		EditText edit_authkey = (EditText) findViewById(R.id.edit_authkey);
 		String authkey = edit_authkey.getText().toString();
 		EditText edit_password = (EditText) findViewById(R.id.edit_password);
 		String password = edit_password.getText().toString();
 		
-		HttpPostHelper helper = new HttpPostHelper(getString(R.string.url)+"/android_authkey.php"); 	//get url from sharedpreferences
+		HttpPostHelper helper = new HttpPostHelper(getString(R.string.url)+"/android_authkey.php"); 	
 		
 		Log.d("url",getString(R.string.url)+"/android_authkey.php");
 		
@@ -74,7 +79,7 @@ public class LoginActivity extends Activity {
 		pairs.add(new BasicNameValuePair("authkey", authkey));
 		pairs.add(new BasicNameValuePair("password", password));
 	
-		if(helper.post(pairs)){
+		if(helper.post(pairs)){			//perform request, if login is successful
 			
 			toEdit.putString("authenticated", "true");
 			toEdit.putString("onProject", "false");
@@ -87,29 +92,14 @@ public class LoginActivity extends Activity {
 		    Toast.makeText(this, "Welcome, Researcher!", Toast.LENGTH_LONG).show();
 			Intent intent = new Intent(this,ProjectActivity.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
+			startActivity(intent);		//fire intent to next activity
 			finish();
 			
 		}
-		else{
-			Toast.makeText(getApplicationContext(), "Authentication Failed.", Toast.LENGTH_SHORT).show(); //make more informative
+		else{		
+			Toast.makeText(getApplicationContext(), "Login Failed.", Toast.LENGTH_SHORT).show(); 
 		}
 		
 	}
 	
-	private boolean isAuthenticated(String url, String authkey_input){
-    	
-    	Log.d("Inside isAuthenticated","HIHI");
-    	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
-        String authkey = prefs.getString("authkey", authkey_input);
-        
-        HttpPostHelper helper = new HttpPostHelper(url+"/is_authenticated.php"); 	//get url from sharedpreferences
-        ArrayList<NameValuePair> pairs = new ArrayList<NameValuePair>();
-        pairs.add(new BasicNameValuePair("authkey", authkey));
-        
-        
-        
-        return helper.post(pairs);  
-        //return true;
-    }
 }

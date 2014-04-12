@@ -3,7 +3,7 @@
  *	DatabaseHelper.java
  *	Description: This class allows basic CR(U)D operations on the local SQLite database. 
  *  Author: Escamos, Ivan Marc H. 
- *  Date last modified: 02/05/14
+ *  Date last modified: 04/10/14
  * 	
  * 	Received help from: 
  * 	http://hmkcode.com/android-simple-sqlite-database-tutorial/
@@ -24,14 +24,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
 import android.util.Log;
 
-public class DatabaseHelper extends SQLiteOpenHelper {
+public class DatabaseHelper extends SQLiteOpenHelper {		//Start of class DatabaseHelper
 
 
-    private static final String TABLE_RECORD = "record";
+    private static final String TABLE_RECORD = "record";					//Table names
     private static final String TABLE_PROJECT = "project";
     private static final String TABLE_UPLOADQUEUE = "upload_queue";
     
-    private static final String KEY_ID = "id";
+    private static final String KEY_ID = "id";				//Column names
     private static final String KEY_HEIGHT = "height";
     private static final String KEY_WEIGHT = "weight";
     private static final String KEY_AGE = "age";
@@ -50,27 +50,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String KEY_SIDEIMG = "side_img";
     private static final String KEY_FRONTIMG = "front_img";
     private static final String KEY_BACKIMG = "back_img";
-  
     private static final String KEY_PROJECTID = "project_id";
     private static final String KEY_PROJECTNAME = "project_name";
     private static final String KEY_OTHERFIELDS = "other_fields";
-    //private static final String KEY_DATE = "date";
     
     private LinkedList<Integer> queue;
-    
-    /*private static final String[] COLUMNS = {KEY_ID,KEY_HEIGHT,KEY_WEIGHT,KEY_AGE,KEY_SEX,
-    	KEY_LATITUDE,KEY_LONGITUDE,KEY_SITH,KEY_SH,KEY_ERH,KEY_TC,KEY_PH,KEY_KH,KEY_BPL,KEY_HB,KEY_KKB,KEY_DATE};
-	*/
-	
-
+  
     private static final int DATABASE_VERSION = 5;
 
     private static final String DATABASE_NAME = "RecordsDB";
 
-    public DatabaseHelper(Context context) {
+    public DatabaseHelper(Context context) {				//constructor for DatabaseHelper
         super(context, DATABASE_NAME, null, DATABASE_VERSION);  
     }
     
+    
+    /*
+     * Creation of the database
+     * 
+     * */
     public void onCreate(SQLiteDatabase db) {
         
         String CREATE_RECORD_TABLE = "CREATE TABLE record ( " +
@@ -114,13 +112,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         this.onCreate(db);
     }
     
-
-    
+    /*
+     * Function that adds a record to the table "record"
+     * 
+     * */
     public void addRecord(Record record){
     
-        
     	SQLiteDatabase db = this.getWritableDatabase();
- 
 
         ContentValues values = new ContentValues();
         values.put(KEY_HEIGHT, record.get_height());
@@ -144,13 +142,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(KEY_PROJECTID, record.get_projectId());
         values.put(KEY_OTHERFIELDS, record.get_otherFields());
        
-
         db.insert(TABLE_RECORD, null, values); 
  
-
         db.close(); 
     }
-    
+  
+    /*
+     * Function for retrieving all rows from the table "record" that has a specific projectId
+     * 
+     * */
     public List<Record> getAllRecords(String projectId) {
     	Log.d("Current Records","");
         List<Record> records = new LinkedList<Record>();
@@ -161,7 +161,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
    
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-  
   
         Record record = null;
         if (cursor.moveToFirst()) {
@@ -198,6 +197,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return records;
     }
     
+    /*
+     * Function for retrieving a row with a specified id from the table "record"
+     * 
+     * */ 
     public Record getRecord(int id) {
 
         String query = "SELECT  * FROM " + TABLE_RECORD + " WHERE id="+id+ " ORDER BY id DESC";
@@ -240,6 +243,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return record;
     }
     
+    /*
+     * Function that inserts ids to the upload queue
+     * 
+     * */
     public void enqueueUpload(){
     	
     	long lastId=0;
@@ -259,6 +266,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         
     }
     
+    /*
+     * Function that retrieves the most recent id 
+     * 
+     * */
     public int getLastId(){
     	
     	long lastId=0;
@@ -276,6 +287,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     		
     }
     
+    /*
+     * Function that retrieves the current upload queue
+     * 
+     * */
     public LinkedList<Integer> getQueue(){
 
         String query = "SELECT  * FROM " + TABLE_UPLOADQUEUE;
@@ -296,6 +311,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return queue;
     }
     
+    /*
+     * Function that removes items form the upload queue
+     * 
+     * */
     public void dequeue(int id){
     	
         SQLiteDatabase db = this.getWritableDatabase();
@@ -306,35 +325,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.d("Dequeued: ", id+"");
     }
     
-    public void deleteAll(String projectId){
-    	
-    	List<Record> records = getAllRecords(projectId);
-    	for(Record r: records){
-    		
-    		//add deletion for img3
-    		File img = new File(Environment.getExternalStorageDirectory() + "/ififits/"+r.get_sideImg());
-    		File img2 = new File(Environment.getExternalStorageDirectory() + "/ififits/"+r.get_backImg());
-    		File img3 = new File(Environment.getExternalStorageDirectory() + "/ififits/"+r.get_frontImg());
-    		img.delete();
-    		img2.delete();
-    		img3.delete();
-    	}
-    	
-    	SQLiteDatabase db = this.getWritableDatabase();
-    	
-    	db.delete(TABLE_UPLOADQUEUE, null, null);    	
-    	db.delete(TABLE_RECORD, null, null);
-
-    	db.close(); 
-    	
-    }
-    
+    /*
+     * Function that deletes a row from the table "project" and deletes associated records
+     * 
+     * */
     public void deleteProject(String projectId){
     	
     	SQLiteDatabase db = this.getWritableDatabase();
     	
     	List<Record> records = getAllRecords(projectId);
-    	Log.d("Nakapasok", "yep");
+    	
     	for(Record r: records){
     		db = this.getWritableDatabase();
     		//add deletion for img3
@@ -347,18 +347,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     		db.delete(TABLE_UPLOADQUEUE, KEY_ID+" = ?", new String[] { r.get_id()+""});  //dequeue
     		db.delete(TABLE_RECORD, KEY_ID+" = ?", new String[] { r.get_id()+""});  //dequeue
     		db.close();
-    		
-    		Log.d("Nakapasok", "yepyep");
+ 
     	}
     	db = this.getWritableDatabase();
     	db.delete(TABLE_PROJECT, KEY_PROJECTID+" = ?", new String[] {projectId});  //dequeue
     	db.close();
-    	Log.d("Nakapasok", "yepyep");
-    	
-    	 
+  
     }
     
- public void addProject(Project project){
+    
+    /*
+     * Function that adds data to the table "project"
+     * 
+     * */   
+    public void addProject(Project project){
     
         
     	SQLiteDatabase db = this.getWritableDatabase();
@@ -375,7 +377,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close(); 
     }
  
- public List<Project> getAllProjects() {
+    /*
+     * Function that retrieves all data from the table "projects"
+     * 
+     * */   
+    public List<Project> getAllProjects() {
  	 
 	 Log.d("Current Records","");
      List<Project> projects = new LinkedList<Project>();
